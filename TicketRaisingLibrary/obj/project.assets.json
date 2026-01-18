@@ -3663,11 +3663,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FullStack\\Online-Ticketing-System\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
+      "projectUniqueName": "D:\\Final_Project\\Online-Ticketing-System\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
       "projectName": "TicketRaisingLibrary",
-      "projectPath": "D:\\FullStack\\Online-Ticketing-System\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
+      "projectPath": "D:\\Final_Project\\Online-Ticketing-System\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
       "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-      "outputPath": "D:\\FullStack\\Online-Ticketing-System\\TicketRaisingLibrary\\obj\\",
+      "outputPath": "D:\\Final_Project\\Online-Ticketing-System\\TicketRaisingLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config"
