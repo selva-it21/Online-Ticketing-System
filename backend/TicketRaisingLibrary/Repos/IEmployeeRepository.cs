@@ -1,4 +1,5 @@
 using System;
+using TicketRaisingLibrary.Models;
 
 namespace TicketRaisingLibrary.Repos;
 
@@ -15,4 +16,6 @@ public interface IEmployeeRepository
         Task<List<Employee>> GetAllEmployeesAsync();
 
         Task<List<Employee>> GetEmployeesByDepartmentAsync(string deptId);
+
+        Task<Employee> LoginAsync(string username, string password);
 }
