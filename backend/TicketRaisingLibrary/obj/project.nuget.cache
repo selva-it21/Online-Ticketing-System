@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "fII8EKDz1UM=",
+=======
+  "dgSpecHash": "lflXFYzTk60=",
+>>>>>>> 5dd42f7281a60bab8de189cdcdb81d71501c915a
   "success": true,
   "projectFilePath": "C:\\Users\\user1\\Desktop\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
   "expectedPackageFiles": [

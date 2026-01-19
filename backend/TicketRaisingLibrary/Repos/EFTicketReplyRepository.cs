@@ -1,0 +1,126 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using TicketRaisingLibrary.Models;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+
+namespace TicketRaisingLibrary.Repos;
+
+public class EFTicketReplyRepository : ITicketReplyRepository
+{
+    TicketPortalDBContext context = new TicketPortalDBContext();
+    
+    public async Task AddTicketReplyAsync(TicketReply ticketReply)
+    {
+        try
+        {
+            await context.TicketReplies.AddAsync(ticketReply);
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateException ex)
+        {
+            SqlException sqlException = ex.InnerException as SqlException;
+            int errorNumber = sqlException.Number;
+            switch (errorNumber)
+            {
+                case 2627: throw new TicketingException("Reply ID already exists", 2001); break;
+                default: throw new TicketingException(sqlException.Message, 2099);
+            }
+        }
+    }
+
+    public async Task UpdateTicketReplyAsync(string replyId, TicketReply ticketReply)
+    {
+        TicketReply reply2edit = await GetTicketReplyByIdAsync(replyId);
+        try
+        {
+            reply2edit.ReplyMessage = ticketReply.ReplyMessage;
+            reply2edit.ReplyByAssignedEmpId = ticketReply.ReplyByAssignedEmpId;
+            reply2edit.ReplyByCreatorEmpId = ticketReply.ReplyByCreatorEmpId;
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateException ex)
+        {
+            SqlException sqlException = ex.InnerException as SqlException;
+            int errorNumber = sqlException.Number;
+            switch (errorNumber)
+            {
+                case 547: throw new TicketingException("Cannot update due to foreign key constraint", 2002); break;
+                default: throw new TicketingException(sqlException.Message, 2099);
+            }
+        }
+    }
+
+    public async Task DeleteTicketReplyAsync(string replyId)
+    {
+        TicketReply reply2del = await context.TicketReplies.Include("Tickets").FirstOrDefaultAsync(r => r.ReplyId == replyId);
+
+        if (reply2del == null)
+        {
+            throw new TicketingException("No such reply ID", 2003);
+        }
+
+        if (reply2del.Ticket == null || reply2del.Ticket.Status == "Closed")
+        {
+            context.TicketReplies.Remove(reply2del);
+            await context.SaveChangesAsync();
+        }
+        else
+        {
+            throw new TicketingException("Cannot delete because ticket is still active", 2004);
+        }
+    }
+
+    public async Task<List<TicketReply>> GetAllTicketRepliesAsync()
+    {
+        List<TicketReply> replies = await context.TicketReplies.ToListAsync();
+        return replies;
+    }
+
+    public async Task<TicketReply> GetTicketReplyByIdAsync(string replyId)
+    {
+        try
+        {
+            TicketReply reply = await (from r in context.TicketReplies where r.ReplyId == replyId select r).FirstAsync();
+            return reply;
+        }
+        catch
+        {
+            throw new TicketingException("No such reply ID", 2005);
+        }
+    }
+
+    public async Task<List<TicketReply>> GetRepliesByTicketIdAsync(string ticketId)
+    {
+        List<TicketReply> replies = await context.TicketReplies.Where(r => r.TicketId == ticketId).ToListAsync();
+        return replies;
+    }
+
+    public async Task<List<TicketReply>> GetRepliesByCreatorEmpIdAsync(string empId)
+    {
+        List<TicketReply> replies = await context.TicketReplies
+            .Where(r => r.ReplyByCreatorEmpId == empId)
+            .ToListAsync();
+        return replies;
+    }
+
+    public async Task<List<TicketReply>> GetRepliesByAssignedEmpIdAsync(string empId)
+    {
+        List<TicketReply> replies = await context.TicketReplies
+            .Include(r => r.Ticket)
+            .Where(r => r.Ticket.AssignedToEmpId == empId)
+            .ToListAsync();
+        return replies;
+    }
+
+    public async Task<List<TicketReply>> GetRepliesByEmployeeAsync(string empId)
+    {
+        List<TicketReply> replies = await context.TicketReplies
+            .Include(r => r.Ticket)
+            .Where(r => r.ReplyByAssignedEmpId == empId || r.Ticket.AssignedToEmpId == empId)
+            .ToListAsync();
+        return replies;
+    }
+}

@@ -6,9 +6,15 @@ using Microsoft.EntityFrameworkCore;
 using TicketRaisingLibrary.Models;
 using TicketRaisingLibrary.Repos;
 
+<<<<<<< HEAD
 namespace TicketRaisingLibrary.Repos
+=======
+namespace TicketRaisingLibrary.Repos;
+
+public class EFTicketTypeRepository
+>>>>>>> 5dd42f7281a60bab8de189cdcdb81d71501c915a
 {
-    public class EFTicketTypesRepository : ITicketTypesRepository
+    public class EFTicketTypesRepository : ITicketTypeRepository
     {
         //sfgdrsfv
         TicketPortalDBContext context = new();

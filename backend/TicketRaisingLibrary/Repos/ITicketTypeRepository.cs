@@ -2,7 +2,7 @@ using System;
 using TicketRaisingLibrary.Models;
 namespace TicketRaisingLibrary.Repos;
 
-public interface ITicketTypesRepository
+public interface ITicketTypeRepository
 {
     Task AddTicketTypeAsync(TicketType ticketType);
 
