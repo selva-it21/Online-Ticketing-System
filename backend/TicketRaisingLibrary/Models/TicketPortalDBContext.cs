@@ -22,35 +22,34 @@ public class TicketPortalDBContext : DbContext
     public virtual DbSet<TicketType> TicketTypes {get; set;}
     protected override void OnModelCreating(ModelBuilder modelBuilder)
 {      
+<<<<<<< HEAD
     // Ticket → Employee (Created By)
+=======
+>>>>>>> 37ce28f9bad946e8115308d8b81c9f0f6fda8e69
     modelBuilder.Entity<Ticket>()
         .HasOne(t => t.CreatedByEmployee)
         .WithMany(e => e.CreatedTickets)
         .HasForeignKey(t => t.CreatedByEmpId)
         .OnDelete(DeleteBehavior.Restrict);
 
-    // Ticket → Employee (Assigned To)
     modelBuilder.Entity<Ticket>()
         .HasOne(t => t.AssignedToEmployee)
         .WithMany(e => e.AssignedTickets)
         .HasForeignKey(t => t.AssignedToEmpId)
         .OnDelete(DeleteBehavior.Restrict);
 
-    // ✅ TicketReply → Employee (Creator)
     modelBuilder.Entity<TicketReply>()
         .HasOne(tr => tr.ReplyByCreator)
         .WithMany(e => e.CreatorReplies)
         .HasForeignKey(tr => tr.ReplyByCreatorEmpId)
         .OnDelete(DeleteBehavior.Restrict);
 
-    // ✅ TicketReply → Employee (Assigned)
     modelBuilder.Entity<TicketReply>()
         .HasOne(tr => tr.ReplyByAssigned)
         .WithMany(e => e.AssignedReplies)
         .HasForeignKey(tr => tr.ReplyByAssignedEmpId)
         .OnDelete(DeleteBehavior.Restrict);
 
-    // Ticket → TicketReply
     modelBuilder.Entity<TicketReply>()
         .HasOne(tr => tr.Ticket)
         .WithMany(t => t.TicketReplies)

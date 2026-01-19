@@ -17,14 +17,12 @@ namespace TicketRaisingWebApi.Controllers
             this.slaRepository = slaRepository;
         }
  
-        // GET: api/SLA
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             return Ok(await slaRepository.GetAllSLAsAsync());
         }
  
-        // GET: api/SLA/{slaId}
         [HttpGet("{slaId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -40,7 +38,6 @@ namespace TicketRaisingWebApi.Controllers
             }
         }
  
-        // POST: api/SLA
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
@@ -57,7 +54,6 @@ namespace TicketRaisingWebApi.Controllers
             }
         }
  
-        // PUT: api/SLA/{slaId}
         [HttpPut("{slaId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -75,7 +71,6 @@ namespace TicketRaisingWebApi.Controllers
             }
         }
  
-        // DELETE: api/SLA/{slaId}
         [HttpDelete("{slaId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]

@@ -12,7 +12,7 @@ namespace TicketRaisingLibrary.Models
         [Column(TypeName = "CHAR(4)")]
         public string? TicketId { get; set; }
 
-        [Column(TypeName = "CHAR(15)")]
+        [Column(TypeName = "CHAR(100)")]
         public string? Title { get; set; }
 
         [Column(TypeName = "CHAR(50)")]
