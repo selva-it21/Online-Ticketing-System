@@ -2,7 +2,7 @@ using System;
 
 namespace TicketRaisingLibrary.Repos;
 
-public class EFTicketsRepository
+public class EFTicketRepository
 {
 
 }

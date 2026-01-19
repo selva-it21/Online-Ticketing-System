@@ -2,7 +2,7 @@ using System;
 
 namespace TicketRaisingLibrary.Repos;
 
-public interface ITicketsRepository
+public interface ITicketRepository
 {
 
 }
