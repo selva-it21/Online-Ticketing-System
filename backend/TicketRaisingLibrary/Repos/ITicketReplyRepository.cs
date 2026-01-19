@@ -4,7 +4,7 @@ using TicketRaisingLibrary.Models;
 
 namespace TicketRaisingLibrary.Repos
 {
-    public interface ITicketRepliesRepository
+    public interface ITicketReplyRepository
     {
         Task AddTicketReplyAsync(TicketReply ticketReply);
         Task UpdateTicketReplyAsync(string replyId, TicketReply ticketReply);
