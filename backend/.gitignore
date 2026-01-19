@@ -1,0 +1,5 @@
+# Add to .gitignore**/bin/
+**/obj/
+*.csproj.user
+*.suo
+*.cache 
