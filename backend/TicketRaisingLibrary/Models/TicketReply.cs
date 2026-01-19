@@ -17,7 +17,11 @@ namespace TicketRaisingLibrary.Models
 
         public string? TicketId { get; set; }
 
+        [Column(TypeName = "CHAR(100)")]
+        public string? ReplyMessage { get; set; }
+        
         [Column(TypeName = "CHAR(4)")]
+
         public string? ReplyByCreatorEmpId { get; set; }
 
         [Column(TypeName = "CHAR(4)")]
