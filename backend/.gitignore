@@ -3,3 +3,8 @@
 *.csproj.user
 *.suo
 *.cache 
+
+Migrations/
+*.db
+*.mdf
+*.ldf
