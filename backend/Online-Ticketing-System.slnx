@@ -1,4 +1,0 @@
-<Solution>
-  <Project Path="TicketRaisingLibrary/TicketRaisingLibrary.csproj" />
-  <Project Path="TicketRaisingWebApi/TicketRaisingWebApi.csproj" />
-</Solution>
