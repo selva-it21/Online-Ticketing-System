@@ -4,5 +4,10 @@ namespace TicketRaisingLibrary.Repos;
 
 public class TicketingException : Exception
 {
-    public TicketingException(string str) : base(str) {}
+    public int ErrorNumber {get ; set ;}
+    public TicketingException(string str , int errNo) : base(str)
+    {
+        ErrorNumber = errNo;
+        
+    }
 }
