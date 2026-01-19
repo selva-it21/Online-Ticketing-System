@@ -9,9 +9,6 @@ namespace TicketRaisingWebApi.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-<<<<<<< HEAD
-        
-=======
         IEmployeeRepository empRepo;
         public EmployeeController(IEmployeeRepository empRepository) {
             empRepo = empRepository;
@@ -28,6 +25,5 @@ namespace TicketRaisingWebApi.Controllers
                 return NotFound(ex.Message);
             }
         }
->>>>>>> 62d4d4bf731769391c1eb05c8636d4745e1ab136
     }
 }

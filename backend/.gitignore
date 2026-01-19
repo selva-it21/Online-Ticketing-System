@@ -1,8 +1,8 @@
-# # Add to .gitignore**/bin/
-# **/obj/
-# *.csproj.user
-# *.suo
-# *.cache 
+# Add to .gitignore**/bin/
+**/obj/
+*.csproj.user
+*.suo
+*.cache 
 
 Migrations/
 *.db

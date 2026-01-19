@@ -21,7 +21,7 @@ public class TicketPortalDBContext : DbContext
     public virtual DbSet<Ticket> Tickets {get; set;}
     public virtual DbSet<TicketType> TicketTypes {get; set;}
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-{       //Error Vanchu Chatgpt ketathuku overide pana solluchu da selva aprm vanthuruchuu ana en override pandromnu thrlaa
+{      
     // Ticket → Employee (Created By)
     modelBuilder.Entity<Ticket>()
         .HasOne(t => t.CreatedByEmployee)
