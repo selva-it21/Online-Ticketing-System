@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fydR5U9+Kac=",
+  "dgSpecHash": "dFGT1SXOqg8=",
   "success": true,
-  "projectFilePath": "D:\\Final_Project\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\TicketRaisingWebApi.csproj",
+  "projectFilePath": "C:\\Users\\user1\\Desktop\\Final Project\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\TicketRaisingWebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user1\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
@@ -25,8 +25,9 @@
     "C:\\Users\\user1\\.nuget\\packages\\microsoft.identitymodel.protocols\\8.0.1\\microsoft.identitymodel.protocols.8.0.1.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\8.0.1\\microsoft.identitymodel.protocols.openidconnect.8.0.1.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.0.1\\microsoft.identitymodel.tokens.8.0.1.nupkg.sha512",
-    "C:\\Users\\user1\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512",
+    "C:\\Users\\user1\\.nuget\\packages\\microsoft.openapi\\2.3.0\\microsoft.openapi.2.3.0.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
+    "C:\\Users\\user1\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\10.1.0\\swashbuckle.aspnetcore.swagger.10.1.0.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\system.clientmodel\\1.5.1\\system.clientmodel.1.5.1.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\system.configuration.configurationmanager\\9.0.4\\system.configuration.configurationmanager.9.0.4.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.0.1\\system.identitymodel.tokens.jwt.8.0.1.nupkg.sha512",

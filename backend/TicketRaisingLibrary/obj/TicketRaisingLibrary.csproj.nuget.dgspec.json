@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Final_Project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj": {}
+    "C:\\Users\\user1\\Desktop\\Final Project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj": {}
   },
   "projects": {
-    "D:\\Final_Project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj": {
+    "C:\\Users\\user1\\Desktop\\Final Project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Final_Project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\user1\\Desktop\\Final Project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
         "projectName": "TicketRaisingLibrary",
-        "projectPath": "D:\\Final_Project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
+        "projectPath": "C:\\Users\\user1\\Desktop\\Final Project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
         "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-        "outputPath": "D:\\Final_Project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\obj\\",
+        "outputPath": "C:\\Users\\user1\\Desktop\\Final Project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config"
