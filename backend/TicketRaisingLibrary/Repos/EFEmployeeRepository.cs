@@ -8,7 +8,7 @@ namespace TicketRaisingLibrary.Repos
 {
     public class EFEmployeeRepository : IEmployeeRepository
     {
-        TicketPortalDBContext context = new();
+        TicketPortalDBContext context = new TicketPortalDBContext();
 
         public async Task AddEmployeeAsync(Employee employee)
         {
