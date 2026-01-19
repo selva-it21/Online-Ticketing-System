@@ -93,10 +93,6 @@ namespace TicketRaisingWebApi.Controllers
             }
         }
     }
-<<<<<<< HEAD
 }
  
  
-=======
-}
->>>>>>> 62d4d4bf731769391c1eb05c8636d4745e1ab136
