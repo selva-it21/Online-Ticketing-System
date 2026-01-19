@@ -8,9 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
  
 // Add services to the container.
 builder.Services.AddScoped<IDepartmentRepository, EFDepartmentRepository>();
+<<<<<<< HEAD
 // builder.Services.AddScoped<IEmployeeRepository, EFEmployeeRepository>();
 // builder.Services.AddScoped<ITicketReplyRepository, EFTicketReplyRepository>();
 // builder.Services.AddScoped<ITicketRepository, EFTicketRepository>();
+=======
+builder.Services.AddScoped<IEmployeeRepository, EFEmployeeRepository>();
+builder.Services.AddScoped<ITicketReplyRepository, EFTicketReplyRepository>();
+builder.Services.AddScoped<ITicketRepository, EFTicketRepository>();
+>>>>>>> 62d4d4bf731769391c1eb05c8636d4745e1ab136
 builder.Services.AddScoped<ITicketTypeRepository, EFTicketTypeRepository>();
 builder.Services.AddScoped<ISLARepository, EFSLARepository>();
 builder.Services.AddControllers();
@@ -81,5 +87,9 @@ app.MapControllers();
 app.UseSwagger();
 app.UseSwaggerUI();
  
+<<<<<<< HEAD
 app.Run();
  
+=======
+app.Run();
+>>>>>>> 62d4d4bf731769391c1eb05c8636d4745e1ab136

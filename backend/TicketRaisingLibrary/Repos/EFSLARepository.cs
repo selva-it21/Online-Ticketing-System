@@ -30,7 +30,7 @@ using TicketRaisingLibrary.Repos;
                 if (sqlException != null && sqlException.Number == 2627)
                     throw new TicketingException("SLA ID already exists",501);
                 else
-                    throw new TicketingException("Database Error", 599);
+                    throw new TicketingException("Database Error" + ex.Message, 599);
             }
         }
         public async Task UpdateSLAAsync(string slaId, SLA sla)

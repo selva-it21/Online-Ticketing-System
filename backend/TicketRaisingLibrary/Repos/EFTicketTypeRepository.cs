@@ -90,9 +90,7 @@ namespace TicketRaisingLibrary.Repos
         {
             try
             {
-                var ticketTypeToDelete = await context.TicketTypes
-                    .Include(tt => tt.Tickets) 
-                    .FirstOrDefaultAsync(tt => tt.TicketTypeId == ticketTypeId);
+                TicketType ticketTypeToDelete = await context.TicketTypes.Include(tt => tt.Tickets).FirstOrDefaultAsync(tt => tt.TicketTypeId == ticketTypeId);
 
                 if (ticketTypeToDelete == null)
                 {

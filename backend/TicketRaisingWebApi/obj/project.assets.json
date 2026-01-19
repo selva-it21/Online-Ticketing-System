@@ -1641,6 +1641,10 @@
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 10.0.2",
       "Microsoft.AspNetCore.OpenApi >= 10.0.0",
       "Swashbuckle.AspNetCore >= 10.1.0",
+<<<<<<< HEAD
+=======
+      "Swashbuckle.AspNetCore.Swagger >= 10.1.0",
+>>>>>>> 62d4d4bf731769391c1eb05c8636d4745e1ab136
       "TicketRaisingLibrary >= 1.0.0"
     ]
   },
@@ -1650,11 +1654,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user1\\Desktop\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\TicketRaisingWebApi.csproj",
+      "projectUniqueName": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\TicketRaisingWebApi.csproj",
       "projectName": "TicketRaisingWebApi",
-      "projectPath": "C:\\Users\\user1\\Desktop\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\TicketRaisingWebApi.csproj",
+      "projectPath": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\TicketRaisingWebApi.csproj",
       "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user1\\Desktop\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\obj\\",
+      "outputPath": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1669,8 +1673,8 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "C:\\Users\\user1\\Desktop\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj": {
-              "projectPath": "C:\\Users\\user1\\Desktop\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj"
+            "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj": {
+              "projectPath": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj"
             }
           }
         }
@@ -1702,6 +1706,13 @@
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[10.1.0, )"
+<<<<<<< HEAD
+=======
+          },
+          "Swashbuckle.AspNetCore.Swagger": {
+            "target": "Package",
+            "version": "[10.1.0, )"
+>>>>>>> 62d4d4bf731769391c1eb05c8636d4745e1ab136
           }
         },
         "imports": [
