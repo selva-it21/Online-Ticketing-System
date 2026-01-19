@@ -10,32 +10,29 @@ namespace TicketRaisingWebApi.Controllers
     [Authorize]
     public class TicketTypeController : ControllerBase
     {
-        ITicketTypesRepository ticketTypeRepo;
+        ITicketTypeRepository ticketTypeRepository;
 
-        public TicketTypeController(ITicketTypesRepository ticketTypeRepository)
+        public TicketTypeController(ITicketTypeRepository ticketTypeRepository)
         {
-            ticketTypeRepo = ticketTypeRepository;
+            this.ticketTypeRepository = ticketTypeRepository;
         }
 
-        // GET: api/tickettype
+
         [HttpGet]
-        [ProducesResponseType(200)]
-        public async Task<ActionResult> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            List<TicketType> ticketTypes = await ticketTypeRepo.GetAllTicketTypesAsync();
-            return Ok(ticketTypes);
+            return Ok(await ticketTypeRepository.GetAllTicketTypesAsync());
         }
 
-        // GET: api/tickettype/{ticketTypeId}
+
         [HttpGet("{ticketTypeId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult> GetOne(string ticketTypeId)
+        public async Task<IActionResult> GetOne(string ticketTypeId)
         {
             try
             {
-                TicketType ticketType = await ticketTypeRepo.GetTicketTypeAsync(ticketTypeId);
-                return Ok(ticketType);
+                return Ok(await ticketTypeRepository.GetTicketTypeByIdAsync(ticketTypeId));
             }
             catch (TicketingException ex)
             {
@@ -43,16 +40,16 @@ namespace TicketRaisingWebApi.Controllers
             }
         }
 
-        // POST: api/tickettype
+
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> Add(TicketType ticketType)
+        public async Task<IActionResult> Create(TicketType ticketType)
         {
             try
             {
-                await ticketTypeRepo.AddTicketTypeAsync(ticketType);
-                return Created($"api/tickettype/{ticketType.TicketTypeId}", ticketType);
+                await ticketTypeRepository.AddTicketTypeAsync(ticketType);
+                return Created($"api/TicketType/{ticketType.TicketTypeId}", ticketType);
             }
             catch (TicketingException ex)
             {
@@ -60,45 +57,39 @@ namespace TicketRaisingWebApi.Controllers
             }
         }
 
-        // PUT: api/tickettype/{ticketTypeId}
+
         [HttpPut("{ticketTypeId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult> Update(string ticketTypeId, TicketType ticketType)
+        public async Task<IActionResult> Edit(string ticketTypeId, TicketType ticketType)
         {
             try
             {
-                await ticketTypeRepo.UpdateTicketTypeAsync(ticketTypeId, ticketType);
+                await ticketTypeRepository.UpdateTicketTypeAsync(ticketTypeId, ticketType);
                 return Ok(ticketType);
             }
             catch (TicketingException ex)
             {
-                if (ex.Message.Contains("No such"))
-                    return NotFound(ex.Message);
-                else
-                    return BadRequest(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 
-        // DELETE: api/tickettype/{ticketTypeId}
+
         [HttpDelete("{ticketTypeId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult> Delete(string ticketTypeId)
+        public async Task<IActionResult> Delete(string ticketTypeId)
         {
             try
             {
-                await ticketTypeRepo.DeleteTicketTypeAsync(ticketTypeId);
+                await ticketTypeRepository.DeleteTicketTypeAsync(ticketTypeId);
                 return Ok();
             }
             catch (TicketingException ex)
             {
-                if (ex.Message.Contains("No such"))
-                    return NotFound(ex.Message);
-                else
-                    return BadRequest(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
     }

@@ -7,76 +7,89 @@ namespace TicketRaisingWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
-        public class SLAController : ControllerBase
+
+    public class SLAController : ControllerBase
     {
-        ISLARepository slaRepo;
+        ISLARepository slaRepository;
 
         public SLAController(ISLARepository slaRepository)
         {
-            slaRepo = slaRepository;
+            this.slaRepository = slaRepository;
         }
+
+        // GET: api/SLA
         [HttpGet]
-        [ProducesResponseType(200)]
-        public async Task<ActionResult> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            List<SLA> slas = await slaRepo.GetAllSLAsAsync();
-            return Ok(slas);
+            return Ok(await slaRepository.GetAllSLAsAsync());
         }
+
+        // GET: api/SLA/{slaId}
         [HttpGet("{slaId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult> GetOne(string slaId)
+        public async Task<IActionResult> GetOne(string slaId)
         {
-            try{
-                SLA sla = await slaRepo.GetSLAAsync(slaId);
-                return Ok(sla);
-            } catch (TicketingException ex) {
+            try
+            {
+                return Ok(await slaRepository.GetSLAAsync(slaId));
+            }
+            catch (TicketingException ex)
+            {
                 return NotFound(ex.Message);
             }
         }
+
+        // POST: api/SLA
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> Add(SLA sla)
+        public async Task<IActionResult> Create(SLA sla)
         {
-            try {
-                await slaRepo.AddSLAAsync(sla);
-                return Created($"api/sla/{sla.SLAId}", sla);
-            } catch (TicketingException ex) {
+            try
+            {
+                await slaRepository.AddSLAAsync(sla);
+                return Created($"api/SLA/{sla.SLAId}", sla);
+            }
+            catch (TicketingException ex)
+            {
                 return BadRequest(ex.Message);
             }
         }
+
+        // PUT: api/SLA/{slaId}
         [HttpPut("{slaId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult> Update(string slaId, SLA sla)
+        public async Task<IActionResult> Edit(string slaId, SLA sla)
         {
-            try {
-                await slaRepo.UpdateSLAAsync(slaId, sla);
+            try
+            {
+                await slaRepository.UpdateSLAAsync(slaId, sla);
                 return Ok(sla);
-            } catch (TicketingException ex) {
-                if (ex.Message == "No such SLA Id")
-                    return NotFound(ex.Message);
-                else
-                    return BadRequest(ex.Message);
+            }
+            catch (TicketingException ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
+
+        // DELETE: api/SLA/{slaId}
         [HttpDelete("{slaId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult> Delete(string slaId)
+        public async Task<IActionResult> Delete(string slaId)
         {
-            try {
-                await slaRepo.DeleteSLAAsync(slaId);
+            try
+            {
+                await slaRepository.DeleteSLAAsync(slaId);
                 return Ok();
-            } catch (TicketingException ex) {
-                if (ex.Message == "No such SLA Id")
-                    return NotFound(ex.Message);
-                else
-                    return BadRequest(ex.Message);
+            }
+            catch (TicketingException ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }

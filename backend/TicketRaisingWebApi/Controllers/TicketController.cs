@@ -7,5 +7,6 @@ namespace TicketRaisingWebApi.Controllers
     [ApiController]
     public class TicketController : ControllerBase
     {
+        
     }
 }
