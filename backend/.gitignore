@@ -3,13 +3,3 @@
 *.csproj.user
 *.suo
 *.cache 
-# Entity Framework Core Migrations
-
-Migrations/
-
-*.db
-
-*.mdf
-
-*.ldf
- 
