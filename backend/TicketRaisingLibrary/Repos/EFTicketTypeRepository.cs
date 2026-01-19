@@ -21,10 +21,11 @@ namespace TicketRaisingLibrary.Repos
             catch (DbUpdateException ex) {
             SqlException sqlException = ex.InnerException as SqlException;
             int errorNumber = sqlException.Number;
-            switch(errorNumber) {
-                case 2627: throw new TicketingException("Product Category ID already exists",501);
-                default: throw new TicketingException(sqlException.Message,599);
-            }    
+                switch(errorNumber) {
+                    //hello
+                    case 2627: throw new TicketingException("Product Category ID already exists",501);
+                    default: throw new TicketingException(sqlException.Message,599);
+                }    
             }
         }
 
@@ -112,7 +113,6 @@ namespace TicketRaisingLibrary.Repos
             }
 
         }
-
-        
+ 
     }
 }
