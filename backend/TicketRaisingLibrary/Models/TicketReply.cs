@@ -11,10 +11,7 @@ namespace TicketRaisingLibrary.Models
         [Column(TypeName = "CHAR(6)")]
         public string? ReplyId { get; set; }
 
-        [Column(TypeName = "CHAR(100)")]
-        public string? Re
         [Column(TypeName = "CHAR(4)")]
-
         public string? TicketId { get; set; }
 
         [Column(TypeName = "CHAR(100)")]
