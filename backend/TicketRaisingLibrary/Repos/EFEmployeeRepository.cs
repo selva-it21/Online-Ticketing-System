@@ -121,6 +121,16 @@ namespace TicketRaisingLibrary.Repos
             List<Employee> employees = await context.Employees.Where(e => e.DeptId == deptId).ToListAsync();
             return employees;
         }
+
+        public async Task<Employee> LoginAsync(string username, string password) {
+            try {
+                Employee user = await (from u in context.Employees where u.EmpName == username && u.Password == password select u).FirstAsync();
+                return user;
+            }
+            catch {
+                throw new TicketingException("Invalid username or password",400);
+            }
+        }
     }
 }
 
