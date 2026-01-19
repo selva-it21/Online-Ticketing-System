@@ -21,36 +21,31 @@ public class TicketPortalDBContext : DbContext
     public virtual DbSet<Ticket> Tickets {get; set;}
     public virtual DbSet<TicketType> TicketTypes {get; set;}
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-{       //Error Vanchu Chatgpt ketathuku overide pana solluchu da selva aprm vanthuruchuu ana en override pandromnu thrlaa
-    // Ticket → Employee (Created By)
+{      
     modelBuilder.Entity<Ticket>()
         .HasOne(t => t.CreatedByEmployee)
         .WithMany(e => e.CreatedTickets)
         .HasForeignKey(t => t.CreatedByEmpId)
         .OnDelete(DeleteBehavior.Restrict);
 
-    // Ticket → Employee (Assigned To)
     modelBuilder.Entity<Ticket>()
         .HasOne(t => t.AssignedToEmployee)
         .WithMany(e => e.AssignedTickets)
         .HasForeignKey(t => t.AssignedToEmpId)
         .OnDelete(DeleteBehavior.Restrict);
 
-    // ✅ TicketReply → Employee (Creator)
     modelBuilder.Entity<TicketReply>()
         .HasOne(tr => tr.ReplyByCreator)
         .WithMany(e => e.CreatorReplies)
         .HasForeignKey(tr => tr.ReplyByCreatorEmpId)
         .OnDelete(DeleteBehavior.Restrict);
 
-    // ✅ TicketReply → Employee (Assigned)
     modelBuilder.Entity<TicketReply>()
         .HasOne(tr => tr.ReplyByAssigned)
         .WithMany(e => e.AssignedReplies)
         .HasForeignKey(tr => tr.ReplyByAssignedEmpId)
         .OnDelete(DeleteBehavior.Restrict);
 
-    // Ticket → TicketReply
     modelBuilder.Entity<TicketReply>()
         .HasOne(tr => tr.Ticket)
         .WithMany(t => t.TicketReplies)
