@@ -16,13 +16,14 @@ public class EFDepartmentRepository : IDepartmentRepository
             await context.SaveChangesAsync();
 
         }
-        catch (DbUpdateException ex)
-        {
+        catch (DbUpdateException ex) {
             SqlException sqlException = ex.InnerException as SqlException;
-            if (sqlException != null && sqlException.Number == 2627)
-                throw new TicketingException("Department ID already exists", 3000);
-            else
-                throw new TicketingException(sqlException?.Message ?? "Database Error", 3000);
+            int errorNumber = sqlException.Number;
+            switch(errorNumber) {
+                case 2627: throw new TicketingException("Product Category ID already exists",501);
+                //case 2628: throw new ProductException("Name and/or description too long");
+                default: throw new TicketingException(sqlException.Message,599);
+            }    
         }
     }
 
@@ -35,7 +36,7 @@ public class EFDepartmentRepository : IDepartmentRepository
 
         if (deptToDelete == null)
         {
-            throw new Exception("Department not found");
+            throw new TicketingException("Department not found",3008);
         }
 
         if (deptToDelete.Employees.Count == 0 &&
@@ -47,7 +48,7 @@ public class EFDepartmentRepository : IDepartmentRepository
         else
         {
             throw new TicketingException(
-                "Cannot delete Department because it contains Employees or Ticket Types", 3001
+                "Cannot delete Department because it contains Employees or Ticket Types", 3009
             );
         }
     }
@@ -55,16 +56,10 @@ public class EFDepartmentRepository : IDepartmentRepository
 
     public async Task<List<Department>> GetAllDepartmentAsync()
     {
-        try
-        {
+       
             List<Department> departments = await context.Departments.ToListAsync();
             return departments;
-        }
-        catch (Exception ex)
-        {
-
-            throw new TicketingException(ex.Message, 3002);
-        }
+      
     }
 
     public async Task<Department> GetDepartmentAsync(string deptId)
@@ -80,7 +75,7 @@ public class EFDepartmentRepository : IDepartmentRepository
         }
         catch
         {
-            throw new TicketingException("No Department Id Found", 3000);
+            throw new TicketingException("No Department Id Found", 3004);
         }
     }
 
@@ -97,7 +92,7 @@ public class EFDepartmentRepository : IDepartmentRepository
         }
         catch (Exception ex)
         {
-            throw new TicketingException(ex.Message, 3003);
+            throw new TicketingException(ex.Message, 3006);
         }
     }
 
