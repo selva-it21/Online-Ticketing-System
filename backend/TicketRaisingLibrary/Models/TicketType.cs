@@ -7,7 +7,7 @@ namespace TicketRaisingLibrary.Models
 {
     [Table("TicketTypes")]
     public class TicketType
-    {
+    { 
         [Key]
         [Column(TypeName = "CHAR(4)")]
         public string? TicketTypeId { get; set; }

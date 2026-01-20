@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TicketRaisingLibrary.Models
 {
     [Table("Employee")]
-    public class Employee
+    public class Employee 
     {
         [Key]
         [Column(TypeName = "CHAR(4)")]

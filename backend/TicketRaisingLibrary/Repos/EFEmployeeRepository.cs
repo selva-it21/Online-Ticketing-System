@@ -50,11 +50,10 @@ namespace TicketRaisingLibrary.Repos
             {
                 SqlException sqlException = ex.InnerException as SqlException;
                 int errorNumber = sqlException.Number;
-
                 switch (errorNumber)
                 {
-                    default:
-                        throw new TicketingException(sqlException.Message, 599);
+                    case 547: throw new TicketingException("Cannot update due to foreign key constraint", 1002); break;
+                    default: throw new TicketingException(sqlException.Message, 1099);
                 }
             }
         }
