@@ -9,7 +9,7 @@
         <input
           type="text"
           id="slaId"
-          [(ngModel)]="sla.SLAId"
+          [(ngModel)]="sla.slaId"
           name="slaId"
           class="form-input"
         />
@@ -20,7 +20,7 @@
         <input
           type="text"
           id="slaName"
-          [(ngModel)]="sla.SLAName"
+          [(ngModel)]="sla.slaName"
           name="slaName"
           class="form-input"
         />
@@ -31,7 +31,7 @@
         <input
           type="text"
           id="priority"
-          [(ngModel)]="sla.Priority"
+          [(ngModel)]="sla.priority"
           name="priority"
           class="form-input"
         />
@@ -42,7 +42,7 @@
         <input
           type="number"
           id="responseTime"
-          [(ngModel)]="sla.ResponseTime"
+          [(ngModel)]="sla.responseTime"
           name="responseTime"
           class="form-input"
         />
@@ -53,7 +53,7 @@
         <input
           type="number"
           id="resolutionHours"
-          [(ngModel)]="sla.ResolutionHours"
+          [(ngModel)]="sla.resolutionHours"
           name="resolutionHours"
           class="form-input"
         />
@@ -117,11 +117,11 @@
         <tbody>
           @for (s of slas; track s) {
             <tr>
-              <td>{{ s.SLAId }}</td>
-              <td>{{ s.SLAName }}</td>
-              <td>{{ s.Priority }}</td>
-              <td>{{ s.ResponseTime }}</td>
-              <td>{{ s.ResolutionHours }}</td>
+              <td>{{ s.slaId }}</td>
+              <td>{{ s.slaName }}</td>
+              <td>{{ s.priority }}</td>
+              <td>{{ s.responseTime }}</td>
+              <td>{{ s.resolutionHours }}</td>
             </tr>
           } @empty {
             <tr>

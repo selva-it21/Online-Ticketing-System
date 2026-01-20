@@ -19,8 +19,8 @@
       </div>
 
       <div class="form-row">
-        <label for="sLAId" class="form-label">SLA ID:</label>
-        <input type="text" id="sLAId" [(ngModel)]="tickettype.sLAId" name="sLAId" class="form-input" />
+        <label for="slaId" class="form-label">SLA ID:</label>
+        <input type="text" id="slaId" [(ngModel)]="tickettype.slaId" name="slaId" class="form-input" />
       </div>
 
       <div class="form-row">
@@ -60,7 +60,7 @@
               <td>{{ tickettype.ticketTypeId }}</td>
               <td>{{ tickettype.typeName }}</td>
               <td>{{ tickettype.description }}</td>
-              <td>{{ tickettype.sLAId }}</td>
+              <td>{{ tickettype.slaId }}</td>
               <td>{{ tickettype.deptId }}</td>
             </tr>
           } @empty {
