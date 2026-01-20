@@ -7,7 +7,7 @@ namespace TicketRaisingWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-[]    public class TicketController : ControllerBase
+   public class TicketController : ControllerBase
     {
         ITicketRepository ticketRepo;
         public TicketController(ITicketRepository ticketRepository)
