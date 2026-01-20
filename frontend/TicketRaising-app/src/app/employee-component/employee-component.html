@@ -11,57 +11,39 @@
     <tr>
       <td>Employee ID</td>
       <td>
-        <input
-          type="text"
-          name="empId"
-          [(ngModel)]="employee.empId"
-          required
-        />
+        <input type="text" name="empId" [(ngModel)]="employee.empId" required />
       </td>
     </tr>
     <tr>
       <td>Password</td>
       <td>
-        <input
-          type="password"
-          name="password"
-          [(ngModel)]="employee.password"
-          required
-        />
+        <input type="password" name="password" [(ngModel)]="employee.password" required />
       </td>
     </tr>
 
     <tr>
       <td>Employee Name</td>
       <td>
-        <input
-          type="text"
-          name="empName"
-          [(ngModel)]="employee.empName"
-          required
-        />
+        <input type="text" name="empName" [(ngModel)]="employee.empName" required />
       </td>
     </tr>
 
     <tr>
       <td>Department ID</td>
       <td>
-        <input
-          type="text"
-          name="deptId"
-          [(ngModel)]="employee.deptId"
-        />
+        <select name="deptId"  [(ngModel)]="employee.deptId">
+          <option value="">-- Select Department --</option>
+          <option *ngFor="let dept of departments" [value]="dept.deptId">
+            {{ dept.deptName }}
+          </option>
+        </select>
       </td>
     </tr>
 
     <tr>
       <td>Role</td>
       <td>
-        <input
-          type="text"
-          name="role"
-          [(ngModel)]="employee.role"
-        />
+        <input type="text" name="role" [(ngModel)]="employee.role" />
       </td>
     </tr>
 
@@ -94,17 +76,17 @@
   </thead>
   <tbody>
     @for (emp of employees; track emp) {
-      <tr>
-        <td>{{ emp.empId }}</td>
-        <td>{{ emp.password }}</td>
-        <td>{{ emp.empName }}</td>
-        <td>{{ emp.deptId }}</td>
-        <td>{{ emp.role }}</td>
-      </tr>
+    <tr>
+      <td>{{ emp.empId }}</td>
+      <td>{{ emp.password }}</td>
+      <td>{{ emp.empName }}</td>
+      <td>{{ emp.deptId }}</td>
+      <td>{{ emp.role }}</td>
+    </tr>
     } @empty {
-      <tr>
-        <td colspan="5" class="no-data">No employees found</td>
-      </tr>
+    <tr>
+      <td colspan="5" class="no-data">No employees found</td>
+    </tr>
     }
   </tbody>
 </table>

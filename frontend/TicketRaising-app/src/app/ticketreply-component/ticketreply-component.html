@@ -6,7 +6,7 @@
   <div class="card shadow-sm mb-4">
     <div class="card-header d-flex justify-content-between align-items-center">
       <span class="fw-bold">Ticket Reply Form</span>
-      <button class="btn btn-secondary btn-sm" type="button" (click)="newReply()">New</button>
+      <!-- <button class="btn btn-secondary btn-sm" type="button" (click)="newReply()">New</button> -->
     </div>
 
     <div class="card-body">
@@ -18,7 +18,10 @@
           <div class="col-sm-6">
             <input type="text" class="form-control"
                    [(ngModel)]="reply.replyId" name="replyId">
+
+
           </div>
+          
           <div class="col-sm-3">
             <button type="button" class="btn btn-info w-100" (click)="getReply()">Show</button>
           </div>
@@ -28,8 +31,14 @@
         <div class="row mb-3">
           <label class="col-sm-3 col-form-label">Ticket ID</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control"
-                   [(ngModel)]="reply.ticketId" name="ticketId">
+            <select [(ngModel)]="reply.replyId" name="replyId">
+              <option value="">-- Select ReplyId --</option>
+
+              <option *ngFor="let t of tickets" [value]="t.ticketId">
+                {{ t.ticketId }}
+              </option>
+            </select>
+
           </div>
         </div>
 
@@ -37,9 +46,9 @@
         <div class="row mb-3">
           <label class="col-sm-3 col-form-label">Reply Message</label>
           <div class="col-sm-9">
-            <textarea class="form-control" rows="3"
+            <input class="form-control" rows="3"
                       [(ngModel)]="reply.replyMessage"
-                      name="replyMessage"></textarea>
+                      name="replyMessage"/>
           </div>
         </div>
 
@@ -49,7 +58,7 @@
           <div class="col-sm-9">
             <input type="text" class="form-control"
                    [(ngModel)]="reply.replyByCreatorEmpId"
-                   name="replyByCreatorEmpId">
+                   name="replyByCreatorEmpId" disabled>
           </div>
         </div>
 
