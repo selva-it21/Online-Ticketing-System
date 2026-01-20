@@ -31,8 +31,8 @@ export class LoginComponent {
     this.loginSvc.login(this.empId, this.password).subscribe({
       next: (response: any) => {
         this.user = response;
-        console.log(response);
-        
+        // console.log(response);
+        alert("Loged in successfull")
         sessionStorage.setItem("empId", this.user.empId);
         sessionStorage.setItem("role", this.user.role);
         this.errMsg = "";
