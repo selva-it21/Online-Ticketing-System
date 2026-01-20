@@ -1,14 +1,6 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "SfGjTzjlw1A=",
-=======
-<<<<<<< HEAD
-  "dgSpecHash": "JViIJS+9oOw=",
-=======
-  "dgSpecHash": "qr/4W8dmHnw=",
->>>>>>> 62d4d4bf731769391c1eb05c8636d4745e1ab136
->>>>>>> 2707a7a24579b7977c802103308fcda437f25758
   "success": true,
   "projectFilePath": "D:\\Final_Project\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\TicketRaisingWebApi.csproj",
   "expectedPackageFiles": [

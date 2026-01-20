@@ -108,7 +108,7 @@ namespace TicketRaisingLibrary.Migrations
                         .HasColumnType("CHAR(4)");
 
                     b.Property<string>("Title")
-                        .HasColumnType("CHAR(15)");
+                        .HasColumnType("CHAR(100)");
 
                     b.HasKey("TicketId");
 
