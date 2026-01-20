@@ -18,7 +18,6 @@ namespace TicketRaisingLibrary.Repos
                 await context.TicketTypes.AddAsync(ticketType);
                 await context.SaveChangesAsync();
             }
-<<<<<<< HEAD
             catch (DbUpdateException ex) {
                 SqlException sqlException = ex.InnerException as SqlException;
                 int errorNumber = sqlException.Number;
@@ -29,33 +28,14 @@ namespace TicketRaisingLibrary.Repos
             }
             catch(Exception ex){
                 throw new TicketingException(ex.Message,555);
-=======
-            catch (DbUpdateException ex)
-            {
-                SqlException sqlException = ex.InnerException as SqlException;
-                int errorNumber = sqlException.Number;
-                switch (errorNumber)
-                {
-
-                    case 2627: throw new TicketingException("Ticket Type ID already exists", 501);
-                    default: throw new TicketingException(sqlException.Message, 599);
-                }
->>>>>>> e12ad82701c571233829a19528c1b237e50c6c9d
             }
         }
 
         public async Task<List<TicketType>> GetAllTicketTypesAsync()
         {
-<<<<<<< HEAD
             
             List<TicketType> ticketTypes = await context.TicketTypes.ToListAsync();
             return ticketTypes;
-=======
-
-            List<TicketType> ticketTypes = await context.TicketTypes.ToListAsync();
-            return ticketTypes;
-
->>>>>>> e12ad82701c571233829a19528c1b237e50c6c9d
         }
 
         public async Task<TicketType> GetTicketTypeByIdAsync(string ticketTypeId)
@@ -81,18 +61,10 @@ namespace TicketRaisingLibrary.Repos
         public async Task<List<TicketType>> GetTicketTypesByDeptAsync(string departmentId)
         {
             List<TicketType> ticketTypes = await context.TicketTypes
-<<<<<<< HEAD
                 .Where(tt => tt.DeptId == departmentId)
                 .ToListAsync();
             return ticketTypes;
             
-=======
-                   .Where(tt => tt.DeptId == departmentId)
-                   .ToListAsync();
-
-            return ticketTypes;
-
->>>>>>> e12ad82701c571233829a19528c1b237e50c6c9d
         }
 
         public async Task UpdateTicketTypeAsync(string ticketTypeId, TicketType ticketType)
@@ -108,7 +80,6 @@ namespace TicketRaisingLibrary.Repos
 
                 await context.SaveChangesAsync();
             }
-<<<<<<< HEAD
             catch (DbUpdateException ex) {
                 SqlException sqlException = ex.InnerException as SqlException;
                 int errorNumber = sqlException.Number;
@@ -120,17 +91,6 @@ namespace TicketRaisingLibrary.Repos
             }
             catch(Exception ex){
                 throw new TicketingException(ex.Message,555);
-=======
-            catch (DbUpdateException ex)
-            {
-                SqlException sqlException = ex.InnerException as SqlException;
-                int errorNumber = sqlException.Number;
-                switch (errorNumber)
-                {
-                    case 547: throw new TicketingException("Cannot update due to foreign key constraint", 1002); break;
-                    default: throw new TicketingException(sqlException.Message, 1099);
-                }
->>>>>>> e12ad82701c571233829a19528c1b237e50c6c9d
             }
         }
 

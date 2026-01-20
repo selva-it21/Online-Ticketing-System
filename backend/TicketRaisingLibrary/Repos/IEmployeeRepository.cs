@@ -17,5 +17,5 @@ public interface IEmployeeRepository
 
         Task<List<Employee>> GetEmployeesByDepartmentAsync(string deptId);
 
-        Task<Employee> LoginAsync(string username, string password);
+        Task<Employee> LoginAsync(string empId, string password);
 }

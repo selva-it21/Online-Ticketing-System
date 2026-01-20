@@ -9,7 +9,7 @@ import { TicketReply } from '../models/ticketreply';
 export class TicketReplyService {
 
   http: HttpClient = inject(HttpClient);
-  baseUrl = 'https://localhost:5041/api/TicketReply';
+  baseUrl = 'http://localhost:5041/api/TicketReply';
 
   getAllReplies(): Observable<TicketReply[]> {
     return this.http.get<TicketReply[]>(this.baseUrl);

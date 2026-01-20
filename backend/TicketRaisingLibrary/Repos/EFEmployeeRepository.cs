@@ -47,8 +47,8 @@ namespace TicketRaisingLibrary.Repos
                 int errorNumber = sqlException.Number;
                 switch (errorNumber)
                 {
-                    case 547: throw new TicketingException("Cannot update due to foreign key constraint", 1002); break;
-                    default: throw new TicketingException(sqlException.Message, 1099);
+                    case 2628: throw new TicketingException("Name or Role too long",502);
+                    default: throw new TicketingException(sqlException.Message, 599);
                 }
             }
             catch(Exception ex){
@@ -115,13 +115,13 @@ namespace TicketRaisingLibrary.Repos
             return employees;
         }
 
-        public async Task<Employee> LoginAsync(string username, string password) {
+        public async Task<Employee> LoginAsync(string empId, string password) {
             try {
-                Employee user = await (from u in context.Employees where u.EmpName == username && u.Password == password select u).FirstAsync();
+                Employee user = await (from u in context.Employees where u.EmpId == empId && u.Password == password select u).FirstAsync();
                 return user;
             }
             catch {
-                throw new TicketingException("Invalid username or password",400);
+                throw new TicketingException("Invalid user Id or password",400);
             }
         }
     }
