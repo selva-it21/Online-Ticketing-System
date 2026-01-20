@@ -115,13 +115,13 @@ namespace TicketRaisingLibrary.Repos
             return employees;
         }
 
-        public async Task<Employee> LoginAsync(string username, string password) {
+        public async Task<Employee> LoginAsync(string empId, string password) {
             try {
-                Employee user = await (from u in context.Employees where u.EmpName == username && u.Password == password select u).FirstAsync();
+                Employee user = await (from u in context.Employees where u.EmpId == empId && u.Password == password select u).FirstAsync();
                 return user;
             }
             catch {
-                throw new TicketingException("Invalid username or password",400);
+                throw new TicketingException("Invalid user Id or password",400);
             }
         }
     }
