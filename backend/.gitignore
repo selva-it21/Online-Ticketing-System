@@ -4,10 +4,6 @@
 *.suo
 *.cache 
 
-<<<<<<< HEAD
-# Entity Framework Core Migrations
-=======
->>>>>>> 62d4d4bf731769391c1eb05c8636d4745e1ab136
 Migrations/
 *.db
 *.mdf

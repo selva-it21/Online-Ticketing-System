@@ -1650,11 +1650,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\TicketRaisingWebApi.csproj",
+      "projectUniqueName": "C:\\Users\\user1\\Desktop\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\TicketRaisingWebApi.csproj",
       "projectName": "TicketRaisingWebApi",
-      "projectPath": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\TicketRaisingWebApi.csproj",
+      "projectPath": "C:\\Users\\user1\\Desktop\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\TicketRaisingWebApi.csproj",
       "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-      "outputPath": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\obj\\",
+      "outputPath": "C:\\Users\\user1\\Desktop\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1669,8 +1669,8 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj": {
-              "projectPath": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj"
+            "C:\\Users\\user1\\Desktop\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj": {
+              "projectPath": "C:\\Users\\user1\\Desktop\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj"
             }
           }
         }
@@ -2146,7 +2146,7 @@
       "code": "Undefined",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Problem reading the cache file D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0."
+      "message": "Problem reading the cache file C:\\Users\\user1\\Desktop\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0."
     }
   ]
 }
