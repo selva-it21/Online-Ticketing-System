@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BEWdo25yZdw=",
+  "dgSpecHash": "+/XzuRJczGU=",
   "success": true,
-  "projectFilePath": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
+  "projectFilePath": "D:\\FullStack\\Project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user1\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
@@ -62,20 +62,5 @@
     "C:\\Users\\user1\\.nuget\\packages\\system.security.cryptography.pkcs\\9.0.4\\system.security.cryptography.pkcs.9.0.4.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\system.security.cryptography.protecteddata\\9.0.4\\system.security.cryptography.protecteddata.9.0.4.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-<<<<<<< HEAD
-      "message": "Problem reading the cache file D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 64 | BytePositionInLine: 0.",
-      "projectPath": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
-=======
-      "message": "Problem reading the cache file D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 64 | BytePositionInLine: 0.",
-      "projectPath": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
->>>>>>> 0999797afea609a3c0d50ef3c3e1c2b9aa2271b7
-      "warningLevel": 1,
-      "filePath": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
-      "targetGraphs": []
-    }
-  ]
+  "logs": []
 }
