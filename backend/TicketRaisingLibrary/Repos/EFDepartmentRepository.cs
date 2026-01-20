@@ -88,15 +88,17 @@ public class EFDepartmentRepository : IDepartmentRepository
             dept1.Description = department.Description;
             await context.SaveChangesAsync();
         }
-        catch (DbUpdateException ex)
-        {
+        catch (DbUpdateException ex) {
             SqlException sqlException = ex.InnerException as SqlException;
             int errorNumber = sqlException.Number;
-            switch (errorNumber)
-            {
-                case 547: throw new TicketingException("Cannot update due to foreign key constraint", 1002); break;
-                default: throw new TicketingException(sqlException.Message, 1099);
-            }
+            switch(errorNumber) {
+                case 2628: throw new TicketingException("Name and/or description too long",502);
+                default: throw new TicketingException(sqlException.Message,599);
+            }    
+        }
+        catch(Exception ex)
+        {
+            throw new TicketingException(ex.Message,555);
         }
     }
 

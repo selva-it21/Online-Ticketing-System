@@ -7,6 +7,7 @@ namespace TicketRaisingWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TicketTypeController : ControllerBase
     {
         ITicketTypeRepository ticketTypeRepo;

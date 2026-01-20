@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TicketRaisingLibrary.Models;
@@ -7,6 +8,7 @@ namespace TicketRaisingWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class EmployeeController : ControllerBase
     {
         IEmployeeRepository empRepo;
@@ -124,14 +126,14 @@ namespace TicketRaisingWebApi.Controllers
             }
         }
 
-        [HttpGet("{EmpName}/{Password}")]
+        [HttpGet("{EmpId}/{Password}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> Login(string EmpName, string Password)
+        public async Task<IActionResult> Login(string EmpId, string Password)
         {
             try
             {
-                return Ok(await empRepo.LoginAsync(EmpName, Password));
+                return Ok(await empRepo.LoginAsync(EmpId, Password));
             }
             catch (TicketingException ex)
             {

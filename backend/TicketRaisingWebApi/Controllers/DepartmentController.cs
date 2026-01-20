@@ -1,12 +1,13 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TicketRaisingLibrary.Models;
 using TicketRaisingLibrary.Repos;
- 
 namespace TicketRaisingWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DepartmentController : ControllerBase{
         IDepartmentRepository departmentRepository;
  
