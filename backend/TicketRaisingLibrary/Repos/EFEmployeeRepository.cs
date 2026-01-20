@@ -22,13 +22,10 @@ namespace TicketRaisingLibrary.Repos
                 SqlException sqlException = ex.InnerException as SqlException;
                 int errorNumber = sqlException.Number;
 
-                switch (errorNumber)
-                {
-                    case 2627:
-                        throw new TicketingException("Employee ID already exists", 501);
-
-                    default:
-                        throw new TicketingException(sqlException.Message, 599);
+                switch (errorNumber){
+                    case 2627: throw new TicketingException("Employee ID already exists", 501);
+                    case 2628: throw new TicketingException("Name and/or description too long",502);
+                    default: throw new TicketingException(sqlException.Message, 599);
                 }
             }
         }
@@ -38,12 +35,10 @@ namespace TicketRaisingLibrary.Repos
             try
             {
                 Employee empToEdit = await GetEmployeeByIdAsync(empId);
-
                 empToEdit.EmpName = employee.EmpName;
                 empToEdit.Password = employee.Password;
                 empToEdit.Role = employee.Role;
                 empToEdit.DeptId = employee.DeptId;
-
                 await context.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
@@ -52,9 +47,17 @@ namespace TicketRaisingLibrary.Repos
                 int errorNumber = sqlException.Number;
                 switch (errorNumber)
                 {
+<<<<<<< HEAD
+                    case 2628: throw new TicketingException("Name or Role too long",502);
+                    default: throw new TicketingException(sqlException.Message, 599);
+=======
                     case 547: throw new TicketingException("Cannot update due to foreign key constraint", 1002); break;
                     default: throw new TicketingException(sqlException.Message, 1099);
+>>>>>>> e12ad82701c571233829a19528c1b237e50c6c9d
                 }
+            }
+            catch(Exception ex){
+                throw new TicketingException(ex.Message,555);
             }
         }
 
@@ -63,29 +66,22 @@ namespace TicketRaisingLibrary.Repos
             Employee empToDelete = await context.Employees
                 .Include(e => e.CreatedTickets)
                 .Include(e => e.AssignedTickets)
-                .Include(e => e.CreatorReplies)
-                .Include(e => e.AssignedReplies)
                 .FirstOrDefaultAsync(e => e.EmpId == empId);
 
             if (empToDelete == null)
                 throw new TicketingException("Employee not found", 3003);
 
             if (empToDelete.CreatedTickets.Count > 0 ||
-                empToDelete.AssignedTickets.Count > 0 ||
-                empToDelete.CreatorReplies.Count > 0 ||
-                empToDelete.AssignedReplies.Count > 0)
-            {
+                empToDelete.AssignedTickets.Count > 0){
                 throw new TicketingException(
                     "Cannot delete employee because related records exist", 3009);
             }
 
-            try
-            {
+            try{
                 context.Employees.Remove(empToDelete);
                 await context.SaveChangesAsync();
             }
-            catch (DbUpdateException ex)
-            {
+            catch (DbUpdateException ex){
                 SqlException sqlException = ex.InnerException as SqlException;
                 int errorNumber = sqlException.Number;
 
@@ -94,6 +90,9 @@ namespace TicketRaisingLibrary.Repos
                     default:
                         throw new TicketingException(sqlException.Message, 599);
                 }
+            }
+            catch(Exception ex){
+                throw new TicketingException(ex.Message,555);
             }
         }
 
