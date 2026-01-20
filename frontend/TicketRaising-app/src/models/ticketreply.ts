@@ -1,15 +1,15 @@
 export class TicketReply{
-    public ReplyId : string;
-    public TicketId : string;
-    public ReplyMessage : string;
-    public ReplyByCreatorEmpId : string;
-    public ReplyByAssignedEmpId : string;
+    public replyId : string;
+    public ticketId : string;
+    public replyMessage : string;
+    public replyByCreatorEmpId : string;
+    public replyByAssignedEmpId : string;
 
     constructor(ReplyId : string, TicketId : string, ReplyMessage : string, ReplyByCreatorEmpId : string, ReplyByAssignedEmpId : string){
-        this.ReplyId = ReplyId;
-        this.TicketId = TicketId;
-        this.ReplyMessage = ReplyMessage;
-        this.ReplyByCreatorEmpId = ReplyByCreatorEmpId;
-        this.ReplyByAssignedEmpId = ReplyByAssignedEmpId;
+        this.replyId = ReplyId;
+        this.ticketId = TicketId;
+        this.replyMessage = ReplyMessage;
+        this.replyByCreatorEmpId = ReplyByCreatorEmpId;
+        this.replyByAssignedEmpId = ReplyByAssignedEmpId;
     }
 }
