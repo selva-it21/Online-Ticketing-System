@@ -20,8 +20,13 @@ public class EFDepartmentRepository : IDepartmentRepository
             SqlException sqlException = ex.InnerException as SqlException;
             int errorNumber = sqlException.Number;
             switch(errorNumber) {
+<<<<<<< HEAD
                 case 2627: throw new TicketingException("Product Category ID already exists",501);
                 case 2628: throw new TicketingException("Name and/or description too long",502);
+=======
+                case 2627: throw new TicketingException("Department ID already exists",501);
+                //case 2628: throw new ProductException("Name and/or description too long");
+>>>>>>> e12ad82701c571233829a19528c1b237e50c6c9d
                 default: throw new TicketingException(sqlException.Message,599);
             }    
         }
@@ -88,6 +93,7 @@ public class EFDepartmentRepository : IDepartmentRepository
             dept1.Description = department.Description;
             await context.SaveChangesAsync();
         }
+<<<<<<< HEAD
         catch (DbUpdateException ex) {
             SqlException sqlException = ex.InnerException as SqlException;
             int errorNumber = sqlException.Number;
@@ -99,6 +105,17 @@ public class EFDepartmentRepository : IDepartmentRepository
         catch(Exception ex)
         {
             throw new TicketingException(ex.Message,555);
+=======
+        catch (DbUpdateException ex)
+        {
+            SqlException sqlException = ex.InnerException as SqlException;
+            int errorNumber = sqlException.Number;
+            switch (errorNumber)
+            {
+                case 547: throw new TicketingException("Cannot update due to foreign key constraint", 1002); break;
+                default: throw new TicketingException(sqlException.Message, 1099);
+            }
+>>>>>>> e12ad82701c571233829a19528c1b237e50c6c9d
         }
     }
 
