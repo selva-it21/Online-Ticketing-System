@@ -1,21 +1,30 @@
-<<<<<<< HEAD
-# Add to .gitignore**/bin/
-**/obj/
-*.csproj.user
-*.suo
-<<<<<<< HEAD
-*.cache 
-=======
-*.cache 
-=======
-# Binaries
->>>>>>> a4aae1f9ad68b5f72b18dda287055ccb8d503664
+# .NET build outputs
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
 
-Migrations/
-*.db
-*.mdf
-*.ldf
-<<<<<<< HEAD
->>>>>>> 2707a7a24579b7977c802103308fcda437f25758
-=======
->>>>>>> a4aae1f9ad68b5f72b18dda287055ccb8d503664
+# Visual Studio/VS Code files
+.vs/
+.vscode/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebugPublic/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.resources
+*.dotCover
+
+# Generated files
+*.GeneratedMSBuildEditorConfig.editorconfig
+*.sourceLink.json
+*.assets.json
+project.nuget.cache
