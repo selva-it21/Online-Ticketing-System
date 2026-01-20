@@ -1,17 +1,59 @@
-// import { HttpClient } from '@angular/common/http';
-// import { inject, Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Employee } from '../models/employee';
 
-// @Injectable({
-//   providedIn: 'root',
-// })
-// export class EmployeeService {
+@Injectable({
+    providedIn: 'root',
+})
+export class EmployeeService {
 
-//     http : HttpClient = inject(HttpClient);
-//     token;
-//     baseurl : string = "http://localhost:5041/api/employee/";
-//     httpOptions;
-//     constructor(){
+    http: HttpClient = inject(HttpClient);
+    token;
+    baseUrl: string = "http://localhost:5253/api/batch/";
+    httpOptions;
+    constructor() {
+        this.token = sessionStorage.getItem("token");
+        this.httpOptions = {
+            headers: new HttpHeaders({
+                'Authorization': 'Bearer ' + this.token
+            })
+        };
+    }
 
-//     }
+    showAllEmployee(): Observable<Employee[]> {
+        return this.http.get<Employee[]>(this.baseUrl, this.httpOptions);
+    }
+    getOneEmployee(empid: string): Observable<Employee> {
+        return this.http.get<Employee>(this.baseUrl + empid, this.httpOptions);
+    }
+
+    addEmployee(employee: Employee): Observable<Employee> {
+        return this.http.post<Employee>(
+            this.baseUrl,
+            employee,
+            this.httpOptions
+        );
+    }
+
+
+    updateEmployee(empid: string, employee: Employee): Observable<any> {
+        return this.http.put(
+            this.baseUrl + empid,
+            employee,
+            this.httpOptions
+        );
+    }
+
+
+    deleteEmployee(empid: string): Observable<any> {
+        return this.http.delete(
+            this.baseUrl + empid,
+            this.httpOptions
+        );
+    }
     
-// }
+    login(empid : string , password : string ) : Observable<Employee>{
+        return this.http.get<Employee>(this.baseUrl + empid + "/" + password);
+    }
+}
