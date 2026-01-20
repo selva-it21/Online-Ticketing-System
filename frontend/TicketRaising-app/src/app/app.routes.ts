@@ -8,6 +8,7 @@ import { SlaComponent } from './sla-component/sla-component';
 import { EmployeeComponent } from './employee-component/employee-component';
 import { LoginComponent } from './login-component/login-component';
 import { TickettypeComponent } from './tickettype-component/tickettype-component';
+import { TicketReplyComponent } from './ticketreply-component/ticketreply-component';
 
 export const routes: Routes = [
     {path: '',component:HomeComponent},
@@ -16,6 +17,7 @@ export const routes: Routes = [
     {path: 'sla',component:SlaComponent},
     {path: 'navbar',component:NavbarComponent},
     {path: 'tickettype',component:TickettypeComponent},
+    {path: 'ticketreply',component:TicketReplyComponent},
     {path: 'logout',component:LogoutComponent},
     {path: 'login',component:LoginComponent}
 ];

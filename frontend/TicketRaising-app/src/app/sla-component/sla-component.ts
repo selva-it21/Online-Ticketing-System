@@ -58,7 +58,7 @@ export class SlaComponent {
 
   // GET SLA BY ID
   showSla(): void {
-    this.slaSvc.getSla(this.sla.SLAId).subscribe({
+    this.slaSvc.getSla(this.sla.slaId).subscribe({
       next: (response: SLA) => {
         this.sla = response;
         this.errMsg = '';
@@ -72,7 +72,7 @@ export class SlaComponent {
 
   // UPDATE SLA
   updateSla(): void {
-    this.slaSvc.updateSla(this.sla.SLAId, this.sla).subscribe({
+    this.slaSvc.updateSla(this.sla.slaId, this.sla).subscribe({
       next: (response: SLA) => {
         this.showAllSlas();
         alert('SLA details updated successfully!');
@@ -87,7 +87,7 @@ export class SlaComponent {
 
   // DELETE SLA
   deleteSla(): void {
-    this.slaSvc.deleteSla(this.sla.SLAId).subscribe({
+    this.slaSvc.deleteSla(this.sla.slaId).subscribe({
       next: () => {
         this.showAllSlas();
         alert('SLA deleted successfully!');
