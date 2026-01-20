@@ -28,13 +28,16 @@
 
       <div class="form-row">
         <label for="priority" class="form-label">Priority:</label>
-        <input
-          type="text"
-          id="priority"
-          [(ngModel)]="sla.priority"
+        <select
           name="priority"
-          class="form-input"
-        />
+          [(ngModel)]="sla.priority" class="form-input"
+        >
+          <option value="">-- Select --</option>
+          <option value="Low">Low</option>
+          <option value="Standard">Standard</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
       </div>
 
       <div class="form-row">

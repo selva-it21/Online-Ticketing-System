@@ -31,9 +31,8 @@
     <tr>
       <td>Department ID</td>
       <td>
-        <select name="deptId">
+        <select name="deptId"  [(ngModel)]="employee.deptId">
           <option value="">-- Select Department --</option>
-
           <option *ngFor="let dept of departments" [value]="dept.deptId">
             {{ dept.deptName }}
           </option>
