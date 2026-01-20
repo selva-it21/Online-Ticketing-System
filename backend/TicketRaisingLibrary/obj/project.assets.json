@@ -4004,21 +4004,13 @@
         }
       }
     }
-<<<<<<< HEAD
-  }
-=======
   },
   "logs": [
     {
       "code": "Undefined",
       "level": "Warning",
       "warningLevel": 1,
-<<<<<<< HEAD
-      "message": "Problem reading the cache file C:\\Users\\user1\\Desktop\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 3 | BytePositionInLine: 0."
-=======
-      "message": "Problem reading the cache file D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0."
->>>>>>> a4aae1f9ad68b5f72b18dda287055ccb8d503664
+      "message": "Problem reading the cache file D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 64 | BytePositionInLine: 0."
     }
   ]
->>>>>>> e29f138572df6c36d0c2596750d6da00edabaf40
 }
