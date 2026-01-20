@@ -3663,11 +3663,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
+      "projectUniqueName": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
       "projectName": "TicketRaisingLibrary",
-      "projectPath": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
+      "projectPath": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
       "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-      "outputPath": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\obj\\",
+      "outputPath": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -4004,6 +4004,9 @@
         }
       }
     }
+<<<<<<< HEAD
+  }
+=======
   },
   "logs": [
     {
@@ -4017,4 +4020,5 @@
 >>>>>>> a4aae1f9ad68b5f72b18dda287055ccb8d503664
     }
   ]
+>>>>>>> e29f138572df6c36d0c2596750d6da00edabaf40
 }

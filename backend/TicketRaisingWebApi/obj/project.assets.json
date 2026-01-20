@@ -1650,11 +1650,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\TicketRaisingWebApi.csproj",
+      "projectUniqueName": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\TicketRaisingWebApi.csproj",
       "projectName": "TicketRaisingWebApi",
-      "projectPath": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\TicketRaisingWebApi.csproj",
+      "projectPath": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\TicketRaisingWebApi.csproj",
       "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-      "outputPath": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\obj\\",
+      "outputPath": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1669,8 +1669,8 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj": {
-              "projectPath": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj"
+            "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj": {
+              "projectPath": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj"
             }
           }
         }
@@ -2140,13 +2140,5 @@
         }
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0."
-    }
-  ]
+  }
 }
