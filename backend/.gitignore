@@ -2,4 +2,17 @@
 **/obj/
 *.csproj.user
 *.suo
+<<<<<<< HEAD
 *.cache 
+=======
+*.cache 
+
+<<<<<<< HEAD
+# Entity Framework Core Migrations
+=======
+>>>>>>> 62d4d4bf731769391c1eb05c8636d4745e1ab136
+Migrations/
+*.db
+*.mdf
+*.ldf
+>>>>>>> 2707a7a24579b7977c802103308fcda437f25758

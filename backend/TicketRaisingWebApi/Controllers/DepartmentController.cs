@@ -2,7 +2,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TicketRaisingLibrary.Models;
 using TicketRaisingLibrary.Repos;
+<<<<<<< HEAD
+
+=======
  
+>>>>>>> 62d4d4bf731769391c1eb05c8636d4745e1ab136
 namespace TicketRaisingWebApi.Controllers
 {
     [Route("api/[controller]")]

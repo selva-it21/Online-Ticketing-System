@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TicketRaisingLibrary.Models;
 
@@ -11,9 +12,11 @@ using TicketRaisingLibrary.Models;
 namespace TicketRaisingLibrary.Migrations
 {
     [DbContext(typeof(TicketPortalDBContext))]
-    partial class TicketPortalDBContextModelSnapshot : ModelSnapshot
+    [Migration("20260119094244_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,11 +111,7 @@ namespace TicketRaisingLibrary.Migrations
                         .HasColumnType("CHAR(4)");
 
                     b.Property<string>("Title")
-<<<<<<< HEAD
-                        .HasColumnType("CHAR(100)");
-=======
                         .HasColumnType("CHAR(15)");
->>>>>>> 2707a7a24579b7977c802103308fcda437f25758
 
                     b.HasKey("TicketId");
 

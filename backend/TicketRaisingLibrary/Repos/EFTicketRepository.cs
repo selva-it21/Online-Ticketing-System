@@ -24,11 +24,16 @@ public class EFTicketRepository : ITicketRepository
         {
             SqlException sqlException = ex.InnerException as SqlException;
             int errorNumber = sqlException.Number;
-            switch (errorNumber)
-            {
-                case 2627: throw new TicketingException("Ticket ID already exists", 1001); break;
-                default: throw new TicketingException(sqlException.Message, 1099);
+
+            switch (errorNumber){
+                case 2627: throw new TicketingException("Ticket ID already exists", 501);
+                case 2628: throw new TicketingException("Description too long",502);
+                default: throw new TicketingException(sqlException.Message, 599);
             }
+        }
+        catch(Exception ex)
+        {
+            throw new TicketingException(ex.Message,599);
         }
     }
 
@@ -44,15 +49,17 @@ public class EFTicketRepository : ITicketRepository
             ticket2edit.AssignedToEmpId = ticket.AssignedToEmpId;
             await context.SaveChangesAsync();
         }
-        catch (DbUpdateException ex)
-        {
+        catch (DbUpdateException ex){
             SqlException sqlException = ex.InnerException as SqlException;
             int errorNumber = sqlException.Number;
-            switch (errorNumber)
-            {
-                case 547: throw new TicketingException("Cannot update due to foreign key constraint", 1002); break;
-                default: throw new TicketingException(sqlException.Message, 1099);
+
+            switch (errorNumber){
+                case 2628: throw new TicketingException("Description too long",502);
+                default: throw new TicketingException(sqlException.Message, 599);
             }
+        }
+        catch(Exception ex){
+            throw new TicketingException(ex.Message,555);
         }
     }
 
