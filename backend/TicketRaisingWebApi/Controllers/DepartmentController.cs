@@ -19,6 +19,7 @@ namespace TicketRaisingWebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            
             return Ok(await departmentRepository.GetAllDepartmentAsync());
         }
  
