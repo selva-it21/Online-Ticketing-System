@@ -3663,11 +3663,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user1\\Desktop\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
+      "projectUniqueName": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
       "projectName": "TicketRaisingLibrary",
-      "projectPath": "C:\\Users\\user1\\Desktop\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
+      "projectPath": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
       "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user1\\Desktop\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\obj\\",
+      "outputPath": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -4010,7 +4010,11 @@
       "code": "Undefined",
       "level": "Warning",
       "warningLevel": 1,
+<<<<<<< HEAD
       "message": "Problem reading the cache file C:\\Users\\user1\\Desktop\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 3 | BytePositionInLine: 0."
+=======
+      "message": "Problem reading the cache file D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0."
+>>>>>>> a4aae1f9ad68b5f72b18dda287055ccb8d503664
     }
   ]
 }

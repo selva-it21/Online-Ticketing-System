@@ -1,0 +1,15 @@
+D:\project\Online-Ticketing-System\backend\TicketRaisingLibrary\bin\Debug\net10.0\TicketRaisingLibrary.deps.json
+D:\project\Online-Ticketing-System\backend\TicketRaisingLibrary\bin\Debug\net10.0\TicketRaisingLibrary.runtimeconfig.json
+D:\project\Online-Ticketing-System\backend\TicketRaisingLibrary\bin\Debug\net10.0\TicketRaisingLibrary.dll
+D:\project\Online-Ticketing-System\backend\TicketRaisingLibrary\bin\Debug\net10.0\TicketRaisingLibrary.pdb
+D:\project\Online-Ticketing-System\backend\TicketRaisingLibrary\obj\Debug\net10.0\TicketRaisingLibrary.csproj.AssemblyReference.cache
+D:\project\Online-Ticketing-System\backend\TicketRaisingLibrary\obj\Debug\net10.0\TicketRaisingLibrary.GeneratedMSBuildEditorConfig.editorconfig
+D:\project\Online-Ticketing-System\backend\TicketRaisingLibrary\obj\Debug\net10.0\TicketRaisingLibrary.AssemblyInfoInputs.cache
+D:\project\Online-Ticketing-System\backend\TicketRaisingLibrary\obj\Debug\net10.0\TicketRaisingLibrary.AssemblyInfo.cs
+D:\project\Online-Ticketing-System\backend\TicketRaisingLibrary\obj\Debug\net10.0\TicketRaisingLibrary.csproj.CoreCompileInputs.cache
+D:\project\Online-Ticketing-System\backend\TicketRaisingLibrary\obj\Debug\net10.0\TicketRaisingLibrary.sourcelink.json
+D:\project\Online-Ticketing-System\backend\TicketRaisingLibrary\obj\Debug\net10.0\TicketRaisingLibrary.dll
+D:\project\Online-Ticketing-System\backend\TicketRaisingLibrary\obj\Debug\net10.0\refint\TicketRaisingLibrary.dll
+D:\project\Online-Ticketing-System\backend\TicketRaisingLibrary\obj\Debug\net10.0\TicketRaisingLibrary.pdb
+D:\project\Online-Ticketing-System\backend\TicketRaisingLibrary\obj\Debug\net10.0\TicketRaisingLibrary.genruntimeconfig.cache
+D:\project\Online-Ticketing-System\backend\TicketRaisingLibrary\obj\Debug\net10.0\ref\TicketRaisingLibrary.dll
