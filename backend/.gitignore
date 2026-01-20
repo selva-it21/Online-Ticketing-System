@@ -1,6 +1,21 @@
+<<<<<<< HEAD
+# Add to .gitignore**/bin/
+**/obj/
+*.csproj.user
+*.suo
+<<<<<<< HEAD
+*.cache 
+=======
+*.cache 
+=======
 # Binaries
+>>>>>>> a4aae1f9ad68b5f72b18dda287055ccb8d503664
 
 Migrations/
 *.db
 *.mdf
 *.ldf
+<<<<<<< HEAD
+>>>>>>> 2707a7a24579b7977c802103308fcda437f25758
+=======
+>>>>>>> a4aae1f9ad68b5f72b18dda287055ccb8d503664
