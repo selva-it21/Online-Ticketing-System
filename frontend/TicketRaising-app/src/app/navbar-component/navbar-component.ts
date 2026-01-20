@@ -8,5 +8,5 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
   styleUrl: './navbar-component.css',
 })
 export class NavbarComponent {
-  username = sessionStorage.getItem("EmpName");
+  username = sessionStorage.getItem("empId");
 }

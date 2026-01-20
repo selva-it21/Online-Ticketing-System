@@ -19,6 +19,17 @@
         />
       </td>
     </tr>
+    <tr>
+      <td>Password</td>
+      <td>
+        <input
+          type="password"
+          name="password"
+          [(ngModel)]="employee.password"
+          required
+        />
+      </td>
+    </tr>
 
     <tr>
       <td>Employee Name</td>
@@ -74,6 +85,7 @@
   <thead>
     <tr>
       <th>Emp ID</th>
+      <th>Password</th>
       <th>Name</th>
       <th>Dept ID</th>
       <th>Role</th>
@@ -84,6 +96,7 @@
   <tbody>
     <tr *ngFor="let emp of employees">
       <td>{{ emp.empId }}</td>
+      <td>{{ emp.password }}</td>
       <td>{{ emp.empName }}</td>
       <td>{{ emp.deptId }}</td>
       <td>{{ emp.role }}</td>
