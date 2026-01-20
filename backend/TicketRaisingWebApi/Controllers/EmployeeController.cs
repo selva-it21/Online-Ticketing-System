@@ -11,6 +11,8 @@ namespace TicketRaisingWebApi.Controllers
     [Authorize]
     public class EmployeeController : ControllerBase
     {
+        
+        
         IEmployeeRepository empRepo;
         public EmployeeController(IEmployeeRepository empRepository) {
             empRepo = empRepository;
