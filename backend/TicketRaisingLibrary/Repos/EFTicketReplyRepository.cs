@@ -23,11 +23,15 @@ public class EFTicketReplyRepository : ITicketReplyRepository
         {
             SqlException sqlException = ex.InnerException as SqlException;
             int errorNumber = sqlException.Number;
-            switch (errorNumber)
-            {
-                case 2627: throw new TicketingException("Reply ID already exists", 2001); break;
-                default: throw new TicketingException(sqlException.Message, 2099);
+
+            switch (errorNumber){
+                case 2627: throw new TicketingException("Reply ID already exists", 501);
+                case 2628: throw new TicketingException("Reply message too long",502);
+                default: throw new TicketingException(sqlException.Message, 599);
             }
+        }
+        catch(Exception ex){
+            throw new TicketingException(ex.Message,555);
         }
     }
 
@@ -45,13 +49,16 @@ public class EFTicketReplyRepository : ITicketReplyRepository
         {
             SqlException sqlException = ex.InnerException as SqlException;
             int errorNumber = sqlException.Number;
-            switch (errorNumber)
-            {
-                case 547: throw new TicketingException("Cannot update due to foreign key constraint", 2002); break;
-                default: throw new TicketingException(sqlException.Message, 2099);
+
+            switch (errorNumber){
+                case 2628: throw new TicketingException("Reply message too long",502);
+                default: throw new TicketingException(sqlException.Message, 599);
             }
         }
-    }
+        catch(Exception ex){
+            throw new TicketingException(ex.Message,555);
+        }
+}
 
     public async Task DeleteTicketReplyAsync(string replyId)
     {

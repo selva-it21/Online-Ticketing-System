@@ -21,9 +21,13 @@ public class EFDepartmentRepository : IDepartmentRepository
             int errorNumber = sqlException.Number;
             switch(errorNumber) {
                 case 2627: throw new TicketingException("Product Category ID already exists",501);
-                //case 2628: throw new ProductException("Name and/or description too long");
+                case 2628: throw new TicketingException("Name and/or description too long",502);
                 default: throw new TicketingException(sqlException.Message,599);
             }    
+        }
+        catch(Exception ex)
+        {
+            throw new TicketingException(ex.Message,555);
         }
     }
 
@@ -56,9 +60,8 @@ public class EFDepartmentRepository : IDepartmentRepository
 
     public async Task<List<Department>> GetAllDepartmentAsync()
     {
-       
-            List<Department> departments = await context.Departments.ToListAsync();
-            return departments;
+        List<Department> departments = await context.Departments.ToListAsync();
+        return departments;
       
     }
 
@@ -66,11 +69,7 @@ public class EFDepartmentRepository : IDepartmentRepository
     {
         try
         {
-            Department department =
-                await (from d in context.Departments
-                       where d.DeptId == deptId
-                       select d).FirstAsync();
-
+            Department department = await (from d in context.Departments where d.DeptId == deptId select d).FirstAsync();
             return department;
         }
         catch
@@ -87,12 +86,19 @@ public class EFDepartmentRepository : IDepartmentRepository
         {
             dept1.DeptName = department.DeptName;
             dept1.Description = department.Description;
-
             await context.SaveChangesAsync();
         }
-        catch (Exception ex)
+        catch (DbUpdateException ex) {
+            SqlException sqlException = ex.InnerException as SqlException;
+            int errorNumber = sqlException.Number;
+            switch(errorNumber) {
+                case 2628: throw new TicketingException("Name and/or description too long",502);
+                default: throw new TicketingException(sqlException.Message,599);
+            }    
+        }
+        catch(Exception ex)
         {
-            throw new TicketingException(ex.Message, 3006);
+            throw new TicketingException(ex.Message,555);
         }
     }
 
