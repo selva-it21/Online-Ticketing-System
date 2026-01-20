@@ -22,10 +22,6 @@ public class TicketPortalDBContext : DbContext
     public virtual DbSet<TicketType> TicketTypes {get; set;}
     protected override void OnModelCreating(ModelBuilder modelBuilder)
 {      
-<<<<<<< HEAD
-    // Ticket → Employee (Created By)
-=======
->>>>>>> 37ce28f9bad946e8115308d8b81c9f0f6fda8e69
     modelBuilder.Entity<Ticket>()
         .HasOne(t => t.CreatedByEmployee)
         .WithMany(e => e.CreatedTickets)
