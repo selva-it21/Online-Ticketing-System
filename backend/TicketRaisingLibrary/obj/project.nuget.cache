@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Tu6mK0mfth8=",
+  "dgSpecHash": "BEWdo25yZdw=",
   "success": true,
-  "projectFilePath": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
+  "projectFilePath": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user1\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
@@ -62,28 +62,15 @@
     "C:\\Users\\user1\\.nuget\\packages\\system.security.cryptography.pkcs\\9.0.4\\system.security.cryptography.pkcs.9.0.4.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\system.security.cryptography.protecteddata\\9.0.4\\system.security.cryptography.protecteddata.9.0.4.nupkg.sha512"
   ],
-<<<<<<< HEAD
-  "logs": []
-=======
   "logs": [
     {
       "code": "Undefined",
       "level": "Warning",
-<<<<<<< HEAD
       "message": "Problem reading the cache file D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 64 | BytePositionInLine: 0.",
-=======
-<<<<<<< HEAD
-      "message": "Problem reading the cache file C:\\Users\\user1\\Desktop\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 3 | BytePositionInLine: 0.",
-      "projectPath": "C:\\Users\\user1\\Desktop\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
-=======
-      "message": "Problem reading the cache file D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0.",
->>>>>>> ffe9def8c2e884a3747ab4a71e5d176bf056b8fd
       "projectPath": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
->>>>>>> a4aae1f9ad68b5f72b18dda287055ccb8d503664
       "warningLevel": 1,
       "filePath": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
       "targetGraphs": []
     }
   ]
->>>>>>> e29f138572df6c36d0c2596750d6da00edabaf40
 }
