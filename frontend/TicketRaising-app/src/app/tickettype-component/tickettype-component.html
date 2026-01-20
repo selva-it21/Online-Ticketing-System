@@ -1,1 +1,75 @@
-<p>tickettype-component works!</p>
+<div class="tickettype-management-container">
+  <h2 class="tickettype-header">Ticket Type Form</h2>
+  
+  <div class="form-card">
+    <form class="tickettype-form">
+      <div class="form-row">
+        <label for="ticketTypeId" class="form-label">Ticket Type ID:</label>
+        <input type="text" id="ticketTypeId" [(ngModel)]="tickettype.ticketTypeId" name="ticketTypeId" class="form-input" />
+      </div>
+
+      <div class="form-row">
+        <label for="typeName" class="form-label">Type Name:</label>
+        <input type="text" id="typeName" [(ngModel)]="tickettype.typeName" name="typeName" class="form-input" />
+      </div>
+
+      <div class="form-row">
+        <label for="description" class="form-label">Description:</label>
+        <input type="text" id="description" [(ngModel)]="tickettype.description" name="description" class="form-input" />
+      </div>
+
+      <div class="form-row">
+        <label for="sLAId" class="form-label">SLA ID:</label>
+        <input type="text" id="sLAId" [(ngModel)]="tickettype.sLAId" name="sLAId" class="form-input" />
+      </div>
+
+      <div class="form-row">
+        <label for="deptId" class="form-label">Department ID:</label>
+        <input type="text" id="deptId" [(ngModel)]="tickettype.deptId" name="deptId" class="form-input" />
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" class="action-btn add-btn" (click)="addTicketType()">Add</button>
+        <button type="button" class="action-btn update-btn" (click)="updateTicketType()">Update</button>
+        <button type="button" class="action-btn show-btn" (click)="showTicketType()">Show</button>
+        <button type="button" class="action-btn delete-btn" (click)="deleteTicketType()">Delete</button>
+      </div>
+    </form>
+
+    <div *ngIf="errMsg" class="error-message">
+      {{ errMsg }}
+    </div>
+  </div>
+
+  <h2 class="tickettypes-header">Ticket Types List</h2>
+   <div class="table-card">
+    <div class="table-wrapper">
+      <table class="departments-table">
+        <thead>
+          <tr>
+            <th>Ticket Type ID</th>
+            <th>Type Name</th>
+            <th>Description</th>
+            <th>SLA ID</th>
+            <th>Department ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (tickettype of tickettypes; track tickettype) {
+            <tr>
+              <td>{{ tickettype.ticketTypeId }}</td>
+              <td>{{ tickettype.typeName }}</td>
+              <td>{{ tickettype.description }}</td>
+              <td>{{ tickettype.sLAId }}</td>
+              <td>{{ tickettype.deptId }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="3" class="no-data">No Ticket Types found</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

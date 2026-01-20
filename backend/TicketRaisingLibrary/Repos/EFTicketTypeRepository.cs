@@ -18,25 +18,24 @@ namespace TicketRaisingLibrary.Repos
                 await context.TicketTypes.AddAsync(ticketType);
                 await context.SaveChangesAsync();
             }
-            catch (DbUpdateException ex)
-            {
+            catch (DbUpdateException ex) {
                 SqlException sqlException = ex.InnerException as SqlException;
                 int errorNumber = sqlException.Number;
-                switch (errorNumber)
-                {
-
-                    case 2627: throw new TicketingException("Ticket Type ID already exists", 501);
-                    default: throw new TicketingException(sqlException.Message, 599);
+                switch(errorNumber) {
+                    case 2627: throw new TicketingException("Ticket Type ID already exists",501);
+                    default: throw new TicketingException(sqlException.Message,599);
                 }
+            }
+            catch(Exception ex){
+                throw new TicketingException(ex.Message,555);
             }
         }
 
         public async Task<List<TicketType>> GetAllTicketTypesAsync()
         {
-
+            
             List<TicketType> ticketTypes = await context.TicketTypes.ToListAsync();
             return ticketTypes;
-
         }
 
         public async Task<TicketType> GetTicketTypeByIdAsync(string ticketTypeId)
@@ -62,11 +61,10 @@ namespace TicketRaisingLibrary.Repos
         public async Task<List<TicketType>> GetTicketTypesByDeptAsync(string departmentId)
         {
             List<TicketType> ticketTypes = await context.TicketTypes
-                   .Where(tt => tt.DeptId == departmentId)
-                   .ToListAsync();
-
+                .Where(tt => tt.DeptId == departmentId)
+                .ToListAsync();
             return ticketTypes;
-
+            
         }
 
         public async Task UpdateTicketTypeAsync(string ticketTypeId, TicketType ticketType)
@@ -82,15 +80,17 @@ namespace TicketRaisingLibrary.Repos
 
                 await context.SaveChangesAsync();
             }
-            catch (DbUpdateException ex)
-            {
+            catch (DbUpdateException ex) {
                 SqlException sqlException = ex.InnerException as SqlException;
                 int errorNumber = sqlException.Number;
-                switch (errorNumber)
-                {
-                    case 547: throw new TicketingException("Cannot update due to foreign key constraint", 1002); break;
-                    default: throw new TicketingException(sqlException.Message, 1099);
+                switch(errorNumber) {
+                    case 2627: throw new TicketingException("Ticket Type ID already exists",501);
+                    case 2628: throw new TicketingException("Description too long",502);
+                    default: throw new TicketingException(sqlException.Message,599);
                 }
+            }
+            catch(Exception ex){
+                throw new TicketingException(ex.Message,555);
             }
         }
 
@@ -113,9 +113,9 @@ namespace TicketRaisingLibrary.Repos
                 context.TicketTypes.Remove(ticketTypeToDelete);
                 await context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Error deleting TicketType.");
+                throw new TicketingException("Error deleting TicketType." + ex.Message,599);
             }
 
         }

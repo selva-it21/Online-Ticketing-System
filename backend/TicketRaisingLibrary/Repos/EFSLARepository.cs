@@ -25,13 +25,20 @@ using TicketRaisingLibrary.Repos;
                 await context.SLAs.AddAsync(sla);
                 await context.SaveChangesAsync();
             }
-            catch (DbUpdateException ex) {
+            catch (DbUpdateException ex)
+            {
                 SqlException sqlException = ex.InnerException as SqlException;
-                if (sqlException != null && sqlException.Number == 2627)
-                    throw new TicketingException("SLA ID already exists",501);
-                else
-                    throw new TicketingException("Database Error" + ex.Message, 599);
+                int errorNumber = sqlException.Number;
+
+                switch (errorNumber){
+                    case 2627: throw new TicketingException("SLA ID already exists", 501);
+                    case 2628: throw new TicketingException("Name or Priority too long",502);
+                    default: throw new TicketingException(sqlException.Message, 599);
+                }
             }
+            catch(Exception ex){
+                throw new TicketingException(ex.Message,555);
+            }           
         }
         public async Task UpdateSLAAsync(string slaId, SLA sla)
         {
@@ -49,11 +56,15 @@ using TicketRaisingLibrary.Repos;
             {
                 SqlException sqlException = ex.InnerException as SqlException;
                 int errorNumber = sqlException.Number;
+
                 switch (errorNumber)
                 {
-                    case 547: throw new TicketingException("Cannot update due to foreign key constraint", 1002); break;
-                    default: throw new TicketingException(sqlException.Message, 1099);
+                    case 2628: throw new TicketingException("Name or Priority too long",502);
+                    default: throw new TicketingException(sqlException.Message, 599);
                 }
+            }
+            catch(Exception ex){
+                throw new TicketingException(ex.Message,555);
             }
         }
         public async Task DeleteSLAAsync(string slaId)

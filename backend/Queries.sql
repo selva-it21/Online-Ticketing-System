@@ -25,8 +25,6 @@ INSERT INTO TicketTypes (TicketTypeId, TypeName) VALUES
 ('TT04', 'Account Access'),
 ('TT05', 'HR Query');
 select * from TicketTypes
-
-
 -- Tickets
 INSERT INTO Ticket (TicketId, Title, Description, CreatedByEmpId, AssignedToEmpId, TicketTypeId, Status) VALUES
 ('T001', 'Laptop not starting', 'My laptop shows blue screen error', 'E003', 'E004', 'TT01', 'Open'),
@@ -42,3 +40,10 @@ INSERT INTO TicketReply (ReplyId, TicketId, ReplyMessage, ReplyByCreatorEmpId, R
 ('R004', 'T003', 'Software installed successfully', NULL, 'E002'),
 ('R005', 'T004', 'VPN credentials have been updated', NULL, 'E004');
 select * from TicketReply
+
+INSERT INTO SLA (SLAId, SLAName, Priority, ResponseTime, ResolutionHours) VALUES
+('S001', 'Critical SLA', 'Critical', 1, 4),
+('S002', 'High Priority SLA', 'High', 2, 8),
+('S003', 'Medium Priority SLA', 'Medium', 4, 24),
+('S004', 'Low Priority SLA', 'Low', 8, 48),
+('S005', 'Standard SLA', 'Standard', 24, 72)

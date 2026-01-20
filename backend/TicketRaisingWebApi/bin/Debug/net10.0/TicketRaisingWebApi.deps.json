@@ -11,10 +11,6 @@
           "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.2",
           "Microsoft.AspNetCore.OpenApi": "10.0.0",
           "Swashbuckle.AspNetCore": "10.1.0",
-<<<<<<< HEAD
-=======
-          "Swashbuckle.AspNetCore.Swagger": "10.1.0",
->>>>>>> 62d4d4bf731769391c1eb05c8636d4745e1ab136
           "TicketRaisingLibrary": "1.0.0"
         },
         "runtime": {

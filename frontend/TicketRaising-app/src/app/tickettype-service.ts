@@ -31,8 +31,16 @@ export class TickettypeService {
       return this.http.post<TicketType>(this.baseUrl, tickettype, this.httpOptions);
     }
 
-    getTicketType(tic: string): Observable<TicketType>{
-      return this.http.get<TicketType>(this.baseUrl + tickettype, this.httpOptions);
+    getTicketType(tickettypeid: string): Observable<TicketType>{
+      return this.http.get<TicketType>(this.baseUrl + tickettypeid, this.httpOptions);
+    }
+
+    updateTicketType(tickettypeid: string, tickettype: TicketType): Observable<TicketType>{
+      return this.http.put<TicketType>(this.baseUrl + tickettypeid, tickettype, this.httpOptions)
+    }
+
+    deleteTicketType(tickettypeid: string):Observable<any> {
+      return this.http.delete(this.baseUrl + tickettypeid, this.httpOptions);
     }
 
 }
