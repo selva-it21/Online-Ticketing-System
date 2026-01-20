@@ -47,13 +47,8 @@ namespace TicketRaisingLibrary.Repos
                 int errorNumber = sqlException.Number;
                 switch (errorNumber)
                 {
-<<<<<<< HEAD
                     case 2628: throw new TicketingException("Name or Role too long",502);
                     default: throw new TicketingException(sqlException.Message, 599);
-=======
-                    case 547: throw new TicketingException("Cannot update due to foreign key constraint", 1002); break;
-                    default: throw new TicketingException(sqlException.Message, 1099);
->>>>>>> e12ad82701c571233829a19528c1b237e50c6c9d
                 }
             }
             catch(Exception ex){

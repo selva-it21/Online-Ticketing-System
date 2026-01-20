@@ -404,13 +404,6 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[10.1.0, )"
-<<<<<<< HEAD
-=======
-            },
-            "Swashbuckle.AspNetCore.Swagger": {
-              "target": "Package",
-              "version": "[10.1.0, )"
->>>>>>> 62d4d4bf731769391c1eb05c8636d4745e1ab136
             }
           },
           "imports": [
