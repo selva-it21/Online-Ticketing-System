@@ -1,15 +1,15 @@
 export class Employee{
-    public EmpId : string;
-    public EmpName : string;
-    public Password : string;
-    public Role : string;
-    public DeptId : string;
+    public empId : string;
+    public empName : string;
+    public password : string;
+    public role : string;
+    public deptId : string;
 
     constructor(EmpId : string, EmpName : string, Password : string, Role : string, DeptId : string){
-        this.EmpId = EmpId;
-        this.EmpName = EmpName;
-        this.Password = Password;
-        this.Role = Role;
-        this.DeptId = DeptId;
+        this.empId = EmpId;
+        this.empName = EmpName;
+        this.password = Password;
+        this.role = Role;
+        this.deptId = DeptId;
     }
 }

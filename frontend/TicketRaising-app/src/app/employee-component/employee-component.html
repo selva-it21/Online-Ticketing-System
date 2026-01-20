@@ -1,1 +1,95 @@
-<p>employee-component works!</p>
+<h2>Employee Management</h2>
+
+<!-- Error Message -->
+<div *ngIf="errMsg" style="color: red; margin-bottom: 10px;">
+  {{ errMsg }}
+</div>
+
+<!-- Employee Form -->
+<form #empForm="ngForm">
+  <table>
+    <tr>
+      <td>Employee ID</td>
+      <td>
+        <input
+          type="text"
+          name="empId"
+          [(ngModel)]="employee.empId"
+          required
+        />
+      </td>
+    </tr>
+
+    <tr>
+      <td>Employee Name</td>
+      <td>
+        <input
+          type="text"
+          name="empName"
+          [(ngModel)]="employee.empName"
+          required
+        />
+      </td>
+    </tr>
+
+    <tr>
+      <td>Department ID</td>
+      <td>
+        <input
+          type="text"
+          name="deptId"
+          [(ngModel)]="employee.deptId"
+        />
+      </td>
+    </tr>
+
+    <tr>
+      <td>Role</td>
+      <td>
+        <input
+          type="text"
+          name="role"
+          [(ngModel)]="employee.role"
+        />
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <button type="button" (click)="addEmployee()">Add</button>
+        <button type="button" (click)="showEmployee()">Search</button>
+        <button type="button" (click)="updateEmployee()">Update</button>
+        <button type="button" (click)="deleteEmployee()">Delete</button>
+      </td>
+    </tr>
+  </table>
+</form>
+
+<hr />
+
+<!-- Employee List -->
+<h3>Employee List</h3>
+
+<table border="1" cellpadding="5" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Emp ID</th>
+      <th>Name</th>
+      <th>Dept ID</th>
+      <th>Role</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let emp of employees">
+      <td>{{ emp.empId }}</td>
+      <td>{{ emp.empName }}</td>
+      <td>{{ emp.deptId }}</td>
+      <td>{{ emp.role }}</td>
+      <td>
+        <button (click)="employee = emp">Edit</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
