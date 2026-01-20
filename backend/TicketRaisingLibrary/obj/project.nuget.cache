@@ -66,10 +66,15 @@
     {
       "code": "Undefined",
       "level": "Warning",
+<<<<<<< HEAD
       "message": "Problem reading the cache file D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 64 | BytePositionInLine: 0.",
       "projectPath": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
+=======
+      "message": "Problem reading the cache file D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 64 | BytePositionInLine: 0.",
+      "projectPath": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
+>>>>>>> 0999797afea609a3c0d50ef3c3e1c2b9aa2271b7
       "warningLevel": 1,
-      "filePath": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
+      "filePath": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj",
       "targetGraphs": []
     }
   ]
