@@ -10,7 +10,7 @@ export class EmployeeService {
 
     http: HttpClient = inject(HttpClient);
     token;
-    baseUrl: string = "http://localhost:5253/api/batch/";
+    baseUrl: string = "http://localhost:5041/api/Employee/";
     httpOptions;
     constructor() {
         this.token = sessionStorage.getItem("token");
@@ -53,7 +53,11 @@ export class EmployeeService {
         );
     }
     
-    login(empid : string , password : string ) : Observable<Employee>{
-        return this.http.get<Employee>(this.baseUrl + empid + "/" + password);
+    login(empId : string , password : string ) : Observable<Employee>{
+        console.log(empId);
+        console.log(password);
+        // console.log("hi");
+        
+        return this.http.get<Employee>(this.baseUrl + empId + "/" + password,this.httpOptions);
     }
 }

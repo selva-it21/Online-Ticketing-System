@@ -1,16 +1,16 @@
 export class SLA{
-    public SLAId : string;
-    public SLAName : string;
-    public Priority : string;
-    public ResponseTime : number;
-    public ResolutionHours : number;
+    public slaId : string;
+    public slaName : string;
+    public priority : string;
+    public responseTime : number;
+    public resolutionHours : number;
 
     constructor(SLAId : string, SLAName : string, Priority : string, ResponseTime : number, ResolutionHours : number){
-        this.SLAId = SLAId;
-        this.SLAName = SLAName;
-        this.Priority = Priority;
-        this.ResponseTime = ResponseTime;
-        this.ResolutionHours = ResolutionHours;
+        this.slaId = SLAId;
+        this.slaName = SLAName;
+        this.priority = Priority;
+        this.responseTime = ResponseTime;
+        this.resolutionHours = ResolutionHours;
     }
 
 
