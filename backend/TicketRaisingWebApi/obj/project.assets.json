@@ -1650,11 +1650,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\TicketRaisingWebApi.csproj",
+      "projectUniqueName": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\TicketRaisingWebApi.csproj",
       "projectName": "TicketRaisingWebApi",
-      "projectPath": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\TicketRaisingWebApi.csproj",
+      "projectPath": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\TicketRaisingWebApi.csproj",
       "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-      "outputPath": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\obj\\",
+      "outputPath": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingWebApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1669,8 +1669,8 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj": {
-              "projectPath": "D:\\FullStack\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj"
+            "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj": {
+              "projectPath": "D:\\project\\Online-Ticketing-System\\backend\\TicketRaisingLibrary\\TicketRaisingLibrary.csproj"
             }
           }
         }
