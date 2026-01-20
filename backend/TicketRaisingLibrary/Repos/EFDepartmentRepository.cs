@@ -20,7 +20,7 @@ public class EFDepartmentRepository : IDepartmentRepository
             SqlException sqlException = ex.InnerException as SqlException;
             int errorNumber = sqlException.Number;
             switch(errorNumber) {
-                case 2627: throw new TicketingException("Product Category ID already exists",501);
+                case 2627: throw new TicketingException("Department ID already exists",501);
                 //case 2628: throw new ProductException("Name and/or description too long");
                 default: throw new TicketingException(sqlException.Message,599);
             }    
@@ -90,9 +90,15 @@ public class EFDepartmentRepository : IDepartmentRepository
 
             await context.SaveChangesAsync();
         }
-        catch (Exception ex)
+        catch (DbUpdateException ex)
         {
-            throw new TicketingException(ex.Message, 3006);
+            SqlException sqlException = ex.InnerException as SqlException;
+            int errorNumber = sqlException.Number;
+            switch (errorNumber)
+            {
+                case 547: throw new TicketingException("Cannot update due to foreign key constraint", 1002); break;
+                default: throw new TicketingException(sqlException.Message, 1099);
+            }
         }
     }
 

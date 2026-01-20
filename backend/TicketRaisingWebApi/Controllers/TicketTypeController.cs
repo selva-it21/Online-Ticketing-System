@@ -24,7 +24,6 @@ namespace TicketRaisingWebApi.Controllers
             List<TicketType> ticketTypes = await ticketTypeRepo.GetAllTicketTypesAsync();
             return Ok(ticketTypes);
         }
- 
         [HttpGet("{ticketTypeId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -41,7 +40,7 @@ namespace TicketRaisingWebApi.Controllers
             }
         }
  
-       
+        
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
@@ -97,7 +96,6 @@ namespace TicketRaisingWebApi.Controllers
                     return BadRequest(ex.Message);
             }
         }
- 
         [HttpGet("bySLA/{slaId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -119,7 +117,6 @@ namespace TicketRaisingWebApi.Controllers
                 return NotFound(ex.Message);
             }
         }
- 
         [HttpGet("byDepartment/{DeptId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -143,4 +140,5 @@ namespace TicketRaisingWebApi.Controllers
         }
     }
 }
+ 
  

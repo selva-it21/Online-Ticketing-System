@@ -45,9 +45,15 @@ using TicketRaisingLibrary.Repos;
  
                 await context.SaveChangesAsync();
             }
-            catch (Exception ex){
+            catch (DbUpdateException ex)
+            {
                 SqlException sqlException = ex.InnerException as SqlException;
-                throw new TicketingException("Database error",599);
+                int errorNumber = sqlException.Number;
+                switch (errorNumber)
+                {
+                    case 547: throw new TicketingException("Cannot update due to foreign key constraint", 1002); break;
+                    default: throw new TicketingException(sqlException.Message, 1099);
+                }
             }
         }
         public async Task DeleteSLAAsync(string slaId)

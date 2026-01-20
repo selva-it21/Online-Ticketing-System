@@ -7,7 +7,7 @@ namespace TicketRaisingLibrary.Models
     [Table("TicketReply")]
     public class TicketReply
     {
-        [Key]
+        [Key] 
         [Column(TypeName = "CHAR(6)")]
         public string? ReplyId { get; set; }
 
