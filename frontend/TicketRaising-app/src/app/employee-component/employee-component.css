@@ -1,0 +1,330 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.employee-management-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+}
+
+/* Header styles */
+.employee-header, .list-header {
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #3498db;
+  font-weight: 600;
+}
+
+.employee-header {
+  font-size: 1.8rem;
+}
+
+.list-header {
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+/* Form card */
+.form-card, .table-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5eb;
+}
+
+/* Error message */
+.error-message {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #ffeaea;
+  border: 1px solid #ffcccc;
+  border-radius: 8px;
+  color: #c0392b;
+  font-size: 0.9rem;
+}
+
+/* Single row form layout */
+.single-row-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-end;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 0;
+}
+
+.form-group-empty {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #34495e;
+  font-weight: 500;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.form-input::placeholder {
+  color: #95a5a6;
+  font-size: 0.9rem;
+}
+
+select.form-input {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2334495e' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 10px;
+  padding-right: 2rem;
+}
+
+input[type="password"].form-input {
+  font-family: monospace;
+  letter-spacing: 1px;
+}
+
+/* Action buttons */
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.action-btn:active {
+  transform: translateY(0);
+}
+
+.add-btn {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.add-btn:hover {
+  background-color: #27ae60;
+}
+
+.search-btn {
+  background-color: #3498db;
+  color: white;
+}
+
+.search-btn:hover {
+  background-color: #2980b9;
+}
+
+.update-btn {
+  background-color: #9b59b6;
+  color: white;
+}
+
+.update-btn:hover {
+  background-color: #8e44ad;
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+/* Table styles */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #e1e5eb;
+}
+
+.employees-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.employees-table thead {
+  background-color: #2c3e50;
+}
+
+.employees-table th {
+  padding: 1rem;
+  text-align: left;
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.employees-table tbody tr {
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s ease;
+}
+
+.employees-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.employees-table td {
+  padding: 0.875rem 1rem;
+  color: #34495e;
+  font-size: 0.9rem;
+}
+
+/* Employee ID styling */
+.emp-id {
+  background-color: #e8f4fc;
+  color: #2980b9;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-family: monospace;
+  font-weight: 600;
+}
+
+/* Password field styling */
+.password-field {
+  font-family: monospace;
+  background-color: #f8f9fa;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  color: #2c3e50;
+}
+
+/* Role badges */
+.role-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.role-admin {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+
+.role-employee {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+
+
+/* No data message */
+.no-data {
+  text-align: center;
+  padding: 2rem !important;
+  color: #7f8c8d;
+  font-size: 1rem;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .single-row-form {
+    flex-wrap: wrap;
+  }
+  
+  .form-group {
+    flex: 1 0 calc(50% - 1rem);
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .employee-management-container {
+    padding: 1rem;
+  }
+  
+  .form-card, .table-card {
+    padding: 1.5rem;
+  }
+  
+  .single-row-form {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .form-group {
+    flex: 1 0 100%;
+    width: 100%;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .action-btn {
+    width: 100%;
+  }
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-card, .table-card {
+  animation: fadeIn 0.5s ease-out;
+}
