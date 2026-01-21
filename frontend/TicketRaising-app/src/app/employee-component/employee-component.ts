@@ -24,7 +24,7 @@ export class EmployeeComponent {
   constructor() {
     this.employees = [];
     this.departments = [];
-    this.employee = {} as Employee;
+    this.employee = new Employee("","","","","");
     this.errMsg = '';
     this.showAllEmployees();
     this.getallDepartment();

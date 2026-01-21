@@ -45,7 +45,8 @@
     <tr>
       <td>Ticket Type ID</td>
        <td>      
-        <select name="ticketTypeId"  [(ngModel)]="ticket.ticketTypeId">
+        <select name="ticketTypeId"  [(ngModel)]="ticket.ticketTypeId"  
+                  (ngModelChange)="onTicketTypeChange($event)">
           <option value="">-- Select Department --</option>
           <option *ngFor="let tType of ticketTypes" [value]="tType.ticketTypeId">
             {{ tType.typeName }}
@@ -88,6 +89,13 @@
           name="AssignedToEmpId"
           [(ngModel)]="ticket.assignedToEmpId"
         />
+          <select name="ticketTypeId"  [(ngModel)]="ticket.assignedToEmpId"  
+                  >
+          <option value="">-- Select Employee --</option>
+          <option *ngFor="let emp of employeesbyDept" [value]="emp.empId">
+            {{ emp.empName }}
+          </option>
+        </select>
       </td>
     </tr>
 

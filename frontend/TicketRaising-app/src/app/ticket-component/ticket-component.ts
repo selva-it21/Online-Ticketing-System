@@ -5,6 +5,8 @@ import { Ticket } from '../../models/ticket';
 import { TicketService } from '../ticket-service';
 import { TickettypeService } from '../tickettype-service';
 import { TicketType } from '../../models/tickettype';
+import { Employee } from '../../models/employee';
+import { EmployeeService } from '../employee-service';
 
 @Component({
   selector: 'app-ticket-component',
@@ -16,20 +18,42 @@ export class TicketComponent {
 
   ticketSvc: TicketService = inject(TicketService);
   tickettypeSvc : TickettypeService = inject(TickettypeService);
+  employeeSvc : EmployeeService = inject(EmployeeService)
   ticketTypes : TicketType[];
+  employeesbyDept : Employee[]
   tickets: Ticket[];
+  ticketTypeId : string;
+  tickettypeStore : TicketType;
   // employees : Employee[];
   errMsg: string;
   ticket: Ticket;
   username : any = sessionStorage.getItem("empId");
   constructor() {
+    this.employeesbyDept = [];
     this.tickets = [];
+    this.tickettypeStore = new TicketType("","","","","");
+    this.ticketTypeId = "";
     // this.employees = [];
     this.ticketTypes = [];
     this.ticket  = new Ticket("","","","",new Date() ,"",this.username ,"")
     this.errMsg = '';
     this.showAllTickets();
     this.getAllTicketType();
+  }
+
+  getEmployeesbyDept(): void {
+    this.employeeSvc.getEmployeeByDept(this.ticketTypeId).subscribe({
+      next: (response: Employee[]) => {
+        console.log(response);
+        
+        this.employeesbyDept = response;
+        this.errMsg = '';
+      },
+       error: (err) => {
+        this.errMsg = err.error;
+        console.log(err);
+      }
+    });
   }
 
     getAllTicketType(): void {
@@ -57,6 +81,27 @@ export class TicketComponent {
       }
     });
   }
+ onTicketTypeChange(ticketTypeId: string) {
+  this.tickettypeSvc.getTicketType(ticketTypeId).subscribe({
+    next: (response: TicketType) => {
+
+      // ✅ deptId comes from TicketType
+      const deptId = response.deptId;
+
+      console.log('Dept ID:', deptId);
+
+      // ✅ fetch employees by department
+      this.employeeSvc.getEmployeeByDept(deptId).subscribe({
+        next: (emps: Employee[]) => {
+          this.employeesbyDept = emps;
+        },
+        error: err => console.log(err)
+      });
+
+    },
+    error: err => console.log(err)
+  });
+}
 
   addTicket(): void {
     this.ticketSvc.addTicket(this.ticket).subscribe({
