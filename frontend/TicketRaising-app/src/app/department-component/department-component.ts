@@ -10,6 +10,7 @@ import { Department } from '../../models/department';
   templateUrl: './department-component.html',
   styleUrl: './department-component.css',
 })
+
 export class DepartmentComponent {
   departmentSvc: DepartmentService = inject(DepartmentService);
   departments: Department[];
