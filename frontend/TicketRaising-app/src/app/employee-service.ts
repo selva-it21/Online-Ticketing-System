@@ -52,12 +52,18 @@ export class EmployeeService {
             this.httpOptions
         );
     }
-    
-    login(empId : string , password : string ) : Observable<Employee>{
+    getEmployeeByDept(deptId: string): Observable<Employee[]> {
+        return this.http.get<Employee[]>(
+            `${this.baseUrl}department/${deptId}`,
+            this.httpOptions
+        );
+    }
+
+    login(empId: string, password: string): Observable<Employee> {
         console.log(empId);
         console.log(password);
         // console.log("hi");
-        
-        return this.http.get<Employee>(this.baseUrl + empId + "/" + password,this.httpOptions);
+
+        return this.http.get<Employee>(this.baseUrl + empId + "/" + password, this.httpOptions);
     }
 }

@@ -32,6 +32,8 @@ export class TickettypeService {
     }
 
     getTicketType(tickettypeid: string): Observable<TicketType>{
+      // console.log("he;");
+      
       return this.http.get<TicketType>(this.baseUrl + tickettypeid, this.httpOptions);
     }
 
@@ -41,6 +43,10 @@ export class TickettypeService {
 
     deleteTicketType(tickettypeid: string):Observable<any> {
       return this.http.delete(this.baseUrl + tickettypeid, this.httpOptions);
+    }
+
+    getDepartmentbyId(depId : string) : Observable<any>{
+      return this.http.get<any>(this.baseUrl + depId,this.httpOptions);
     }
 
 }

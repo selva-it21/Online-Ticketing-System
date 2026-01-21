@@ -127,6 +127,8 @@ namespace TicketRaisingWebApi.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+      
+           
 
         [HttpGet("{EmpId}/{Password}")]
         [ProducesResponseType(200)]
@@ -142,5 +144,6 @@ namespace TicketRaisingWebApi.Controllers
                 return NotFound(ex.Message);
             }
         }
+
     }
 }
