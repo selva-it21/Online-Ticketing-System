@@ -3,6 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Ticket } from '../../models/ticket';
 import { TicketService } from '../ticket-service';
+import { TickettypeService } from '../tickettype-service';
+import { TicketType } from '../../models/tickettype';
+import { Employee } from '../../models/employee';
+import { EmployeeService } from '../employee-service';
 
 @Component({
   selector: 'app-ticket-component',
@@ -13,18 +17,58 @@ import { TicketService } from '../ticket-service';
 export class TicketComponent {
 
   ticketSvc: TicketService = inject(TicketService);
+  tickettypeSvc : TickettypeService = inject(TickettypeService);
+  employeeSvc : EmployeeService = inject(EmployeeService)
+  ticketTypes : TicketType[];
+  employeesbyDept : Employee[]
   tickets: Ticket[];
+  ticketTypeId : string;
+  tickettypeStore : TicketType;
+  // employees : Employee[];
   errMsg: string;
   ticket: Ticket;
-
+  username : any = sessionStorage.getItem("empId");
   constructor() {
+    this.employeesbyDept = [];
     this.tickets = [];
-    this.ticket  = new Ticket("","","","",new Date() ,"","" ,"")
+    this.tickettypeStore = new TicketType("","","","","");
+    this.ticketTypeId = "";
+    // this.employees = [];
+    this.ticketTypes = [];
+    this.ticket  = new Ticket("","","","",new Date() ,"",this.username ,"")
     this.errMsg = '';
     this.showAllTickets();
+    this.getAllTicketType();
   }
 
-  // 🔹 Get all tickets
+  getEmployeesbyDept(): void {
+    this.employeeSvc.getEmployeeByDept(this.ticketTypeId).subscribe({
+      next: (response: Employee[]) => {
+        console.log(response);
+        
+        this.employeesbyDept = response;
+        this.errMsg = '';
+      },
+       error: (err) => {
+        this.errMsg = err.error;
+        console.log(err);
+      }
+    });
+  }
+
+    getAllTicketType(): void {
+    this.tickettypeSvc.getAllTicketTypes().subscribe({
+      next: (response: TicketType[]) => {
+        this.ticketTypes = response;
+        this.errMsg = '';
+      },
+      error: (err) => {
+        this.errMsg = err.error;
+        console.log(err);
+      }
+    });
+  }
+  
   showAllTickets(): void {
     this.ticketSvc.showAllTickets().subscribe({
       next: (response: Ticket[]) => {
@@ -37,8 +81,26 @@ export class TicketComponent {
       }
     });
   }
+ onTicketTypeChange(ticketTypeId: string) {
+  this.tickettypeSvc.getTicketType(ticketTypeId).subscribe({
+    next: (response: TicketType) => {
 
-  // 🔹 Add new ticket
+      const deptId = response.deptId;
+
+      console.log('Dept ID:', deptId);
+
+      this.employeeSvc.getEmployeeByDept(deptId).subscribe({
+        next: (emps: Employee[]) => {
+          this.employeesbyDept = emps;
+        },
+        error: err => console.log(err)
+      });
+
+    },
+    error: err => console.log(err)
+  });
+}
+
   addTicket(): void {
     this.ticketSvc.addTicket(this.ticket).subscribe({
       next: (response: Ticket) => {
@@ -54,9 +116,8 @@ export class TicketComponent {
     });
   }
 
-  // 🔹 Get ticket by ID
   showTicket(): void {
-    this.ticketSvc.getOneTicket(this.ticket.TicketId).subscribe({
+    this.ticketSvc.getOneTicket(this.ticket.ticketId).subscribe({
       next: (response: Ticket) => {
         this.ticket = response;
         this.errMsg = '';
@@ -68,9 +129,8 @@ export class TicketComponent {
     });
   }
 
-  // 🔹 Update ticket
   updateTicket(): void {
-    this.ticketSvc.updateTicket(this.ticket.TicketId, this.ticket).subscribe({
+    this.ticketSvc.updateTicket(this.ticket.ticketId, this.ticket).subscribe({
       next: () => {
         this.showAllTickets();
         alert('Ticket updated successfully!');
@@ -83,9 +143,8 @@ export class TicketComponent {
     });
   }
 
-  // 🔹 Delete ticket
   deleteTicket(): void {
-    this.ticketSvc.deleteTicket(this.ticket.TicketId).subscribe({
+    this.ticketSvc.deleteTicket(this.ticket.ticketId).subscribe({
       next: () => {
         this.showAllTickets();
         alert('Ticket deleted successfully!');
@@ -99,9 +158,8 @@ export class TicketComponent {
     });
   }
 
-  // 🔹 Filter tickets by type
   getTicketsByType(): void {
-    this.ticketSvc.getTicketsByType(this.ticket.TicketTypeId).subscribe({
+    this.ticketSvc.getTicketsByType(this.ticket.ticketTypeId).subscribe({
       next: (response: Ticket[]) => {
         this.tickets = response;
         this.errMsg = '';
@@ -113,9 +171,8 @@ export class TicketComponent {
     });
   }
 
-  // 🔹 Filter tickets by creator
   getTicketsByCreator(): void {
-    this.ticketSvc.getTicketsByCreator(this.ticket.CreatedByEmpId).subscribe({
+    this.ticketSvc.getTicketsByCreator(this.ticket.createdByEmpId).subscribe({
       next: (response: Ticket[]) => {
         this.tickets = response;
         this.errMsg = '';
@@ -127,9 +184,8 @@ export class TicketComponent {
     });
   }
 
-  // 🔹 Filter tickets assigned to employee
   getTicketsAssignedTo(): void {
-    this.ticketSvc.getTicketsAssignedTo(this.ticket.AssignedToEmpId).subscribe({
+    this.ticketSvc.getTicketsAssignedTo(this.ticket.assignedToEmpId).subscribe({
       next: (response: Ticket[]) => {
         this.tickets = response;
         this.errMsg = '';

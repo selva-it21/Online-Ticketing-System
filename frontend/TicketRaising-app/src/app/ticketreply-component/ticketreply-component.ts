@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TicketReplyService } from '../ticketreply-service';
 import { TicketReply } from '../../models/ticketreply';
+import { TicketService } from '../ticket-service';
+import { Ticket } from '../../models/ticket';
 
 @Component({
   selector: 'app-ticket-reply-component',
@@ -13,25 +15,65 @@ import { TicketReply } from '../../models/ticketreply';
 export class TicketReplyComponent {
 
   replySvc: TicketReplyService = inject(TicketReplyService);
-
-  reply!: TicketReply;
+  ticketSvc: TicketService = inject(TicketService);
+  tickets: Ticket[];
+  replier : string;
+  ticket : Ticket;
+  reply: TicketReply;
   replies: TicketReply[] = [];
   errMsg: string = '';
 
-  // filters
   ticketId: string = '';
   empId: string = '';
-
+  creator : any = sessionStorage.getItem("empId");
   constructor() {
+    this.tickets = [];
+    this.ticket  = new Ticket("","","","",new Date() ,"","" ,"")
+    this.replier = "";
+    this.reply= new TicketReply('', '', '', this.ticket.createdByEmpId, this.ticket.assignedToEmpId);
     this.newReply();
     this.showAllReplies();
+    this.showAllTickets();
   }
 
+  onTicketIdChange(ticketId : string){
+
+    this.ticketSvc.getOneTicket(ticketId).subscribe({
+      next: (response: Ticket) => {
+        this.ticket = response;
+        //  this.newReply()
+        this.reply.replyByAssignedEmpId = this.ticket.assignedToEmpId;
+        this.reply.replyByCreatorEmpId = this.ticket.createdByEmpId
+        console.log(this.ticket);
+        console.log(this.ticket.createdByEmpId);
+        
+        this.errMsg = '';
+      },
+      error: (err) => {
+        this.errMsg = err.error;
+        console.log(err);
+      }
+    });
+    // this.newReply()
+
+  }
   newReply() {
-    this.reply = new TicketReply('', '', '', '', '');
-  }
+       this.reply= new TicketReply('',"" , '', "", "");
 
-  // ===== GET =====
+  }
+    showAllTickets(): void {
+    this.ticketSvc.showAllTickets().subscribe({
+      next: (response: Ticket[]) => {
+        this.tickets = response;
+        
+        this.errMsg = '';
+      },
+      error: (err) => {
+        this.errMsg = err.error;
+        console.log(err);
+      }
+    });
+  }
 
   showAllReplies() {
     this.replySvc.getAllReplies().subscribe({
@@ -93,7 +135,6 @@ export class TicketReplyComponent {
     });
   }
 
-  // ===== POST =====
 
   addReply() {
     this.replySvc.addReply(this.reply).subscribe({
@@ -106,7 +147,6 @@ export class TicketReplyComponent {
     });
   }
 
-  // ===== PUT =====
 
   updateReply() {
     this.replySvc.updateReply(this.reply.replyId, this.reply).subscribe({
@@ -119,7 +159,6 @@ export class TicketReplyComponent {
     });
   }
 
-  // ===== DELETE =====
 
   deleteReply() {
     this.replySvc.deleteReply(this.reply.replyId).subscribe({

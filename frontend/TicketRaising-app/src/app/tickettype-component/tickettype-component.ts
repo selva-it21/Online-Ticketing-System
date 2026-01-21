@@ -3,6 +3,10 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TickettypeService } from '../tickettype-service';
 import { TicketType } from '../../models/tickettype';
+import { Department } from '../../models/department';
+import { DepartmentService } from '../department-service';
+import { SLA } from '../../models/sla';
+import { SlaService } from '../sla-service';
 
 @Component({
   selector: 'app-tickettype-component',
@@ -12,16 +16,41 @@ import { TicketType } from '../../models/tickettype';
 })
 export class TickettypeComponent {
   tickettypeSvc: TickettypeService = inject(TickettypeService);
+  depSvc : DepartmentService = inject(DepartmentService);
+  slaSvc : SlaService = inject(SlaService);
+  departments : Department[];
   tickettypes: TicketType[];
+  slas : SLA[];
   errMsg: string;
   tickettype: TicketType;
   constructor(){
+    this.departments = [];
     this.tickettypes = [];
+    this.slas = [];
     this.tickettype = new TicketType("","","","","");
     this.errMsg = "";
     this.showAllTicketTypes();
+    this.getallDepartment();
+    this.getAllSla();
   }
-
+   getallDepartment(): void {
+    this.depSvc.getAllDepartments().subscribe({
+      next: (response: Department[]) => {
+        this.departments = response;
+        this.errMsg = '';
+      },
+       error: (err : any) => {this.errMsg = err.error ; console.log(err);}
+    });
+  }
+   getAllSla(): void {
+    this.slaSvc.getAllSlas().subscribe({
+      next: (response: SLA[]) => {
+        this.slas = response;
+        this.errMsg = '';
+      },
+       error: (err : any) => {this.errMsg = err.error ; console.log(err);}
+    });
+  }
   showAllTicketTypes(): void{
     this.tickettypeSvc.getAllTicketTypes().subscribe({
       next: (response: TicketType[]) => {

@@ -1,62 +1,80 @@
-<div class="department-management-container">
-  <h2 class="department-header">SLA Form</h2>
+<div class="sla-management-container">
+  <h2 class="sla-header">SLA Form</h2>
 
   <div class="form-card">
-    <form class="department-form">
-
+    <form class="sla-form">
       <div class="form-row">
-        <label for="slaId" class="form-label">SLA ID:</label>
-        <input
-          type="text"
-          id="slaId"
-          [(ngModel)]="sla.slaId"
-          name="slaId"
-          class="form-input"
-        />
+        <div class="form-group">
+          <label for="slaId" class="form-label">SLA ID:</label>
+          <input
+            type="text"
+            id="slaId"
+            [(ngModel)]="sla.slaId"
+            name="slaId"
+            class="form-input"
+            placeholder="Enter SLA ID"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="slaName" class="form-label">SLA Name:</label>
+          <input
+            type="text"
+            id="slaName"
+            [(ngModel)]="sla.slaName"
+            name="slaName"
+            class="form-input"
+            placeholder="Enter SLA name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="priority" class="form-label">Priority:</label>
+          <select
+            name="priority"
+            [(ngModel)]="sla.priority"
+            id="priority"
+            class="form-input"
+          >
+            <option value="">-- Select Priority --</option>
+            <option value="Low">Low</option>
+            <option value="Standard">Standard</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+        </div>
       </div>
 
       <div class="form-row">
-        <label for="slaName" class="form-label">SLA Name:</label>
-        <input
-          type="text"
-          id="slaName"
-          [(ngModel)]="sla.slaName"
-          name="slaName"
-          class="form-input"
-        />
-      </div>
+        <div class="form-group">
+          <label for="responseTime" class="form-label">Response Time (Hours):</label>
+          <input
+            type="number"
+            id="responseTime"
+            [(ngModel)]="sla.responseTime"
+            name="responseTime"
+            class="form-input"
+            placeholder="e.g., 4"
+            min="0"
+          />
+        </div>
 
-      <div class="form-row">
-        <label for="priority" class="form-label">Priority:</label>
-        <input
-          type="text"
-          id="priority"
-          [(ngModel)]="sla.priority"
-          name="priority"
-          class="form-input"
-        />
-      </div>
-
-      <div class="form-row">
-        <label for="responseTime" class="form-label">Response Time (Hours):</label>
-        <input
-          type="number"
-          id="responseTime"
-          [(ngModel)]="sla.responseTime"
-          name="responseTime"
-          class="form-input"
-        />
-      </div>
-
-      <div class="form-row">
-        <label for="resolutionHours" class="form-label">Resolution Hours:</label>
-        <input
-          type="number"
-          id="resolutionHours"
-          [(ngModel)]="sla.resolutionHours"
-          name="resolutionHours"
-          class="form-input"
-        />
+        <div class="form-group">
+          <label for="resolutionHours" class="form-label">Resolution Hours:</label>
+          <input
+            type="number"
+            id="resolutionHours"
+            [(ngModel)]="sla.resolutionHours"
+            name="resolutionHours"
+            class="form-input"
+            placeholder="e.g., 24"
+            min="0"
+          />
+        </div>
+        
+        <div class="form-group form-group-empty">
+          <!-- Empty group for spacing in the second row -->
+        </div>
       </div>
 
       <div class="action-buttons">
@@ -65,7 +83,7 @@
           class="action-btn add-btn"
           (click)="addSla()"
         >
-          Add
+          <i class="btn-icon">+</i> Add
         </button>
 
         <button
@@ -73,7 +91,7 @@
           class="action-btn update-btn"
           (click)="updateSla()"
         >
-          Update
+          <i class="btn-icon">↻</i> Update
         </button>
 
         <button
@@ -81,7 +99,7 @@
           class="action-btn show-btn"
           (click)="showSla()"
         >
-          Show
+          <i class="btn-icon">👁️</i> Show
         </button>
 
         <button
@@ -89,22 +107,22 @@
           class="action-btn delete-btn"
           (click)="deleteSla()"
         >
-          Delete
+          <i class="btn-icon">🗑️</i> Delete
         </button>
       </div>
 
     </form>
 
     <div *ngIf="errMsg" class="error-message">
-      {{ errMsg }}
+      <i class="error-icon">⚠️</i> {{ errMsg }}
     </div>
   </div>
 
-  <h2 class="departments-header">SLA List</h2>
+  <h2 class="slas-header">SLA List</h2>
 
   <div class="table-card">
     <div class="table-wrapper">
-      <table class="departments-table">
+      <table class="slas-table">
         <thead>
           <tr>
             <th>SLA ID</th>
@@ -119,13 +137,15 @@
             <tr>
               <td>{{ s.slaId }}</td>
               <td>{{ s.slaName }}</td>
-              <td>{{ s.priority }}</td>
-              <td>{{ s.responseTime }}</td>
-              <td>{{ s.resolutionHours }}</td>
+              <td><span class="priority-badge priority-{{s.priority?.toLowerCase()}}">{{ s.priority }}</span></td>
+              <td>{{ s.responseTime }} <span class="unit-text">hours</span></td>
+              <td>{{ s.resolutionHours }} <span class="unit-text">hours</span></td>
             </tr>
           } @empty {
             <tr>
-              <td colspan="5" class="no-data">No SLA records found</td>
+              <td colspan="5" class="no-data">
+                <i class="empty-icon">📭</i> No SLA records found
+              </td>
             </tr>
           }
         </tbody>

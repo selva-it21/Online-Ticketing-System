@@ -1,21 +1,21 @@
 export class Ticket{
-    public TicketId : string;
-    public Title : string;
-    public Description : string;
-    public TicketTypeId : string;
-    public TicketCreatedDate : Date;
-    public Status : string;
-    public CreatedByEmpId : string;
-    public AssignedToEmpId : string;
+    public ticketId : string;
+    public title : string;
+    public description : string;
+    public ticketTypeId : string;
+    public ticketCreatedDate : Date;
+    public status : string;
+    public createdByEmpId : string;
+    public assignedToEmpId : string;
 
     constructor(TicketId : string, Title : string, Description : string, TicketTypeId : string, TicketCreatedDate : Date, Status : string, CreatedByEmpId : string, AssignedToEmpId : string){
-        this.TicketId = TicketId;
-        this.Title = Title;
-        this.Description = Description;
-        this.TicketTypeId = TicketTypeId;
-        this.TicketCreatedDate = TicketCreatedDate;
-        this.Status = Status;
-        this.CreatedByEmpId = CreatedByEmpId;
-        this.AssignedToEmpId = AssignedToEmpId
+        this.ticketId = TicketId;
+        this.title = Title;
+        this.description = Description;
+        this.ticketTypeId = TicketTypeId;
+        this.ticketCreatedDate = TicketCreatedDate;
+        this.status = Status;
+        this.createdByEmpId = CreatedByEmpId;
+        this.assignedToEmpId = AssignedToEmpId
     }
 }

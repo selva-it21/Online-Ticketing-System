@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EmployeeService } from '../employee-service';
 import { Employee } from '../../models/employee';
+import { DepartmentService } from '../department-service';
+import { Department } from '../../models/department';
 
 @Component({
   selector: 'app-employee-component',
@@ -13,17 +15,30 @@ import { Employee } from '../../models/employee';
 export class EmployeeComponent {
 
   empSvc: EmployeeService = inject(EmployeeService);
+  depSvc : DepartmentService = inject(DepartmentService);
+  departments : Department[];
   employees: Employee[];
   errMsg: string;
   employee: Employee;
 
   constructor() {
     this.employees = [];
-    this.employee = {} as Employee;
+    this.departments = [];
+    this.employee = new Employee("","","","","");
     this.errMsg = '';
     this.showAllEmployees();
+    this.getallDepartment();
   }
 
+   getallDepartment(): void {
+    this.depSvc.getAllDepartments().subscribe({
+      next: (response: Department[]) => {
+        this.departments = response;
+        this.errMsg = '';
+      },
+       error: (err : any) => {this.errMsg = err.error ; console.log(err);}
+    });
+  }
  
   showAllEmployees(): void {
     this.empSvc.showAllEmployee().subscribe({
