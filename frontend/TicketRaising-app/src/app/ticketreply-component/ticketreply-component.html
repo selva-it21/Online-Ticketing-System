@@ -16,12 +16,11 @@
         <div class="row mb-3">
           <label class="col-sm-3 col-form-label">Reply ID</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control"
-                   [(ngModel)]="reply.replyId" name="replyId">
+            <input type="text" class="form-control" [(ngModel)]="reply.replyId" name="replyId">
 
 
           </div>
-          
+
           <div class="col-sm-3">
             <button type="button" class="btn btn-info w-100" (click)="getReply()">Show</button>
           </div>
@@ -31,7 +30,7 @@
         <div class="row mb-3">
           <label class="col-sm-3 col-form-label">Ticket ID</label>
           <div class="col-sm-9">
-            <select [(ngModel)]="reply.replyId" name="replyId">
+            <select [(ngModel)]="reply.ticketId"  (ngModelChange)="onTicketIdChange($event)" name="replyId">
               <option value="">-- Select ReplyId --</option>
 
               <option *ngFor="let t of tickets" [value]="t.ticketId">
@@ -42,35 +41,43 @@
           </div>
         </div>
 
+        <div class="row mb-3">
+          <label class="col-sm-3 col-form-label">Select Replier</label>
+          <div class="col-sm-9">
+            <select [(ngModel)]="replier" name="replier">
+              <option value="">-- Select Replier --</option>
+              <option value="creator"> Creator </option>
+              <option value="assigner">Assigner</option>
+            </select>
+
+          </div>
+        </div>
         <!-- Reply Message -->
         <div class="row mb-3">
           <label class="col-sm-3 col-form-label">Reply Message</label>
           <div class="col-sm-9">
-            <input class="form-control" rows="3"
-                      [(ngModel)]="reply.replyMessage"
-                      name="replyMessage"/>
+            <input class="form-control" rows="3" [(ngModel)]="reply.replyMessage" name="replyMessage" />
           </div>
         </div>
 
         <!-- Creator Employee -->
-        <div class="row mb-3">
+        <div class="row mb-3" *ngIf="replier === 'assigner'">
           <label class="col-sm-3 col-form-label">Creator Emp ID</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control"
-                   [(ngModel)]="reply.replyByCreatorEmpId"
-                   name="replyByCreatorEmpId" disabled>
+            <input type="text" class="form-control" [(ngModel)]="reply.replyByCreatorEmpId" name="replyByCreatorEmpId"
+              disabled />
           </div>
         </div>
 
         <!-- Assigned Employee -->
-        <div class="row mb-3">
+        <div class="row mb-3" *ngIf="replier === 'creator'">
           <label class="col-sm-3 col-form-label">Assigned Emp ID</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control"
-                   [(ngModel)]="reply.replyByAssignedEmpId"
-                   name="replyByAssignedEmpId">
+            <input type="text" class="form-control" [(ngModel)]="reply.replyByAssignedEmpId"
+              name="replyByAssignedEmpId" disabled/>
           </div>
         </div>
+
 
         <!-- Buttons -->
         <div class="d-flex gap-2 justify-content-end">
@@ -108,20 +115,20 @@
         </thead>
         <tbody>
           @for (r of replies; track r) {
-            <tr>
-              <td>{{ r.replyId }}</td>
-              <td>{{ r.ticketId }}</td>
-              <td>{{ r.replyMessage }}</td>
-              <td>{{ r.replyByCreatorEmpId }}</td>
-              <td>{{ r.replyByAssignedEmpId }}</td>
-            </tr>
+          <tr>
+            <td>{{ r.replyId }}</td>
+            <td>{{ r.ticketId }}</td>
+            <td>{{ r.replyMessage }}</td>
+            <td>{{ r.replyByCreatorEmpId }}</td>
+            <td>{{ r.replyByAssignedEmpId }}</td>
+          </tr>
           }
           @empty {
-            <tr>
-              <td colspan="5" class="text-center text-muted py-3">
-                No replies found
-              </td>
-            </tr>
+          <tr>
+            <td colspan="5" class="text-center text-muted py-3">
+              No replies found
+            </td>
+          </tr>
           }
         </tbody>
       </table>
