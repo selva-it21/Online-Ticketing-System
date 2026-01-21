@@ -84,7 +84,7 @@
             <th>Status</th>
             <th>Created By</th>
             <th>Assigned To</th>
-            <th>Action</th>
+            <!-- <th>Action</th> -->
           </tr>
         </thead>
         <tbody>
@@ -95,7 +95,7 @@
             <td><span class="status-badge status-{{t.status?.toLowerCase()?.replace(' ', '')}}">{{ t.status }}</span></td>
             <td>{{ t.createdByEmpId }}</td>
             <td>{{ t.assignedToEmpId }}</td>
-            <td><button class="edit-btn" (click)="ticket = t">✏️ Edit</button></td>
+            <!-- <td><button class="edit-btn" (click)="ticket = t">✏️ Edit</button></td> -->
           </tr>
           <tr *ngIf="tickets.length === 0">
             <td colspan="7" class="no-data">📭 No tickets found</td>

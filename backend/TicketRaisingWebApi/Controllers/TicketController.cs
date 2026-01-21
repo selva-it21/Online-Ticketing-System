@@ -100,6 +100,7 @@ namespace TicketRaisingWebApi.Controllers
         {
             try
             {
+                // ticket.AssignedToEmpId = null;
                 Ticket createdTicket = await ticketRepo.AddTicketAsync(ticket);
                 return Created($"api/Ticket/{createdTicket.TicketId}", createdTicket);
             }

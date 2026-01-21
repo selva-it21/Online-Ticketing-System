@@ -92,7 +92,7 @@ public class EFTicketRepository : ITicketRepository
         }
         catch
         {
-            throw new TicketingException("No such ticket ID", 1005);
+            throw new TicketingException("Select ticket type", 1005);
         }
     }
 
