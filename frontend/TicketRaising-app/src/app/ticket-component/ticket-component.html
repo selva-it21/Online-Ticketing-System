@@ -1,150 +1,107 @@
-<h2>Ticket Management</h2>
+<div class="ticket-management-container">
+  <h2 class="ticket-header">Ticket Management</h2>
 
-<!-- Error Message -->
-<div *ngIf="errMsg" style="color: red; margin-bottom: 10px;">
-  {{ errMsg }}
+  <div *ngIf="errMsg" class="error-message">⚠️ {{ errMsg }}</div>
+
+  <div class="form-card">
+    <form #ticketForm="ngForm" class="ticket-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="ticketId" class="form-label">Ticket ID</label>
+          <input type="text" id="ticketId" name="TicketId" [(ngModel)]="ticket.ticketId" required class="form-input" placeholder="Enter ID" />
+        </div>
+
+        <div class="form-group">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" id="title" name="Title" [(ngModel)]="ticket.title" required class="form-input" placeholder="Enter title" />
+        </div>
+
+        <div class="form-group">
+          <label for="ticketTypeId" class="form-label">Type</label>
+          <select id="ticketTypeId" name="ticketTypeId" [(ngModel)]="ticket.ticketTypeId" (ngModelChange)="onTicketTypeChange($event)" class="form-input">
+            <option value="">Select Type</option>
+            <option *ngFor="let tType of ticketTypes" [value]="tType.ticketTypeId">{{ tType.typeName }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="status" class="form-label">Status</label>
+          <select id="status" name="Status" [(ngModel)]="ticket.status" class="form-input">
+            <option value="">Select Status</option>
+            <option value="Open">Open</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Closed">Closed</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="createdByEmpId" class="form-label">Created By</label>
+          <input type="text" id="createdByEmpId" name="CreatedByEmpId" [(ngModel)]="ticket.createdByEmpId" class="form-input" placeholder="Emp ID" />
+        </div>
+
+        <div class="form-group">
+          <label for="assignedToEmpId" class="form-label">Assigned To</label>
+          <select id="assignedToEmpId" name="assignedToEmpId" [(ngModel)]="ticket.assignedToEmpId" class="form-input">
+            <option value="">Select Employee</option>
+            <option *ngFor="let emp of employeesbyDept" [value]="emp.empId">{{ emp.empName }}</option>
+          </select>
+        </div>
+
+        <div class="form-group form-group-wide">
+          <label for="description" class="form-label">Description</label>
+          <textarea id="description" name="Description" [(ngModel)]="ticket.description" class="form-input form-textarea" placeholder="Enter description"></textarea>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" class="action-btn add-btn" (click)="addTicket()">+ Add</button>
+        <button type="button" class="action-btn search-btn" (click)="showTicket()">🔍 Search</button>
+        <button type="button" class="action-btn update-btn" (click)="updateTicket()">↻ Update</button>
+        <button type="button" class="action-btn delete-btn" (click)="deleteTicket()">🗑️ Delete</button>
+      </div>
+    </form>
+  </div>
+
+  <h3 class="filter-header">Filter Tickets</h3>
+  <div class="filter-buttons">
+    <button class="filter-btn" (click)="getTicketsByType()">By Type</button>
+    <button class="filter-btn" (click)="getTicketsByCreator()">By Creator</button>
+    <button class="filter-btn" (click)="getTicketsAssignedTo()">Assigned To</button>
+    <button class="filter-btn" (click)="showAllTickets()">Show All</button>
+  </div>
+
+  <h3 class="list-header">Ticket List</h3>
+  <div class="table-card">
+    <div class="table-wrapper">
+      <table class="tickets-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Created By</th>
+            <th>Assigned To</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let t of tickets">
+            <td>{{ t.ticketId }}</td>
+            <td>{{ t.title }}</td>
+            <td>{{ t.ticketTypeId }}</td>
+            <td><span class="status-badge status-{{t.status?.toLowerCase()?.replace(' ', '')}}">{{ t.status }}</span></td>
+            <td>{{ t.createdByEmpId }}</td>
+            <td>{{ t.assignedToEmpId }}</td>
+            <td><button class="edit-btn" (click)="ticket = t">✏️ Edit</button></td>
+          </tr>
+          <tr *ngIf="tickets.length === 0">
+            <td colspan="7" class="no-data">📭 No tickets found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-
-<!-- Ticket Form -->
-<form #ticketForm="ngForm">
-  <table>
-    <tr>
-      <td>Ticket ID</td>
-      <td>
-        <input
-          type="text"
-          name="TicketId"
-          [(ngModel)]="ticket.ticketId"
-          required
-        />
-      </td>
-    </tr>
-
-    <tr>
-      <td>Title</td>
-      <td>
-        <input
-          type="text"
-          name="Title"
-          [(ngModel)]="ticket.title"
-          required
-        />
-      </td>
-    </tr>
-
-    <tr>
-      <td>Description</td>
-      <td>
-        <textarea
-          name="Description"
-          [(ngModel)]="ticket.description"
-        ></textarea>
-      </td>
-    </tr>
-
-    <tr>
-      <td>Ticket Type ID</td>
-       <td>      
-        <select name="ticketTypeId"  [(ngModel)]="ticket.ticketTypeId"  
-                  (ngModelChange)="onTicketTypeChange($event)">
-          <option value="">-- Select Department --</option>
-          <option *ngFor="let tType of ticketTypes" [value]="tType.ticketTypeId">
-            {{ tType.typeName }}
-          </option>
-        </select>
-      </td>
-    </tr>
-
-    <tr>
-      <td>Status</td>
-      <td>
-        <select
-          name="Status"
-          [(ngModel)]="ticket.status"
-        >
-          <option value="">-- Select --</option>
-          <option value="Open">Open</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Closed">Closed</option>
-        </select>
-      </td>
-    </tr>
-
-    <tr>
-      <td>Created By (Emp ID)</td>
-      <td>
-        <input 
-          type="text"
-          name="CreatedByEmpId"
-          [(ngModel)]="ticket.createdByEmpId"
-          disabled
-        />
-      </td>
-    </tr>
-
-    <tr>
-      <td>Assigned To (Emp ID)</td>
-      <td>
-          <select name="ticketTypeId"  [(ngModel)]="ticket.assignedToEmpId"  
-                  >
-          <option value="">-- Select Employee --</option>
-          <option *ngFor="let emp of employeesbyDept" [value]="emp.empId">
-            {{ emp.empName }}
-          </option>
-        </select>
-      </td>
-    </tr>
-
-    <tr>
-      <td colspan="2">
-        <button type="button" (click)="addTicket()">Add</button>
-        <button type="button" (click)="showTicket()">Search</button>
-        <button type="button" (click)="updateTicket()">Update</button>
-        <button type="button" (click)="deleteTicket()">Delete</button>
-      </td>
-    </tr>
-  </table>
-</form>
-
-<hr />
-
-<!-- Filter Section -->
-<h3>Filter Tickets</h3>
-
-<button (click)="getTicketsByType()">By Type</button>
-<button (click)="getTicketsByCreator()">By Creator</button>
-<button (click)="getTicketsAssignedTo()">Assigned To</button>
-<button (click)="showAllTickets()">Show All</button>
-
-<hr />
-
-<!-- Ticket List -->
-<h3>Ticket List</h3>
-
-<table border="1" cellpadding="5" cellspacing="0">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Title</th>
-      <th>Type</th>
-      <th>Status</th>
-      <th>Created By</th>
-      <th>Assigned To</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr *ngFor="let t of tickets">
-      <td>{{ t.ticketId }}</td>
-      <td>{{ t.title }}</td>
-      <td>{{ t.ticketTypeId }}</td>
-      <td>{{ t.status }}</td>
-      <td>{{ t.createdByEmpId }}</td>
-      <td>{{ t.assignedToEmpId }}</td>
-      <td>
-        <button (click)="ticket = t">Edit</button>
-      </td>
-    </tr>
-  </tbody>
-</table>

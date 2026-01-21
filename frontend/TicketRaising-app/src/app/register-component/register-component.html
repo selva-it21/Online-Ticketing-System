@@ -1,0 +1,76 @@
+<h2>Employee Registration</h2>
+
+<!-- Error Message -->
+<div *ngIf="errMsg" style="color: red; margin-bottom: 10px;">
+  {{ errMsg }}
+</div>
+
+<form #empForm="ngForm" (ngSubmit)="addEmployee()">
+  <table>
+
+    <tr>
+      <td>Employee ID</td>
+      <td>
+        <input type="text" name="empId"
+               [(ngModel)]="employee.empId" required />
+      </td>
+    </tr>
+
+    <tr>
+      <td>Password</td>
+      <td>
+        <input type="password" name="password"
+               [(ngModel)]="employee.password" required />
+      </td>
+    </tr>
+
+    <!-- ✅ Confirm Password -->
+    <tr>
+      <td>Confirm Password</td>
+      <td>
+        <input type="password" name="confirmPassword"
+               [(ngModel)]="confirmPassword" required />
+      </td>
+    </tr>
+
+    <tr>
+      <td>Employee Name</td>
+      <td>
+        <input type="text" name="empName"
+               [(ngModel)]="employee.empName" required />
+      </td>
+    </tr>
+
+    <tr>
+      <td>Department</td>
+      <td>
+        <select name="deptId"
+                [(ngModel)]="employee.deptId" required>
+          <option value="">-- Select Department --</option>
+          <option *ngFor="let dept of departments"
+                  [value]="dept.deptId">
+            {{ dept.deptName }}
+          </option>
+        </select>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Role</td>
+      <td>
+        <input type="text" name="role"
+               [(ngModel)]="employee.role"
+               placeholder="Admin / User" required />
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2" style="text-align:center;">
+        <button type="submit" [disabled]="empForm.invalid">
+          Register
+        </button>
+      </td>
+    </tr>
+
+  </table>
+</form>

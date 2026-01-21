@@ -11,29 +11,30 @@ import { Employee } from '../../models/employee';
 })
 export class NavbarComponent {
   empSvc: EmployeeService = inject(EmployeeService);
-  // employeeName : string
-  // username :any
-  // errMsg = ""
-  // constructor(){
-  //   this.username="";
-  //   this.employeeName = ""
-  //   this.errMsg = "";
+  username : string;
+  errMsg: string;
+  employeeName : string
+  constructor(){
+    this.errMsg=""
+    this.username = sessionStorage.getItem("empId") || "";
+    this.employeeName = ""
+    this.showEmployee()
+  }
 
-  // }
-  
-  
-  username = sessionStorage.getItem("empId");
-  //  showEmployee(): void {
-  //   this.empSvc.getOneEmployee(this.username).subscribe({
-  //     next: (response: Employee) => {
-  //       this.employeeName = response.empName;
 
-  //       this.errMsg = '';
-  //     },
-  //     error: (err) => {
-  //       this.errMsg = err.error;
-  //       console.log(err);
-  //     }
-  //   });
-  // }
+  showEmployee(): void {
+    this.empSvc.getOneEmployee(this.username).subscribe({
+      next: (response: Employee) => {
+        this.employeeName = response.empName;
+        console.log(this.employeeName + "hello");
+        
+        this.errMsg = '';
+      },
+      error: (err) => {
+        this.errMsg = err.error;
+        console.log(err);
+      }
+    });
+  }
+
 }
