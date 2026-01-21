@@ -77,6 +77,7 @@
           type="text"
           name="CreatedByEmpId"
           [(ngModel)]="ticket.createdByEmpId"
+          disabled
         />
       </td>
     </tr>
@@ -84,11 +85,6 @@
     <tr>
       <td>Assigned To (Emp ID)</td>
       <td>
-        <input
-          type="text"
-          name="AssignedToEmpId"
-          [(ngModel)]="ticket.assignedToEmpId"
-        />
           <select name="ticketTypeId"  [(ngModel)]="ticket.assignedToEmpId"  
                   >
           <option value="">-- Select Employee --</option>
