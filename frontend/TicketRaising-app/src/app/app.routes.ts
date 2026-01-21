@@ -10,6 +10,7 @@ import { LoginComponent } from './login-component/login-component';
 import { TickettypeComponent } from './tickettype-component/tickettype-component';
 import { TicketReplyComponent } from './ticketreply-component/ticketreply-component';
 import { TicketComponent } from './ticket-component/ticket-component';
+import { RegisterComponent } from './register-component/register-component';
 
 export const routes: Routes = [
     {path: '',component:HomeComponent},
@@ -21,5 +22,6 @@ export const routes: Routes = [
     {path: 'tickettype',component:TickettypeComponent},
     {path: 'ticketreply',component:TicketReplyComponent},
     {path: 'logout',component:LogoutComponent},
-    {path: 'login',component:LoginComponent}
+    {path: 'login',component:LoginComponent},
+    {path: 'register', component:RegisterComponent}
 ];
