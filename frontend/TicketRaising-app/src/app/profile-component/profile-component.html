@@ -1,0 +1,119 @@
+<h2 class="employee-header">Profile</h2>
+
+<div *ngIf="errMsg" class="error-message">⚠️ {{ errMsg }}</div>
+
+<div class="form-card">
+  <form #empForm="ngForm" class="employee-form">
+
+    <div class="single-row-form">
+
+      <div class="form-group">
+        <label for="empId" class="form-label required">Employee ID</label>
+        <input
+          type="text"
+          id="empId"
+          name="empId"
+          [(ngModel)]="employee.empId"
+          class="form-input"
+          placeholder="Enter ID"
+          readonly
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label required">Password</label>
+
+        <div class="input-with-btn">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            [(ngModel)]="employee.password"
+            class="form-input"
+            placeholder="Enter new password"
+          />
+
+          <button
+            type="button"
+            class="change-password-btn"
+            (click)="toggleChangePassword()"
+          >
+            Change
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="showConfirmPassword">
+        <label for="confirmPassword" class="form-label required">
+          Confirm Password
+        </label>
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          [(ngModel)]="confirmPassword"
+          class="form-input"
+          placeholder="Re-enter password"
+        />
+
+        <div
+          *ngIf="
+            employee.password &&
+            confirmPassword &&
+            employee.password !== confirmPassword
+          "
+          class="password-mismatch"
+        >
+          Passwords do not match
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="empName" class="form-label required">Employee Name</label>
+        <input
+          type="text"
+          id="empName"
+          name="empName"
+          [(ngModel)]="employee.empName"
+          class="form-input"
+          placeholder="Enter name"
+        />
+      </div>
+
+    </div>
+
+    <div class="single-row-form">
+      <div class="form-group">
+        <label for="deptId" class="form-label required">Department</label>
+        <select
+          id="deptId"
+          name="deptId"
+          [(ngModel)]="employee.deptId"
+          class="form-input"
+        >
+          <option value="">Select Department</option>
+          <option *ngFor="let dept of departments" [value]="dept.deptId">
+            {{ dept.deptName }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+
+    <div class="action-buttons">
+      <button
+        type="button"
+        class="action-btn update-btn"
+        (click)="updateEmployee()"
+        [disabled]="
+          empForm.invalid ||
+          (showConfirmPassword &&
+            employee.password !== confirmPassword)
+        "
+      >
+        Update
+      </button>
+    </div>
+
+  </form>
+</div>

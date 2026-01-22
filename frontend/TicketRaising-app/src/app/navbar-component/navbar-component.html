@@ -3,6 +3,7 @@
     @if(role.toLocaleLowerCase() == "admin"){
     <div class="nav-container">
         <div class="nav-links">
+            <img src="/eyw.png" alt="Profile" class="profile-img">
             <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
             <a routerLink="/employee" routerLinkActive="active">Employee</a>
             <a routerLink="/ticket" routerLinkActive="active">Tickets</a>
@@ -10,11 +11,17 @@
             <a routerLink="/ticketreply" routerLinkActive="active">TicketReplies</a>
             <a routerLink="/department" routerLinkActive="active">Departments</a>
             <a routerLink="/sla" routerLinkActive="active">SLAs</a>
-            <a routerLink="/logout" routerLinkActive="active">Logout</a>
         </div>
-        <div class="user-info">
-            <span class="welcome-text">Welcome,</span>
-            <span class="username">{{employeeName}}</span>
+        <div class="navbar-user">
+            <div class="user-info">
+
+                <span class="welcome-text">Welcome</span>
+                <a routerLink="/profile" class="profile-link" routerLinkActive="active">
+                    <i class="bi bi-person-circle"></i>
+                    <span class="username">{{employeeName}}</span></a>
+            </div>
+            <a routerLink="/logout" routerLinkActive="active" class="profile-link"><i
+                    class="bi bi-box-arrow-left"></i></a>
         </div>
     </div>
     }
@@ -24,25 +31,28 @@
             <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
             <a routerLink="/ticket" routerLinkActive="active">Tickets</a>
             <a routerLink="/ticketreply" routerLinkActive="active">TicketReplies</a>
-            <a routerLink="/logout" routerLinkActive="active">Logout</a>
+            <a routerLink="/logout" routerLinkActive="active"><i class="bi bi-box-arrow-left"></i></a>
 
         </div>
         <div class="user-info">
-            <span class="welcome-text">Welcome,</span>
-            <span class="username">{{employeeName}}</span>
+            <span class="welcome-text">Welcome</span>
+            <a routerLink="/profile" class="profile-link" routerLinkActive="active">
+                <i class="bi bi-person-circle"></i>
+                <span class="username">{{employeeName}}</span></a>
+
         </div>
-        </div>
-         }
+    </div>
+    }
 
     }
-        @else {
-        <div class="nav-container">
-            <div class="nav-links">
-                <span class="username">{{employeeName}}</span>
-                <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-                <a routerLink="/register" routerLinkActive="active">Register</a>
-                <a routerLink="/login" routerLinkActive="active">Login</a>
-            </div>
+    @else {
+    <div class="nav-container">
+        <div class="nav-links">
+            <span class="username">{{employeeName}}</span>
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+            <a routerLink="/register" routerLinkActive="active">Register</a>
+            <a routerLink="/login" routerLinkActive="active">Login</a>
         </div>
-        }
+    </div>
+    }
 </nav>

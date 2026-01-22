@@ -20,12 +20,9 @@ export class TicketComponent {
   tickettypeSvc : TickettypeService = inject(TickettypeService);
   employeeSvc : EmployeeService = inject(EmployeeService)
   @ViewChild('ticketFormContainer') ticketFormContainer!: ElementRef;
-<<<<<<< HEAD
   isStatusFilter = false;
 
-=======
   role : string;
->>>>>>> d5d2d9860c3e1084eb6b5a7cb08925ebf721c1f8
   ticketTypes : TicketType[];
   employeesbyDept : Employee[]
   tickets: Ticket[];
@@ -37,22 +34,8 @@ export class TicketComponent {
   errMsg: string;
   ticket: Ticket;
   username : any = sessionStorage.getItem("empId");
-<<<<<<< HEAD
-constructor() {
-  this.employeesbyDept = [];
-  this.tickets = [];
-  this.ticketTypes = [];
-  this.tickettypeStore = new TicketType("","","","","");
-  this.ticketTypeId = "";
-  this.ticket  = new Ticket("","","","",new Date() ,"",this.username ,"")
-  this.errMsg = '';
-  this.showAllTickets();
-        this.filteredTickets = [];   // REQUIRED
 
-  this.getAllTicketType();
-}
 
-=======
   constructor() {
     this.role = "";
     this.employeesbyDept = [];
@@ -65,8 +48,10 @@ constructor() {
     this.errMsg = '';
     this.showAllTickets();
     this.getAllTicketType();
-    this.showEmployee();
 
+    this.showEmployee();
+    this.showAllTickets();
+        this.filteredTickets = [];
     if(this.role != "admin"){
       this.getTicketsByCreator()
     }
@@ -87,7 +72,6 @@ constructor() {
       }
     });
   }
->>>>>>> d5d2d9860c3e1084eb6b5a7cb08925ebf721c1f8
 
   getEmployeesbyDept(): void {
     this.employeeSvc.getEmployeeByDept(this.ticketTypeId).subscribe({
