@@ -1,0 +1,30 @@
+# .NET build outputs
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio/VS Code files
+.vs/
+.vscode/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebugPublic/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.resources
+*.dotCover
+
+# Generated files
+*.GeneratedMSBuildEditorConfig.editorconfig
+*.sourceLink.json
+*.assets.json
+project.nuget.cache
