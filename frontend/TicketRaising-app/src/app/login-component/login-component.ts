@@ -24,7 +24,6 @@ export class LoginComponent {
     this.empId = "";
     this.password = "";
     this.errMsg = "";
-    
   }
 
   login() {

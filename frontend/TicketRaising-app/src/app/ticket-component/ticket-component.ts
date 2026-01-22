@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Ticket } from '../../models/ticket';
@@ -19,6 +19,8 @@ export class TicketComponent {
   ticketSvc: TicketService = inject(TicketService);
   tickettypeSvc : TickettypeService = inject(TickettypeService);
   employeeSvc : EmployeeService = inject(EmployeeService)
+  @ViewChild('ticketFormContainer') ticketFormContainer!: ElementRef;
+
   ticketTypes : TicketType[];
   employeesbyDept : Employee[]
   tickets: Ticket[];
@@ -99,6 +101,18 @@ export class TicketComponent {
     },
     error: err => console.log(err)
   });
+}
+editTicket(t: Ticket): void {
+  // Copy ticket data into form
+  this.ticket = { ...t };
+
+  // Scroll to form
+  setTimeout(() => {
+    this.ticketFormContainer.nativeElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }, 0);
 }
 
   addTicket(): void {
