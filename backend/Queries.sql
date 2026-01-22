@@ -17,7 +17,7 @@ INSERT INTO Employee (EmpId, EmpName, Password, Role, DeptId) VALUES
 ('E004', 'Alice Brown', 'demo123', 'Support', 'D001'),
 ('E005', 'Charlie Davis', 'demo456', 'Employee', 'D003');
 select * from Employee
-DELETE from employee where empid = ''
+DELETE from employee where empid = 'E001'
 -- Ticket Types
 INSERT INTO TicketTypes (TicketTypeId, TypeName) VALUES
 ('TT01', 'Hardware Issue'),
@@ -41,7 +41,8 @@ INSERT INTO TicketReply (ReplyId, TicketId, ReplyMessage, ReplyByCreatorEmpId, R
 ('R003', 'T002', 'Your account has been reset. Try login now.', NULL, 'E001'),
 ('R004', 'T003', 'Software installed successfully', NULL, 'E002'),
 ('R005', 'T004', 'VPN credentials have been updated', NULL, 'E004');
-select * from TicketReply
+select * from TicketReply 
+DELETE from TicketReply where ReplyId = 'R011' 
 
 INSERT INTO SLA (SLAId, SLAName, Priority, ResponseTime, ResolutionHours) VALUES
 ('S001', 'Critical SLA', 'Critical', 1, 4),

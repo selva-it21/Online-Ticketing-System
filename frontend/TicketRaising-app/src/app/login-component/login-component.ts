@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EmployeeService } from '../employee-service';
 import { Employee } from '../../models/employee';
+import { AuthService } from '../auth-service';
 
 @Component({
   selector: 'app-login-component',
@@ -13,6 +14,7 @@ import { Employee } from '../../models/employee';
 })
 export class LoginComponent {
   loginSvc: EmployeeService = inject(EmployeeService);
+  authSvc:AuthService=inject(AuthService);
   user: Employee;
   empId: string;
   password: string;
@@ -33,7 +35,7 @@ export class LoginComponent {
         alert("Loged in successfull")
         sessionStorage.setItem("empId", this.user.empId);
         sessionStorage.setItem("role", this.user.role);
-
+        this.authSvc.setLogin(this.user.empName);
         this.errMsg = "";
         this.router.navigate(['/']);
       },

@@ -1,9 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { DepartmentComponent } from "./department-component/department-component";
 import { HomeComponent } from "./home-component/home-component";
 import { NavbarComponent } from "./navbar-component/navbar-component";
 import { EmployeeComponent } from "./employee-component/employee-component";
+import { AuthService } from './auth-service';
 
 @Component({
   selector: 'app-root',
@@ -13,5 +14,6 @@ import { EmployeeComponent } from "./employee-component/employee-component";
 })
 export class App {
   protected readonly title = signal('TicketRaising-app');
-  
+  auth=inject(AuthService);
+  empName=signal(sessionStorage.getItem('empName'));
 }

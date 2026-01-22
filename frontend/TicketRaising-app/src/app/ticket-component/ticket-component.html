@@ -1,10 +1,10 @@
 <div class="ticket-management-container">
   <h2 class="ticket-header">Ticket Management</h2>
-
+ 
   <div *ngIf="errMsg" class="error-message">⚠️ {{ errMsg }}</div>
-
+ 
 <div class="form-card" #ticketFormContainer>
-
+ 
     <form #ticketForm="ngForm" class="ticket-form">
       <div class="form-row">
         <div class="form-group">
@@ -15,7 +15,7 @@
           <label for="title" class="form-label">Title</label>
           <input type="text" id="title" name="Title" [(ngModel)]="ticket.title" required class="form-input" placeholder="Enter title" />
         </div>
-
+ 
         <div class="form-group">
           <label for="ticketTypeId" class="form-label">Type</label>
           <select id="ticketTypeId" name="ticketTypeId" [(ngModel)]="ticket.ticketTypeId" (ngModelChange)="onTicketTypeChange($event)" class="form-input">
@@ -34,9 +34,9 @@
           </select>
         </div>
         }
-        
+       
       </div>
-
+ 
       <div class="form-row">
         <div class="form-group">
           <label for="createdByEmpId" class="form-label">Created By</label>
@@ -56,7 +56,7 @@
           <textarea id="description" name="Description" [(ngModel)]="ticket.description" class="form-input form-textarea" placeholder="Enter description"></textarea>
         </div>
       </div>
-
+ 
       <div class="action-buttons">
         <button type="button" class="action-btn add-btn" (click)="addTicket()">+ Add</button>
         <button type="button" class="action-btn search-btn" (click)="showTicket()">🔍 Search</button>
@@ -65,15 +65,17 @@
       </div>
     </form>
   </div>
-  @if(role.toLocaleLowerCase() == "admin"){
+    @if(role.toLocaleLowerCase() == "admin"){
   <h3 class="filter-header">Filter Tickets</h3>
   <div class="filter-buttons">
     <button class="filter-btn" (click)="getTicketsByType()">By Type</button>
     <button class="filter-btn" (click)="getTicketsByCreator()">By Creator</button>
     <button class="filter-btn" (click)="getTicketsAssignedTo()">Assigned To</button>
     <button class="filter-btn" (click)="showAllTickets()">Show All</button>
+    <button class="filter-btn" (click)="filterTicketsByStatus()">By Status</button>
+ 
   </div>
-
+ 
   <h3 class="list-header">Ticket List</h3>
   <div class="table-card">
     <div class="table-wrapper">
@@ -86,23 +88,19 @@
             <th>Status</th>
             <th>Created By</th>
             <th>Assigned To</th>
-            @if(role.toLocaleLowerCase() == "admin"){
             <th>Action</th>
-            }
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let t of tickets">
+          <tr *ngFor="let t of (isStatusFilter ? filteredTickets : tickets)">
             <td>{{ t.ticketId }}</td>
             <td>{{ t.title }}</td>
             <td>{{ t.ticketTypeId }}</td>
             <td><span class="status-badge status-{{t.status?.toLowerCase()?.replace(' ', '')}}">{{ t.status }}</span></td>
             <td>{{ t.createdByEmpId }}</td>
             <td>{{ t.assignedToEmpId }}</td>
-            @if(role.toLocaleLowerCase() == "admin"){
             <td><button class="edit-btn" (click)="editTicket(t)">✏️ Edit</button>
-            </td>
-            }
+</td>
           </tr>
           <tr *ngIf="tickets.length === 0">
             <td colspan="7" class="no-data">📭 No tickets found</td>

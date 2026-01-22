@@ -16,4 +16,4 @@
     Login
   </button>
 </form>
-<p class="error-message">{{ errMsg }}</p>
+<p class="error-message" *ngIf="errMsg">{{ errMsg }}</p>

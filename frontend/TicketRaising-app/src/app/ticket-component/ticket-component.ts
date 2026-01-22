@@ -7,7 +7,7 @@ import { TickettypeService } from '../tickettype-service';
 import { TicketType } from '../../models/tickettype';
 import { Employee } from '../../models/employee';
 import { EmployeeService } from '../employee-service';
-
+ 
 @Component({
   selector: 'app-ticket-component',
   imports: [FormsModule, CommonModule],
@@ -15,41 +15,47 @@ import { EmployeeService } from '../employee-service';
   styleUrl: './ticket-component.css',
 })
 export class TicketComponent {
-
+ 
   ticketSvc: TicketService = inject(TicketService);
   tickettypeSvc : TickettypeService = inject(TickettypeService);
   employeeSvc : EmployeeService = inject(EmployeeService)
   @ViewChild('ticketFormContainer') ticketFormContainer!: ElementRef;
+  isStatusFilter = false;
+ 
   role : string;
   ticketTypes : TicketType[];
   employeesbyDept : Employee[]
   tickets: Ticket[];
+  filteredTickets:Ticket[];
   ticketTypeId : string;
   tickettypeStore : TicketType;
+ 
   // employees : Employee[];
   errMsg: string;
   ticket: Ticket;
   username : any = sessionStorage.getItem("empId");
-  typeid: string;
+ 
+ 
   constructor() {
     this.role = "";
     this.employeesbyDept = [];
     this.tickets = [];
     this.tickettypeStore = new TicketType("","","","","");
     this.ticketTypeId = "";
-    this.typeid = "";
     // this.employees = [];
     this.ticketTypes = [];
     this.ticket  = new Ticket("","","","",new Date() ,"Open",this.username ,"")
     this.errMsg = '';
     this.showAllTickets();
     this.getAllTicketType();
+ 
     this.showEmployee();
-
+    this.showAllTickets();
+        this.filteredTickets = [];
     if(this.role != "admin"){
       this.getTicketsByCreator()
     }
-
+ 
   }
    showEmployee(): void {
     this.employeeSvc.getOneEmployee(this.username).subscribe({
@@ -57,7 +63,7 @@ export class TicketComponent {
         // this.employeeName = response.empName;
         this.role = response.role
         // console.log(this.employeeName + "hello");
-        
+       
         this.errMsg = '';
       },
       error: (err) => {
@@ -66,13 +72,14 @@ export class TicketComponent {
       }
     });
   }
-
+ 
   getEmployeesbyDept(): void {
     this.employeeSvc.getEmployeeByDept(this.ticketTypeId).subscribe({
       next: (response: Employee[]) => {
         console.log(response);
-        
+       
         this.employeesbyDept = response;
+ 
         this.errMsg = '';
       },
        error: (err) => {
@@ -81,7 +88,7 @@ export class TicketComponent {
       }
     });
   }
-
+ 
     getAllTicketType(): void {
     this.tickettypeSvc.getAllTicketTypes().subscribe({
       next: (response: TicketType[]) => {
@@ -94,8 +101,10 @@ export class TicketComponent {
       }
     });
   }
-  
+ 
   showAllTickets(): void {
+          this.isStatusFilter = false;
+ 
     this.ticketSvc.showAllTickets().subscribe({
       next: (response: Ticket[]) => {
         this.tickets = response;
@@ -107,29 +116,40 @@ export class TicketComponent {
       }
     });
   }
+  filterTicketsByStatus(): void {
+  this.isStatusFilter = true;
+  if (!this.ticket.status) {
+    this.filteredTickets = this.tickets;  // show all if no status selected
+  } else {
+    this.filteredTickets = this.tickets.filter(t => t.status === this.ticket.status);
+   
+  }
+}
+ 
  onTicketTypeChange(ticketTypeId: string) {
   this.tickettypeSvc.getTicketType(ticketTypeId).subscribe({
     next: (response: TicketType) => {
-
+ 
       const deptId = response.deptId;
-
+ 
       console.log('Dept ID:', deptId);
-
+ 
       this.employeeSvc.getEmployeeByDept(deptId).subscribe({
         next: (emps: Employee[]) => {
           this.employeesbyDept = emps;
         },
         error: err => console.log(err)
       });
-
+ 
     },
     error: err => console.log(err)
   });
 }
 editTicket(t: Ticket): void {
+  // Copy ticket data into form
   this.ticket = { ...t };
-  this.typeid = t.ticketTypeId;
-  this.onTicketTypeChange(this.typeid);
+ 
+  // Scroll to form
   setTimeout(() => {
     this.ticketFormContainer.nativeElement.scrollIntoView({
       behavior: 'smooth',
@@ -137,7 +157,7 @@ editTicket(t: Ticket): void {
     });
   }, 0);
 }
-
+ 
   addTicket(): void {
     this.ticketSvc.addTicket(this.ticket).subscribe({
       next: (response: Ticket) => {
@@ -152,8 +172,9 @@ editTicket(t: Ticket): void {
       }
     });
   }
-
+ 
   showTicket(): void {
+ 
     this.ticketSvc.getOneTicket(this.ticket.ticketId).subscribe({
       next: (response: Ticket) => {
         this.ticket = response;
@@ -165,7 +186,7 @@ editTicket(t: Ticket): void {
       }
     });
   }
-
+ 
   updateTicket(): void {
     this.ticketSvc.updateTicket(this.ticket.ticketId, this.ticket).subscribe({
       next: () => {
@@ -179,7 +200,7 @@ editTicket(t: Ticket): void {
       }
     });
   }
-
+ 
   deleteTicket(): void {
     this.ticketSvc.deleteTicket(this.ticket.ticketId).subscribe({
       next: () => {
@@ -194,8 +215,10 @@ editTicket(t: Ticket): void {
       }
     });
   }
-
+ 
   getTicketsByType(): void {
+      this.isStatusFilter = false;
+ 
     this.ticketSvc.getTicketsByType(this.ticket.ticketTypeId).subscribe({
       next: (response: Ticket[]) => {
         this.tickets = response;
@@ -207,13 +230,15 @@ editTicket(t: Ticket): void {
       }
     });
   }
-
+ 
   getTicketsByCreator(): void {
+      this.isStatusFilter = false;
+ 
     this.ticketSvc.getTicketsByCreator(this.ticket.createdByEmpId).subscribe({
       next: (response: Ticket[]) => {
         this.tickets = response;
         console.log(response);
-        
+       
         this.errMsg = '';
       },
       error: (err) => {
@@ -222,8 +247,10 @@ editTicket(t: Ticket): void {
       }
     });
   }
-
+ 
   getTicketsAssignedTo(): void {
+      this.isStatusFilter = false;
+ 
     this.ticketSvc.getTicketsAssignedTo(this.ticket.assignedToEmpId).subscribe({
       next: (response: Ticket[]) => {
         this.tickets = response;
@@ -236,3 +263,5 @@ editTicket(t: Ticket): void {
     });
   }
 }
+ 
+ 
