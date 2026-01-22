@@ -46,14 +46,16 @@ export class TicketComponent {
     this.ticketTypes = [];
     this.ticket  = new Ticket("","","","",new Date() ,"Open",this.username ,"")
     this.errMsg = '';
-    this.showAllTickets();
+   
     this.getAllTicketType();
 
     this.showEmployee();
-    this.showAllTickets();
+  
         this.filteredTickets = [];
     if(this.role != "admin"){
       this.getTicketsByCreator()
+    }else{
+        this.showAllTickets();
     }
 
   }
