@@ -1,0 +1,103 @@
+/* Full page center */
+.logout-page {
+   height: calc(100vh - 90px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #3498db, #2c3e50);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Card */
+.logout-card {
+  background-color: #ffffff;
+  padding: 40px 50px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  max-width: 420px;
+  width: 100%;
+  animation: fadeIn 0.5s ease;
+}
+
+/* Icon */
+.logout-icon {
+  font-size: 60px;
+  color: #e74c3c;
+  margin-bottom: 20px;
+}
+
+/* Title */
+.logout-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+/* Message */
+.logout-message {
+  font-size: 15px;
+  color: #7f8c8d;
+  margin-bottom: 30px;
+}
+
+/* Buttons */
+.logout-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.logout-btn {
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+/* Primary button */
+.logout-btn.primary {
+  background-color: #3498db;
+  color: #ffffff;
+}
+
+.logout-btn.primary:hover {
+  background-color: #2980b9;
+}
+
+/* Secondary button */
+.logout-btn.secondary {
+  border: 2px solid #3498db;
+  color: #3498db;
+}
+
+.logout-btn.secondary:hover {
+  background-color: #3498db;
+  color: #ffffff;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .logout-card {
+    padding: 30px 25px;
+  }
+
+  .logout-actions {
+    flex-direction: column;
+  }
+}

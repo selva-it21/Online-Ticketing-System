@@ -44,15 +44,14 @@ export class TicketComponent {
     this.ticketTypes = [];
     this.ticket  = new Ticket("","","","",new Date() ,"Open",this.username ,"")
     this.errMsg = '';
-    this.showAllTickets();
+   
     this.getAllTicketType();
     this.showEmployee();
     this.filteredTickets = [];
     if(this.role == "employee"){
       this.getTicketsByCreator()
-    }
-    else{
-      this.showAllTickets();
+    }else{
+        this.showAllTickets();
     }
  
   }

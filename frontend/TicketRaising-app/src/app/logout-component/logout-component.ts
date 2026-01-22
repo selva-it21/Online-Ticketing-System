@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../auth-service';
 import { Router } from '@angular/router';
+import { RouterLink, RouterLinkActive } from "@angular/router";
 
 @Component({
   selector: 'app-logout-component',
-  imports: [],
+  imports: [RouterLinkActive,RouterLink],
   templateUrl: './logout-component.html',
   styleUrl: './logout-component.css',
 })
