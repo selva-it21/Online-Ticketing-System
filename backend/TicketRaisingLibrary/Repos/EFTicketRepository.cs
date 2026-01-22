@@ -16,7 +16,10 @@ public class EFTicketRepository : ITicketRepository
     {
         try
         {
-            ticket.AssignedToEmpId = null;
+            // if(ticket.CreatedByEmpId == "")
+            //     ticket.AssignedToEmpId = null;
+            // if(ticket.AssignedToEmpId == "")
+            //     ticket.CreatedByEmpId = null;
             await context.Tickets.AddAsync(ticket);
             await context.SaveChangesAsync();
             return ticket;

@@ -5,6 +5,7 @@ import { TicketReplyService } from '../ticketreply-service';
 import { TicketReply } from '../../models/ticketreply';
 import { TicketService } from '../ticket-service';
 import { Ticket } from '../../models/ticket';
+import { EmployeeService } from '../employee-service';
 
 @Component({
   selector: 'app-ticket-reply-component',
@@ -16,6 +17,7 @@ export class TicketReplyComponent {
 
   replySvc: TicketReplyService = inject(TicketReplyService);
   ticketSvc: TicketService = inject(TicketService);
+  employeeSvc : EmployeeService = inject(EmployeeService)
   tickets: Ticket[];
   replier : string;
   ticket : Ticket;
@@ -34,6 +36,7 @@ export class TicketReplyComponent {
     this.newReply();
     this.showAllReplies();
     this.showAllTickets();
+    
   }
 
   onTicketIdChange(ticketId : string){
@@ -41,7 +44,6 @@ export class TicketReplyComponent {
     this.ticketSvc.getOneTicket(ticketId).subscribe({
       next: (response: Ticket) => {
         this.ticket = response;
-        //  this.newReply()
         this.reply.replyByAssignedEmpId = this.ticket.assignedToEmpId;
         this.reply.replyByCreatorEmpId = this.ticket.createdByEmpId
         console.log(this.ticket);

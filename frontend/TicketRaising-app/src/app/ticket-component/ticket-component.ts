@@ -41,27 +41,25 @@ export class TicketComponent {
     this.tickets = [];
     this.tickettypeStore = new TicketType("","","","","");
     this.ticketTypeId = "";
-    // this.employees = [];
     this.ticketTypes = [];
     this.ticket  = new Ticket("","","","",new Date() ,"Open",this.username ,"")
     this.errMsg = '';
     this.showAllTickets();
     this.getAllTicketType();
     this.showEmployee();
-    this.showAllTickets();
-        this.filteredTickets = [];
-    if(this.role != "admin"){
+    this.filteredTickets = [];
+    if(this.role == "employee"){
       this.getTicketsByCreator()
+    }
+    else{
+      this.showAllTickets();
     }
  
   }
    showEmployee(): void {
     this.employeeSvc.getOneEmployee(this.username).subscribe({
       next: (response: Employee) => {
-        // this.employeeName = response.empName;
         this.role = response.role
-        // console.log(this.employeeName + "hello");
-       
         this.errMsg = '';
       },
       error: (err) => {
@@ -229,7 +227,7 @@ editTicket(t: Ticket): void {
   }
  
   getTicketsByCreator(): void {
-      this.isStatusFilter = false;
+    this.isStatusFilter = false;
  
     this.ticketSvc.getTicketsByCreator(this.ticket.createdByEmpId).subscribe({
       next: (response: Ticket[]) => {
