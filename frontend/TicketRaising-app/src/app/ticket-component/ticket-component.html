@@ -70,6 +70,8 @@
     <button class="filter-btn" (click)="getTicketsByCreator()">By Creator</button>
     <button class="filter-btn" (click)="getTicketsAssignedTo()">Assigned To</button>
     <button class="filter-btn" (click)="showAllTickets()">Show All</button>
+    <button class="filter-btn" (click)="filterTicketsByStatus()">By Status</button>
+
   </div>
 
   <h3 class="list-header">Ticket List</h3>
@@ -88,7 +90,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let t of tickets">
+          <tr *ngFor="let t of (isStatusFilter ? filteredTickets : tickets)">
             <td>{{ t.ticketId }}</td>
             <td>{{ t.title }}</td>
             <td>{{ t.ticketTypeId }}</td>
@@ -98,7 +100,7 @@
             <td><button class="edit-btn" (click)="editTicket(t)">✏️ Edit</button>
 </td>
           </tr>
-          <tr *ngIf="tickets.length === 0">
+          <tr *ngIf="filteredTickets.length === 0">
             <td colspan="7" class="no-data">📭 No tickets found</td>
           </tr>
         </tbody>
