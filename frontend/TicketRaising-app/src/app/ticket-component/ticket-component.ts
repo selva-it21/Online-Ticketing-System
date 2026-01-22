@@ -20,7 +20,7 @@ export class TicketComponent {
   tickettypeSvc : TickettypeService = inject(TickettypeService);
   employeeSvc : EmployeeService = inject(EmployeeService)
   @ViewChild('ticketFormContainer') ticketFormContainer!: ElementRef;
-
+  role : string;
   ticketTypes : TicketType[];
   employeesbyDept : Employee[]
   tickets: Ticket[];
@@ -30,18 +30,41 @@ export class TicketComponent {
   errMsg: string;
   ticket: Ticket;
   username : any = sessionStorage.getItem("empId");
+  typeid: string;
   constructor() {
+    this.role = "";
     this.employeesbyDept = [];
     this.tickets = [];
     this.tickettypeStore = new TicketType("","","","","");
     this.ticketTypeId = "";
+    this.typeid = "";
     // this.employees = [];
     this.ticketTypes = [];
-    this.ticket  = new Ticket("","","","",new Date() ,"",this.username ,"")
+    this.ticket  = new Ticket("","","","",new Date() ,"Open",this.username ,"")
     this.errMsg = '';
     this.showAllTickets();
     this.getAllTicketType();
+    this.showEmployee();
 
+    if(this.role != "admin"){
+      this.getTicketsByCreator()
+    }
+
+  }
+   showEmployee(): void {
+    this.employeeSvc.getOneEmployee(this.username).subscribe({
+      next: (response: Employee) => {
+        // this.employeeName = response.empName;
+        this.role = response.role
+        // console.log(this.employeeName + "hello");
+        
+        this.errMsg = '';
+      },
+      error: (err) => {
+        this.errMsg = err.error;
+        console.log(err);
+      }
+    });
   }
 
   getEmployeesbyDept(): void {
@@ -104,10 +127,9 @@ export class TicketComponent {
   });
 }
 editTicket(t: Ticket): void {
-  // Copy ticket data into form
   this.ticket = { ...t };
-
-  // Scroll to form
+  this.typeid = t.ticketTypeId;
+  this.onTicketTypeChange(this.typeid);
   setTimeout(() => {
     this.ticketFormContainer.nativeElement.scrollIntoView({
       behavior: 'smooth',
