@@ -20,7 +20,7 @@ export class TicketComponent {
   tickettypeSvc : TickettypeService = inject(TickettypeService);
   employeeSvc : EmployeeService = inject(EmployeeService)
   @ViewChild('ticketFormContainer') ticketFormContainer!: ElementRef;
-
+  role : string;
   ticketTypes : TicketType[];
   employeesbyDept : Employee[]
   tickets: Ticket[];
@@ -31,17 +31,38 @@ export class TicketComponent {
   ticket: Ticket;
   username : any = sessionStorage.getItem("empId");
   constructor() {
+    this.role = "";
     this.employeesbyDept = [];
     this.tickets = [];
     this.tickettypeStore = new TicketType("","","","","");
     this.ticketTypeId = "";
     // this.employees = [];
     this.ticketTypes = [];
-    this.ticket  = new Ticket("","","","",new Date() ,"",this.username ,"")
+    this.ticket  = new Ticket("","","","",new Date() ,"Open",this.username ,"")
     this.errMsg = '';
     this.showAllTickets();
     this.getAllTicketType();
+    this.showEmployee();
 
+    if(this.role != "admin"){
+      this.getTicketsByCreator()
+    }
+
+  }
+   showEmployee(): void {
+    this.employeeSvc.getOneEmployee(this.username).subscribe({
+      next: (response: Employee) => {
+        // this.employeeName = response.empName;
+        this.role = response.role
+        // console.log(this.employeeName + "hello");
+        
+        this.errMsg = '';
+      },
+      error: (err) => {
+        this.errMsg = err.error;
+        console.log(err);
+      }
+    });
   }
 
   getEmployeesbyDept(): void {

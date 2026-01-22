@@ -13,11 +13,13 @@ export class NavbarComponent {
   empSvc: EmployeeService = inject(EmployeeService);
   username : string;
   errMsg: string;
+  role : string;
   employeeName : string
   constructor(){
     this.errMsg=""
     this.username = sessionStorage.getItem("empId") || "";
     this.employeeName = ""
+    this.role = ""
     this.showEmployee()
   }
 
@@ -26,6 +28,7 @@ export class NavbarComponent {
     this.empSvc.getOneEmployee(this.username).subscribe({
       next: (response: Employee) => {
         this.employeeName = response.empName;
+        this.role = response.role
         console.log(this.employeeName + "hello");
         
         this.errMsg = '';
