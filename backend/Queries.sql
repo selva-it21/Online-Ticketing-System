@@ -17,6 +17,7 @@ INSERT INTO Employee (EmpId, EmpName, Password, Role, DeptId) VALUES
 ('E004', 'Alice Brown', 'demo123', 'Support', 'D001'),
 ('E005', 'Charlie Davis', 'demo456', 'Employee', 'D003');
 select * from Employee
+DELETE from employee where empid = ''
 -- Ticket Types
 INSERT INTO TicketTypes (TicketTypeId, TypeName) VALUES
 ('TT01', 'Hardware Issue'),
@@ -32,6 +33,7 @@ INSERT INTO Ticket (TicketId, Title, Description, CreatedByEmpId, AssignedToEmpI
 ('T003', 'Software installation', 'Need Photoshop installed', 'E003', 'E002', 'TT02', 'Closed'),
 ('T004', 'VPN connection problem', 'Cannot connect to company VPN', 'E005', 'E004', 'TT03', 'Open')
 select * from ticket
+DELETE from ticket where CreatedByEmpId = 'E001'
 -- Ticket Replies
 INSERT INTO TicketReply (ReplyId, TicketId, ReplyMessage, ReplyByCreatorEmpId, ReplyByAssignedEmpId) VALUES
 ('R001', 'T001', 'Please try restarting your laptop', NULL, 'E004'),

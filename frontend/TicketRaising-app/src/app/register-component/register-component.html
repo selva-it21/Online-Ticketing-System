@@ -1,76 +1,71 @@
-<h2>Employee Registration</h2>
+<div class="employee-registration-container">
+  <h2 class="registration-header">Employee Registration</h2>
 
-<!-- Error Message -->
-<div *ngIf="errMsg" style="color: red; margin-bottom: 10px;">
-  {{ errMsg }}
-</div>
+  <!-- Error Message -->
+  <div *ngIf="errMsg" class="error-message">
+    ⚠️ {{ errMsg }}
+  </div>
 
-<form #empForm="ngForm" (ngSubmit)="addEmployee()">
-  <table>
+  <div class="form-card">
+    <form #empForm="ngForm" (ngSubmit)="addEmployee()" class="registration-form">
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="empId" class="form-label">Employee ID</label>
+          <input type="text" id="empId" name="empId"
+                 [(ngModel)]="employee.empId" required 
+                 class="form-input" placeholder="Enter employee ID" />
+        </div>
 
-    <tr>
-      <td>Employee ID</td>
-      <td>
-        <input type="text" name="empId"
-               [(ngModel)]="employee.empId" required />
-      </td>
-    </tr>
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" name="password"
+                 [(ngModel)]="employee.password" required 
+                 class="form-input" placeholder="Enter password" />
+        </div>
+      </div>
 
-    <tr>
-      <td>Password</td>
-      <td>
-        <input type="password" name="password"
-               [(ngModel)]="employee.password" required />
-      </td>
-    </tr>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword"
+                 [(ngModel)]="confirmPassword" required 
+                 class="form-input" placeholder="Re-enter password" />
+          <div *ngIf="employee.password && confirmPassword && employee.password !== confirmPassword" 
+               class="password-mismatch">
+            Passwords do not match
+          </div>
+        </div>
 
-    <!-- ✅ Confirm Password -->
-    <tr>
-      <td>Confirm Password</td>
-      <td>
-        <input type="password" name="confirmPassword"
-               [(ngModel)]="confirmPassword" required />
-      </td>
-    </tr>
+        <div class="form-group">
+          <label for="empName" class="form-label">Employee Name</label>
+          <input type="text" id="empName" name="empName"
+                 [(ngModel)]="employee.empName" required 
+                 class="form-input" placeholder="Enter full name" />
+        </div>
+      </div>
 
-    <tr>
-      <td>Employee Name</td>
-      <td>
-        <input type="text" name="empName"
-               [(ngModel)]="employee.empName" required />
-      </td>
-    </tr>
+      <div class="form-row">
+        <div class="form-group form-group-wide">
+          <label for="deptId" class="form-label">Department</label>
+          <select id="deptId" name="deptId"
+                  [(ngModel)]="employee.deptId" required 
+                  class="form-input">
+            <option value="">-- Select Department --</option>
+            <option *ngFor="let dept of departments"
+                    [value]="dept.deptId">
+              {{ dept.deptName }}
+            </option>
+          </select>
+        </div>
+      </div>
 
-    <tr>
-      <td>Department</td>
-      <td>
-        <select name="deptId"
-                [(ngModel)]="employee.deptId" required>
-          <option value="">-- Select Department --</option>
-          <option *ngFor="let dept of departments"
-                  [value]="dept.deptId">
-            {{ dept.deptName }}
-          </option>
-        </select>
-      </td>
-    </tr>
-
-    <tr>
-      <td>Role</td>
-      <td>
-        <input type="text" name="role"
-               [(ngModel)]="employee.role"
-               placeholder="Admin / User" required />
-      </td>
-    </tr>
-
-    <tr>
-      <td colspan="2" style="text-align:center;">
-        <button type="submit" [disabled]="empForm.invalid">
-          Register
+      <div class="form-actions">
+        <button type="submit" class="submit-btn" [disabled]="empForm.invalid || (employee.password !== confirmPassword)">
+          Register Employee
         </button>
-      </td>
-    </tr>
+      </div>
 
-  </table>
-</form>
+    </form>
+  </div>
+</div>

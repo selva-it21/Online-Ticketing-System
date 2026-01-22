@@ -51,6 +51,10 @@ export class EmployeeComponent {
   }
 
   addEmployee(): void {
+    if(this.employee.empId != ""){
+      this.errMsg = "Enter emp id";
+      return;
+    }
     this.empSvc.addEmployee(this.employee).subscribe({
       next: (response: Employee) => {
         this.employees.push(response);
