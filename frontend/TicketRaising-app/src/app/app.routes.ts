@@ -11,16 +11,18 @@ import { TickettypeComponent } from './tickettype-component/tickettype-component
 import { TicketReplyComponent } from './ticketreply-component/ticketreply-component';
 import { TicketComponent } from './ticket-component/ticket-component';
 import { RegisterComponent } from './register-component/register-component';
+import { ProfileComponent } from './profile-component/profile-component';
 
 export const routes: Routes = [
     {path: '',component:HomeComponent},
     {path: 'employee',component:EmployeeComponent},
     {path: 'department',component:DepartmentComponent},
-    {path: 'ticket' , component:TicketComponent},
+    {path: 'ticket' , component:TicketComponent, canActivate: [userAccessGuard]},
     {path: 'sla',component:SlaComponent},
     {path: 'navbar',component:NavbarComponent},
     {path: 'tickettype',component:TickettypeComponent},
     {path: 'ticketreply',component:TicketReplyComponent},
+    {path: 'profile',component:ProfileComponent, canActivate: [userAccessGuard]},
     {path: 'logout',component:LogoutComponent},
     {path: 'login',component:LoginComponent},
     {path: 'register', component:RegisterComponent}
