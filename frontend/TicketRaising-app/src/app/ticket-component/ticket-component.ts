@@ -20,16 +20,39 @@ export class TicketComponent {
   tickettypeSvc : TickettypeService = inject(TickettypeService);
   employeeSvc : EmployeeService = inject(EmployeeService)
   @ViewChild('ticketFormContainer') ticketFormContainer!: ElementRef;
+<<<<<<< HEAD
+  isStatusFilter = false;
+
+=======
   role : string;
+>>>>>>> d5d2d9860c3e1084eb6b5a7cb08925ebf721c1f8
   ticketTypes : TicketType[];
   employeesbyDept : Employee[]
   tickets: Ticket[];
+  filteredTickets:Ticket[];
   ticketTypeId : string;
   tickettypeStore : TicketType;
+
   // employees : Employee[];
   errMsg: string;
   ticket: Ticket;
   username : any = sessionStorage.getItem("empId");
+<<<<<<< HEAD
+constructor() {
+  this.employeesbyDept = [];
+  this.tickets = [];
+  this.ticketTypes = [];
+  this.tickettypeStore = new TicketType("","","","","");
+  this.ticketTypeId = "";
+  this.ticket  = new Ticket("","","","",new Date() ,"",this.username ,"")
+  this.errMsg = '';
+  this.showAllTickets();
+        this.filteredTickets = [];   // REQUIRED
+
+  this.getAllTicketType();
+}
+
+=======
   constructor() {
     this.role = "";
     this.employeesbyDept = [];
@@ -64,6 +87,7 @@ export class TicketComponent {
       }
     });
   }
+>>>>>>> d5d2d9860c3e1084eb6b5a7cb08925ebf721c1f8
 
   getEmployeesbyDept(): void {
     this.employeeSvc.getEmployeeByDept(this.ticketTypeId).subscribe({
@@ -71,6 +95,7 @@ export class TicketComponent {
         console.log(response);
         
         this.employeesbyDept = response;
+
         this.errMsg = '';
       },
        error: (err) => {
@@ -94,6 +119,8 @@ export class TicketComponent {
   }
   
   showAllTickets(): void {
+          this.isStatusFilter = false;
+
     this.ticketSvc.showAllTickets().subscribe({
       next: (response: Ticket[]) => {
         this.tickets = response;
@@ -105,6 +132,16 @@ export class TicketComponent {
       }
     });
   }
+  filterTicketsByStatus(): void {
+  this.isStatusFilter = true;
+  if (!this.ticket.status) {
+    this.filteredTickets = this.tickets;  // show all if no status selected
+  } else {
+    this.filteredTickets = this.tickets.filter(t => t.status === this.ticket.status);
+    
+  }
+}
+
  onTicketTypeChange(ticketTypeId: string) {
   this.tickettypeSvc.getTicketType(ticketTypeId).subscribe({
     next: (response: TicketType) => {
@@ -153,6 +190,7 @@ editTicket(t: Ticket): void {
   }
 
   showTicket(): void {
+
     this.ticketSvc.getOneTicket(this.ticket.ticketId).subscribe({
       next: (response: Ticket) => {
         this.ticket = response;
@@ -195,6 +233,8 @@ editTicket(t: Ticket): void {
   }
 
   getTicketsByType(): void {
+      this.isStatusFilter = false;
+
     this.ticketSvc.getTicketsByType(this.ticket.ticketTypeId).subscribe({
       next: (response: Ticket[]) => {
         this.tickets = response;
@@ -208,6 +248,8 @@ editTicket(t: Ticket): void {
   }
 
   getTicketsByCreator(): void {
+      this.isStatusFilter = false;
+
     this.ticketSvc.getTicketsByCreator(this.ticket.createdByEmpId).subscribe({
       next: (response: Ticket[]) => {
         this.tickets = response;
@@ -223,6 +265,8 @@ editTicket(t: Ticket): void {
   }
 
   getTicketsAssignedTo(): void {
+      this.isStatusFilter = false;
+
     this.ticketSvc.getTicketsAssignedTo(this.ticket.assignedToEmpId).subscribe({
       next: (response: Ticket[]) => {
         this.tickets = response;
