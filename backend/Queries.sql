@@ -8,7 +8,7 @@ INSERT INTO Department (DeptId, DeptName) VALUES
 ('D003', 'Finance'),
 ('D004', 'Operations');
 select * from Department
-
+DELETE from Department where deptid = ''
 -- Employees
 INSERT INTO Employee (EmpId, EmpName, Password, Role, DeptId) VALUES
 ('E001', 'John Doe', 'password123', 'Admin', 'D001'),
@@ -17,6 +17,7 @@ INSERT INTO Employee (EmpId, EmpName, Password, Role, DeptId) VALUES
 ('E004', 'Alice Brown', 'demo123', 'Support', 'D001'),
 ('E005', 'Charlie Davis', 'demo456', 'Employee', 'D003');
 select * from Employee
+DELETE from employee where empid = ''
 -- Ticket Types
 INSERT INTO TicketTypes (TicketTypeId, TypeName) VALUES
 ('TT01', 'Hardware Issue'),
@@ -32,6 +33,7 @@ INSERT INTO Ticket (TicketId, Title, Description, CreatedByEmpId, AssignedToEmpI
 ('T003', 'Software installation', 'Need Photoshop installed', 'E003', 'E002', 'TT02', 'Closed'),
 ('T004', 'VPN connection problem', 'Cannot connect to company VPN', 'E005', 'E004', 'TT03', 'Open')
 select * from ticket
+DELETE from ticket where CreatedByEmpId = 'E001'
 -- Ticket Replies
 INSERT INTO TicketReply (ReplyId, TicketId, ReplyMessage, ReplyByCreatorEmpId, ReplyByAssignedEmpId) VALUES
 ('R001', 'T001', 'Please try restarting your laptop', NULL, 'E004'),
@@ -47,3 +49,4 @@ INSERT INTO SLA (SLAId, SLAName, Priority, ResponseTime, ResolutionHours) VALUES
 ('S003', 'Medium Priority SLA', 'Medium', 4, 24),
 ('S004', 'Low Priority SLA', 'Low', 8, 48),
 ('S005', 'Standard SLA', 'Standard', 24, 72)
+DELETE from sla where slaid = ''

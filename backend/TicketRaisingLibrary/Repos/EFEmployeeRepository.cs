@@ -23,10 +23,15 @@ namespace TicketRaisingLibrary.Repos
                 int errorNumber = sqlException.Number;
 
                 switch (errorNumber){
+                    case 547: throw new TicketingException("Select Dept ID", 500);
                     case 2627: throw new TicketingException("Employee ID already exists", 501);
                     case 2628: throw new TicketingException("Name and/or description too long",502);
                     default: throw new TicketingException(sqlException.Message, 599);
                 }
+            }
+            catch(Exception ex)
+            {
+                throw new TicketingException(ex.Message,666);
             }
         }
 

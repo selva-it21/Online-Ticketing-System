@@ -26,6 +26,7 @@ public class EFTicketRepository : ITicketRepository
             int errorNumber = sqlException.Number;
 
             switch (errorNumber){
+                case 547: throw new TicketingException("Please select both Ticket type and employee field", 500);
                 case 2627: throw new TicketingException("Ticket ID already exists", 501);
                 case 2628: throw new TicketingException("Description too long",502);
                 default: throw new TicketingException(sqlException.Message, 599);
@@ -92,7 +93,7 @@ public class EFTicketRepository : ITicketRepository
         }
         catch
         {
-            throw new TicketingException("No such ticket ID", 1005);
+            throw new TicketingException("Select ticket type", 1005);
         }
     }
 

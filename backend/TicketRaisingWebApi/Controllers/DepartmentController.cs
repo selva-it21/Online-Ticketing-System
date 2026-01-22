@@ -45,6 +45,7 @@ namespace TicketRaisingWebApi.Controllers
         {
             try
             {
+                System.Console.WriteLine(department);
                 await departmentRepository.AddDepartmentAsync(department);
                 return Created($"api/Department/{department.DeptId}", department);
             }
