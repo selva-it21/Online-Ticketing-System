@@ -31,15 +31,18 @@
             <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
             <a routerLink="/ticket" routerLinkActive="active">Tickets</a>
             <a routerLink="/ticketreply" routerLinkActive="active">TicketReplies</a>
-            <a routerLink="/logout" routerLinkActive="active"><i class="bi bi-box-arrow-left"></i></a>
 
         </div>
-        <div class="user-info">
-            <span class="welcome-text">Welcome</span>
-            <a routerLink="/profile" class="profile-link" routerLinkActive="active">
-                <i class="bi bi-person-circle"></i>
-                <span class="username">{{employeeName}}</span></a>
+          <div class="navbar-user">
+            <div class="user-info">
 
+                <span class="welcome-text">Welcome</span>
+                <a routerLink="/profile" class="profile-link" routerLinkActive="active">
+                    <i class="bi bi-person-circle"></i>
+                    <span class="username">{{employeeName}}</span></a>
+            </div>
+            <a routerLink="/logout" routerLinkActive="active" class="profile-link"><i
+                    class="bi bi-box-arrow-left"></i></a>
         </div>
     </div>
     }
