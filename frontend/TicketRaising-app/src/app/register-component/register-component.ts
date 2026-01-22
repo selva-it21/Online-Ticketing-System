@@ -41,6 +41,10 @@ export class RegisterComponent {
   confirmPassword:string='';
   addEmployee(): void {
 
+      if(this.employee.empId == ""){
+      this.errMsg = "Enter Employee id";
+      return;
+    }
     if (this.employee.password !== this.confirmPassword) {
       this.errMsg = "Passwords do not match.";
       return;

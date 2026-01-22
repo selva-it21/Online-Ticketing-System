@@ -7,24 +7,24 @@
     <form #empForm="ngForm" class="employee-form">
       <div class="single-row-form">
         <div class="form-group">
-          <label for="empId" class="form-label">Employee ID</label>
-          <input type="text" id="empId" name="empId" [(ngModel)]="employee.empId" required class="form-input" placeholder="Enter ID" />
+          <label for="empId" class="form-label required">Employee ID</label>
+          <input type="text" id="empId" name="empId" [(ngModel)]="employee.empId" class="form-input" placeholder="Enter ID"/>
         </div>
 
         <div class="form-group">
-          <label for="password" class="form-label">Password</label>
-          <input type="password" id="password" name="password" [(ngModel)]="employee.password" required class="form-input" placeholder="Enter password" />
+          <label for="password" class="form-label required">Password</label>
+          <input type="password" id="password" name="password" [(ngModel)]="employee.password" class="form-input" placeholder="Enter password" />
         </div>
 
         <div class="form-group">
-          <label for="empName" class="form-label">Employee Name</label>
-          <input type="text" id="empName" name="empName" [(ngModel)]="employee.empName" required class="form-input" placeholder="Enter name" />
+          <label for="empName" class="form-label required">Employee Name</label>
+          <input type="text" id="empName" name="empName" [(ngModel)]="employee.empName" class="form-input" placeholder="Enter name" />
         </div>
       </div>
 
       <div class="single-row-form">
         <div class="form-group">
-          <label for="deptId" class="form-label">Department</label>
+          <label for="deptId" class="form-label required">Department</label>
           <select id="deptId" name="deptId" [(ngModel)]="employee.deptId" class="form-input">
             <option value="">Select Department</option>
             <option *ngFor="let dept of departments" [value]="dept.deptId">{{ dept.deptName }}</option>
@@ -32,8 +32,12 @@
         </div>
 
         <div class="form-group">
-          <label for="role" class="form-label">Role</label>
-          <input type="text" id="role" name="role" [(ngModel)]="employee.role" class="form-input" placeholder="Enter role" />
+          <label for="role" class="form-label required">Role</label>
+          <select id="role" name="role" [(ngModel)]="employee.role" class="form-input">
+            <option value="">Select Role</option>
+            <option value="Admin">Admin</option>
+            <option value="Employee">Employee</option>
+          </select>
         </div>
 
         <div class="form-group form-group-empty">
@@ -42,9 +46,9 @@
       </div>
 
       <div class="action-buttons">
-        <button type="button" class="action-btn add-btn" (click)="addEmployee()">+ Add</button>
+        <button type="button" class="action-btn add-btn" (click)="addEmployee()" [disabled]="empForm.invalid">+ Add</button>
         <button type="button" class="action-btn search-btn" (click)="showEmployee()">🔍 Search</button>
-        <button type="button" class="action-btn update-btn" (click)="updateEmployee()">↻ Update</button>
+        <button type="button" class="action-btn update-btn" (click)="updateEmployee()" [disabled]="empForm.invalid">↻ Update</button>
         <button type="button" class="action-btn delete-btn" (click)="deleteEmployee()">🗑️ Delete</button>
       </div>
     </form>

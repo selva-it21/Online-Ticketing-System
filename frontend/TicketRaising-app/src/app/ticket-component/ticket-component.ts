@@ -41,6 +41,7 @@ export class TicketComponent {
     this.errMsg = '';
     this.showAllTickets();
     this.getAllTicketType();
+
   }
 
   getEmployeesbyDept(): void {
@@ -189,6 +190,8 @@ editTicket(t: Ticket): void {
     this.ticketSvc.getTicketsByCreator(this.ticket.createdByEmpId).subscribe({
       next: (response: Ticket[]) => {
         this.tickets = response;
+        console.log(response);
+        
         this.errMsg = '';
       },
       error: (err) => {
