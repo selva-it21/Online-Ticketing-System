@@ -35,7 +35,7 @@ export class TicketComponent {
     this.ticketTypeId = "";
     // this.employees = [];
     this.ticketTypes = [];
-    this.ticket  = new Ticket("","","","",new Date() ,"",this.username ,"")
+    this.ticket  = new Ticket("","","","",new Date() ,"Open",this.username ,"")
     this.errMsg = '';
     this.showAllTickets();
     this.getAllTicketType();

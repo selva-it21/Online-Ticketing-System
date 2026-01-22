@@ -371,7 +371,7 @@ select.form-input {
   }
 }
 
-/* Animation */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
