@@ -20,8 +20,12 @@ export class TicketComponent {
   tickettypeSvc : TickettypeService = inject(TickettypeService);
   employeeSvc : EmployeeService = inject(EmployeeService)
   @ViewChild('ticketFormContainer') ticketFormContainer!: ElementRef;
+<<<<<<< HEAD
   isStatusFilter = false;
 
+=======
+  role : string;
+>>>>>>> d5d2d9860c3e1084eb6b5a7cb08925ebf721c1f8
   ticketTypes : TicketType[];
   employeesbyDept : Employee[]
   tickets: Ticket[];
@@ -33,6 +37,7 @@ export class TicketComponent {
   errMsg: string;
   ticket: Ticket;
   username : any = sessionStorage.getItem("empId");
+<<<<<<< HEAD
 constructor() {
   this.employeesbyDept = [];
   this.tickets = [];
@@ -47,6 +52,42 @@ constructor() {
   this.getAllTicketType();
 }
 
+=======
+  constructor() {
+    this.role = "";
+    this.employeesbyDept = [];
+    this.tickets = [];
+    this.tickettypeStore = new TicketType("","","","","");
+    this.ticketTypeId = "";
+    // this.employees = [];
+    this.ticketTypes = [];
+    this.ticket  = new Ticket("","","","",new Date() ,"Open",this.username ,"")
+    this.errMsg = '';
+    this.showAllTickets();
+    this.getAllTicketType();
+    this.showEmployee();
+
+    if(this.role != "admin"){
+      this.getTicketsByCreator()
+    }
+
+  }
+   showEmployee(): void {
+    this.employeeSvc.getOneEmployee(this.username).subscribe({
+      next: (response: Employee) => {
+        // this.employeeName = response.empName;
+        this.role = response.role
+        // console.log(this.employeeName + "hello");
+        
+        this.errMsg = '';
+      },
+      error: (err) => {
+        this.errMsg = err.error;
+        console.log(err);
+      }
+    });
+  }
+>>>>>>> d5d2d9860c3e1084eb6b5a7cb08925ebf721c1f8
 
   getEmployeesbyDept(): void {
     this.employeeSvc.getEmployeeByDept(this.ticketTypeId).subscribe({
