@@ -16,4 +16,16 @@ export class App {
   protected readonly title = signal('TicketRaising-app');
   auth=inject(AuthService);
   empName=signal(sessionStorage.getItem('empName'));
+   authSvc: AuthService = inject(AuthService);
+  token: string = "";
+  constructor() {
+    this.authSvc.getToken().subscribe({
+      next: (response: any) => {
+        this.token = response;
+        sessionStorage.setItem("token", this.token);
+        console.log(this.token);
+      },
+      error: (err) => { alert(err.message); console.log(err); }
+    });
+  }
 }

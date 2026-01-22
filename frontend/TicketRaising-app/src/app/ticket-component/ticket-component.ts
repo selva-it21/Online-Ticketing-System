@@ -21,7 +21,6 @@ export class TicketComponent {
   employeeSvc : EmployeeService = inject(EmployeeService)
   @ViewChild('ticketFormContainer') ticketFormContainer!: ElementRef;
   isStatusFilter = false;
- 
   role : string;
   ticketTypes : TicketType[];
   employeesbyDept : Employee[]
@@ -34,8 +33,8 @@ export class TicketComponent {
   errMsg: string;
   ticket: Ticket;
   username : any = sessionStorage.getItem("empId");
- 
- 
+
+
   constructor() {
     this.role = "";
     this.employeesbyDept = [];
@@ -48,7 +47,6 @@ export class TicketComponent {
     this.errMsg = '';
     this.showAllTickets();
     this.getAllTicketType();
- 
     this.showEmployee();
     this.showAllTickets();
         this.filteredTickets = [];
@@ -72,7 +70,6 @@ export class TicketComponent {
       }
     });
   }
- 
   getEmployeesbyDept(): void {
     this.employeeSvc.getEmployeeByDept(this.ticketTypeId).subscribe({
       next: (response: Employee[]) => {
