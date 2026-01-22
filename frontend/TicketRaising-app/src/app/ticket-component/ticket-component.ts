@@ -85,12 +85,10 @@ export class TicketComponent {
   this.tickettypeSvc.getTicketType(ticketTypeId).subscribe({
     next: (response: TicketType) => {
 
-      // ✅ deptId comes from TicketType
       const deptId = response.deptId;
 
       console.log('Dept ID:', deptId);
 
-      // ✅ fetch employees by department
       this.employeeSvc.getEmployeeByDept(deptId).subscribe({
         next: (emps: Employee[]) => {
           this.employeesbyDept = emps;

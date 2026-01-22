@@ -13,14 +13,14 @@
             </div>
             <div class="user-info">
                 <span class="welcome-text">Welcome,</span>
-                <span class="username">{{username}}</span>
+                <span class="username">{{employeeName}}</span>
             </div>
         </div>
     }
     @else {
         <div class="nav-container">
             <div class="nav-links">
-                <span class="username">{{username}}</span>
+                <span class="username">{{employeeName}}</span>
                 <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
                 <a routerLink="/register" routerLinkActive="active">Register</a>
                 <a routerLink="/login" routerLinkActive="active">Login</a>
