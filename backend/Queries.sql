@@ -8,7 +8,7 @@ INSERT INTO Department (DeptId, DeptName) VALUES
 ('D003', 'Finance'),
 ('D004', 'Operations');
 select * from Department
-
+DELETE from Department where deptid = ''
 -- Employees
 INSERT INTO Employee (EmpId, EmpName, Password, Role, DeptId) VALUES
 ('E001', 'John Doe', 'password123', 'Admin', 'D001'),
@@ -49,3 +49,4 @@ INSERT INTO SLA (SLAId, SLAName, Priority, ResponseTime, ResolutionHours) VALUES
 ('S003', 'Medium Priority SLA', 'Medium', 4, 24),
 ('S004', 'Low Priority SLA', 'Low', 8, 48),
 ('S005', 'Standard SLA', 'Standard', 24, 72)
+DELETE from sla where slaid = ''

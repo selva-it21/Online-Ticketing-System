@@ -8,24 +8,24 @@
       <div class="single-row-form">
         <div class="form-group">
           <label for="empId" class="form-label required">Employee ID</label>
-          <input type="text" id="empId" name="empId" [(ngModel)]="employee.empId" required class="form-input" placeholder="Enter ID"/>
+          <input type="text" id="empId" name="empId" [(ngModel)]="employee.empId" class="form-input" placeholder="Enter ID"/>
         </div>
 
         <div class="form-group">
           <label for="password" class="form-label required">Password</label>
-          <input type="password" id="password" name="password" [(ngModel)]="employee.password" required class="form-input" placeholder="Enter password" />
+          <input type="password" id="password" name="password" [(ngModel)]="employee.password" class="form-input" placeholder="Enter password" />
         </div>
 
         <div class="form-group">
           <label for="empName" class="form-label required">Employee Name</label>
-          <input type="text" id="empName" name="empName" [(ngModel)]="employee.empName" required class="form-input" placeholder="Enter name" />
+          <input type="text" id="empName" name="empName" [(ngModel)]="employee.empName" class="form-input" placeholder="Enter name" />
         </div>
       </div>
 
       <div class="single-row-form">
         <div class="form-group">
           <label for="deptId" class="form-label required">Department</label>
-          <select id="deptId" name="deptId" [(ngModel)]="employee.deptId" required class="form-input">
+          <select id="deptId" name="deptId" [(ngModel)]="employee.deptId" class="form-input">
             <option value="">Select Department</option>
             <option *ngFor="let dept of departments" [value]="dept.deptId">{{ dept.deptName }}</option>
           </select>
@@ -33,7 +33,7 @@
 
         <div class="form-group">
           <label for="role" class="form-label required">Role</label>
-          <select id="role" name="role" [(ngModel)]="employee.role" required class="form-input">
+          <select id="role" name="role" [(ngModel)]="employee.role" class="form-input">
             <option value="">Select Role</option>
             <option value="Admin">Admin</option>
             <option value="Employee">Employee</option>

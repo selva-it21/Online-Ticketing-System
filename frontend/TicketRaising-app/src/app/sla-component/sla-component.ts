@@ -25,7 +25,6 @@ export class SlaComponent {
     this.showAllSlas();
   }
 
-  // GET ALL SLAs
   showAllSlas(): void {
     this.slaSvc.getAllSlas().subscribe({
       next: (response: SLA[]) => {
@@ -40,7 +39,6 @@ export class SlaComponent {
     });
   }
 
-  // ADD SLA
   addSla(): void {
     this.slaSvc.addSla(this.sla).subscribe({
       next: (response: SLA) => {

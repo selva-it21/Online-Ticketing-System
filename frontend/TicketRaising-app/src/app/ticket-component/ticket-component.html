@@ -3,14 +3,14 @@
 
   <div *ngIf="errMsg" class="error-message">⚠️ {{ errMsg }}</div>
 
-  <div class="form-card">
+<div class="form-card" #ticketFormContainer>
+
     <form #ticketForm="ngForm" class="ticket-form">
       <div class="form-row">
         <div class="form-group">
           <label for="ticketId" class="form-label">Ticket ID</label>
           <input type="text" id="ticketId" name="TicketId" [(ngModel)]="ticket.ticketId" required class="form-input" placeholder="Enter ID" />
         </div>
-
         <div class="form-group">
           <label for="title" class="form-label">Title</label>
           <input type="text" id="title" name="Title" [(ngModel)]="ticket.title" required class="form-input" placeholder="Enter title" />
@@ -84,7 +84,7 @@
             <th>Status</th>
             <th>Created By</th>
             <th>Assigned To</th>
-            <!-- <th>Action</th> -->
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -95,7 +95,8 @@
             <td><span class="status-badge status-{{t.status?.toLowerCase()?.replace(' ', '')}}">{{ t.status }}</span></td>
             <td>{{ t.createdByEmpId }}</td>
             <td>{{ t.assignedToEmpId }}</td>
-            <!-- <td><button class="edit-btn" (click)="ticket = t">✏️ Edit</button></td> -->
+            <td><button class="edit-btn" (click)="editTicket(t)">✏️ Edit</button>
+</td>
           </tr>
           <tr *ngIf="tickets.length === 0">
             <td colspan="7" class="no-data">📭 No tickets found</td>

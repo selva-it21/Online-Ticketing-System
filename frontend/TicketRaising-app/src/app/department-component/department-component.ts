@@ -38,6 +38,10 @@ export class DepartmentComponent {
   }
   
   addDepartment(): void {
+    if(this.department.deptId == ""){
+      this.errMsg = "Enter Department id";
+      return;
+    }
     this.departmentSvc.addDepartment(this.department).subscribe({
       next: (response: Department) => {
         this.departments.push(response);
