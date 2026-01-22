@@ -18,19 +18,7 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.TargetFrameworkIdentifier = .NETCoreApp
 build_property.TargetFrameworkVersion = v10.0
 build_property.RootNamespace = TicketRaisingLibrary
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-build_property.ProjectDir = C:\Users\user1\Desktop\Online-Ticketing-System\backend\TicketRaisingLibrary\
-=======
-build_property.ProjectDir = D:\project\Online-Ticketing-System\backend\TicketRaisingLibrary\
->>>>>>> d5d2d9860c3e1084eb6b5a7cb08925ebf721c1f8
-=======
-build_property.ProjectDir = D:\project\Online-Ticketing-System\backend\TicketRaisingLibrary\
->>>>>>> d5d2d9860c3e1084eb6b5a7cb08925ebf721c1f8
-=======
-build_property.ProjectDir = D:\project\Online-Ticketing-System\backend\TicketRaisingLibrary\
->>>>>>> d5d2d9860c3e1084eb6b5a7cb08925ebf721c1f8
+build_property.ProjectDir = D:\FullStack\Online-Ticketing-System\backend\TicketRaisingLibrary\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.EffectiveAnalysisLevelStyle = 10.0

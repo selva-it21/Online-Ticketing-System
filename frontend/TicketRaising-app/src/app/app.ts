@@ -14,6 +14,8 @@ import { AuthService } from './auth-service';
 })
 export class App {
   protected readonly title = signal('TicketRaising-app');
+  auth=inject(AuthService);
+  empName=signal(sessionStorage.getItem('empName'));
    authSvc: AuthService = inject(AuthService);
   token: string = "";
   constructor() {

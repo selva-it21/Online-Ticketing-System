@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from '../auth-service';
+import { Router } from '@angular/router';
 import { RouterLink, RouterLinkActive } from "@angular/router";
 
 @Component({
@@ -8,7 +10,10 @@ import { RouterLink, RouterLinkActive } from "@angular/router";
   styleUrl: './logout-component.css',
 })
 export class LogoutComponent {
-  constructor() {
-    sessionStorage.clear();
+  authSvc:AuthService=inject(AuthService);
+  router:Router=inject(Router);
+  constructor(){
+    this.authSvc.logout();
+    this.router.navigate(['']);
   }
 }
