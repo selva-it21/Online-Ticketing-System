@@ -20,7 +20,6 @@ export class EmployeeComponent {
   employees: Employee[];
   errMsg: string;
   employee: Employee;
-
   constructor() {
     this.employees = [];
     this.departments = [];
@@ -29,7 +28,6 @@ export class EmployeeComponent {
     this.showAllEmployees();
     this.getallDepartment();
   }
-
    getallDepartment(): void {
     this.depSvc.getAllDepartments().subscribe({
       next: (response: Department[]) => {
@@ -39,7 +37,6 @@ export class EmployeeComponent {
        error: (err : any) => {this.errMsg = err.error ; console.log(err);}
     });
   }
- 
   showAllEmployees(): void {
     this.empSvc.showAllEmployee().subscribe({
       next: (response: Employee[]) => {
@@ -51,6 +48,10 @@ export class EmployeeComponent {
   }
 
   addEmployee(): void {
+    if(this.employee.empId == ""){
+      this.errMsg = "Enter emp id";
+      return;
+    }
     this.empSvc.addEmployee(this.employee).subscribe({
       next: (response: Employee) => {
         this.employees.push(response);

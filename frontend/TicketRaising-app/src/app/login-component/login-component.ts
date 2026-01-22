@@ -20,11 +20,10 @@ export class LoginComponent {
   router: Router = inject(Router);
  
   constructor() {
-    this.user = new Employee("", "", "", "", "");
+    this.user = new Employee("", "", "", "", "Employee");
     this.empId = "";
     this.password = "";
     this.errMsg = "";
-    
   }
 
   login() {
@@ -38,7 +37,7 @@ export class LoginComponent {
         this.errMsg = "";
         this.router.navigate(['/']);
       },
-      error: (err) => {this.errMsg = err.error ; console.log(err);}
+      error: (err : any) => {this.errMsg = err.error ; console.log(err);}
     });
   }
  

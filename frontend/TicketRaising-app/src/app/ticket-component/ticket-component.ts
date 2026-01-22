@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Ticket } from '../../models/ticket';
@@ -19,6 +19,8 @@ export class TicketComponent {
   ticketSvc: TicketService = inject(TicketService);
   tickettypeSvc : TickettypeService = inject(TickettypeService);
   employeeSvc : EmployeeService = inject(EmployeeService)
+  @ViewChild('ticketFormContainer') ticketFormContainer!: ElementRef;
+  role : string;
   ticketTypes : TicketType[];
   employeesbyDept : Employee[]
   tickets: Ticket[];
@@ -29,6 +31,7 @@ export class TicketComponent {
   ticket: Ticket;
   username : any = sessionStorage.getItem("empId");
   constructor() {
+    this.role = "";
     this.employeesbyDept = [];
     this.tickets = [];
     this.tickettypeStore = new TicketType("","","","","");
@@ -39,6 +42,27 @@ export class TicketComponent {
     this.errMsg = '';
     this.showAllTickets();
     this.getAllTicketType();
+    this.showEmployee();
+
+    if(this.role != "admin"){
+      this.getTicketsByCreator()
+    }
+
+  }
+   showEmployee(): void {
+    this.employeeSvc.getOneEmployee(this.username).subscribe({
+      next: (response: Employee) => {
+        // this.employeeName = response.empName;
+        this.role = response.role
+        // console.log(this.employeeName + "hello");
+        
+        this.errMsg = '';
+      },
+      error: (err) => {
+        this.errMsg = err.error;
+        console.log(err);
+      }
+    });
   }
 
   getEmployeesbyDept(): void {
@@ -99,6 +123,18 @@ export class TicketComponent {
     },
     error: err => console.log(err)
   });
+}
+editTicket(t: Ticket): void {
+  // Copy ticket data into form
+  this.ticket = { ...t };
+
+  // Scroll to form
+  setTimeout(() => {
+    this.ticketFormContainer.nativeElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }, 0);
 }
 
   addTicket(): void {
@@ -175,6 +211,8 @@ export class TicketComponent {
     this.ticketSvc.getTicketsByCreator(this.ticket.createdByEmpId).subscribe({
       next: (response: Ticket[]) => {
         this.tickets = response;
+        console.log(response);
+        
         this.errMsg = '';
       },
       error: (err) => {

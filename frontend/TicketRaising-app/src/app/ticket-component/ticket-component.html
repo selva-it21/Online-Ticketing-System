@@ -3,14 +3,14 @@
 
   <div *ngIf="errMsg" class="error-message">⚠️ {{ errMsg }}</div>
 
-  <div class="form-card">
+<div class="form-card" #ticketFormContainer>
+
     <form #ticketForm="ngForm" class="ticket-form">
       <div class="form-row">
         <div class="form-group">
           <label for="ticketId" class="form-label">Ticket ID</label>
           <input type="text" id="ticketId" name="TicketId" [(ngModel)]="ticket.ticketId" required class="form-input" placeholder="Enter ID" />
         </div>
-
         <div class="form-group">
           <label for="title" class="form-label">Title</label>
           <input type="text" id="title" name="Title" [(ngModel)]="ticket.title" required class="form-input" placeholder="Enter title" />
@@ -23,8 +23,8 @@
             <option *ngFor="let tType of ticketTypes" [value]="tType.ticketTypeId">{{ tType.typeName }}</option>
           </select>
         </div>
-
-        <div class="form-group">
+        @if(role.toLocaleLowerCase() == "admin"){
+          <div class="form-group">
           <label for="status" class="form-label">Status</label>
           <select id="status" name="Status" [(ngModel)]="ticket.status" class="form-input">
             <option value="">Select Status</option>
@@ -33,6 +33,8 @@
             <option value="Closed">Closed</option>
           </select>
         </div>
+        }
+        
       </div>
 
       <div class="form-row">
@@ -40,7 +42,7 @@
           <label for="createdByEmpId" class="form-label">Created By</label>
           <input type="text" id="createdByEmpId" name="CreatedByEmpId" [(ngModel)]="ticket.createdByEmpId" class="form-input" placeholder="Emp ID" />
         </div>
-
+        @if(role.toLocaleLowerCase() == "admin"){
         <div class="form-group">
           <label for="assignedToEmpId" class="form-label">Assigned To</label>
           <select id="assignedToEmpId" name="assignedToEmpId" [(ngModel)]="ticket.assignedToEmpId" class="form-input">
@@ -48,7 +50,7 @@
             <option *ngFor="let emp of employeesbyDept" [value]="emp.empId">{{ emp.empName }}</option>
           </select>
         </div>
-
+      }
         <div class="form-group form-group-wide">
           <label for="description" class="form-label">Description</label>
           <textarea id="description" name="Description" [(ngModel)]="ticket.description" class="form-input form-textarea" placeholder="Enter description"></textarea>
@@ -59,11 +61,11 @@
         <button type="button" class="action-btn add-btn" (click)="addTicket()">+ Add</button>
         <button type="button" class="action-btn search-btn" (click)="showTicket()">🔍 Search</button>
         <button type="button" class="action-btn update-btn" (click)="updateTicket()">↻ Update</button>
-        <button type="button" class="action-btn delete-btn" (click)="deleteTicket()">🗑️ Delete</button>
+         @if(role.toLocaleLowerCase() == "admin"){ <button type="button" class="action-btn delete-btn" (click)="deleteTicket()">🗑️ Delete</button>}
       </div>
     </form>
   </div>
-
+    @if(role.toLocaleLowerCase() == "admin"){
   <h3 class="filter-header">Filter Tickets</h3>
   <div class="filter-buttons">
     <button class="filter-btn" (click)="getTicketsByType()">By Type</button>
@@ -95,7 +97,8 @@
             <td><span class="status-badge status-{{t.status?.toLowerCase()?.replace(' ', '')}}">{{ t.status }}</span></td>
             <td>{{ t.createdByEmpId }}</td>
             <td>{{ t.assignedToEmpId }}</td>
-            <td><button class="edit-btn" (click)="ticket = t">✏️ Edit</button></td>
+            <td><button class="edit-btn" (click)="editTicket(t)">✏️ Edit</button>
+</td>
           </tr>
           <tr *ngIf="tickets.length === 0">
             <td colspan="7" class="no-data">📭 No tickets found</td>
@@ -104,4 +107,41 @@
       </table>
     </div>
   </div>
+}
+@else {
+   <!-- <button class="filter-btn" (click)="getTicketsByCreator()">By Creator</button> -->
+   <h3 class="list-header">Ticket List</h3>
+  <div class="table-card">
+    <div class="table-wrapper">
+      <table class="tickets-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Created By</th>
+            <th>Assigned To</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let t of tickets">
+            <td>{{ t.ticketId }}</td>
+            <td>{{ t.title }}</td>
+            <td>{{ t.ticketTypeId }}</td>
+            <td><span class="status-badge status-{{t.status?.toLowerCase()?.replace(' ', '')}}">{{ t.status }}</span></td>
+            <td>{{ t.createdByEmpId }}</td>
+            <td>{{ t.assignedToEmpId }}</td>
+            <td><button class="edit-btn" (click)="editTicket(t)">✏️ Edit</button>
+</td>
+          </tr>
+          <tr *ngIf="tickets.length === 0">
+            <td colspan="7" class="no-data">📭 No tickets found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+}
 </div>
