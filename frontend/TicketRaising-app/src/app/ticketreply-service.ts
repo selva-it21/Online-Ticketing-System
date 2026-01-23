@@ -31,6 +31,8 @@ export class TicketReplyService {
   }
 
   getRepliesByTicketId(ticketId: string): Observable<TicketReply[]> {
+    console.log("hi");
+    
     return this.http.get<TicketReply[]>(this.baseUrl + 'ticket/' + ticketId, this.httpOptions);
   }
 
