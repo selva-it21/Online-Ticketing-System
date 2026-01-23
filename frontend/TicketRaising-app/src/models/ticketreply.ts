@@ -4,6 +4,7 @@ export class TicketReply{
     public replyMessage : string;
     public replyByCreatorEmpId : string;
     public replyByAssignedEmpId : string;
+    
 
     constructor(ReplyId : string, TicketId : string, ReplyMessage : string, ReplyByCreatorEmpId : string, ReplyByAssignedEmpId : string){
         this.replyId = ReplyId;
