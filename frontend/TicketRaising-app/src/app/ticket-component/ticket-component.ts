@@ -142,7 +142,7 @@ export class TicketComponent {
 editTicket(t: Ticket): void {
   // Copy ticket data into form
   this.ticket = { ...t };
- 
+  this.onTicketTypeChange(t.ticketTypeId);
   // Scroll to form
   setTimeout(() => {
     this.ticketFormContainer.nativeElement.scrollIntoView({
