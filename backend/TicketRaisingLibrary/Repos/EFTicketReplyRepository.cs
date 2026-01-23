@@ -16,10 +16,11 @@ public class EFTicketReplyRepository : ITicketReplyRepository
     {
         try
         {
-            if(ticketReply.ReplyByCreatorEmpId == "")
-                ticketReply.ReplyByCreatorEmpId = null;
-            if(ticketReply.ReplyByAssignedEmpId == "")
-                ticketReply.ReplyByAssignedEmpId = null;
+            ticketReply.ReplyByAssignedEmpId = null;
+            // if(ticketReply.ReplyByCreatorEmpId == "")
+            //     ticketReply.ReplyByCreatorEmpId = null;
+            // if(ticketReply.ReplyByAssignedEmpId == "")
+            //     ticketReply.ReplyByAssignedEmpId = null;
             await context.TicketReplies.AddAsync(ticketReply);
             await context.SaveChangesAsync();
         }

@@ -48,10 +48,10 @@ export class TicketComponent {
     this.getAllTicketType();
     this.showEmployee();
     this.filteredTickets = [];
-    if(this.role == "employee"){
-      this.getTicketsByCreator()
+    if(this.role == "admin"){
+      this.showAllTickets();
     }else{
-        this.showAllTickets();
+      this.getTicketsByCreator();
     }
  
   }
