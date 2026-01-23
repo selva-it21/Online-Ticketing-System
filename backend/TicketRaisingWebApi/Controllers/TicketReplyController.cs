@@ -99,7 +99,7 @@ namespace TicketRaisingWebApi.Controllers
         {
             try
             {
-                return Ok(await ticketReplyRepo.GetRepliesByEmployeeAsync(empId));
+                return Ok(await ticketReplyRepo.GetRepliesByCreatorEmpIdAsync(empId));
             }
             catch (Exception ex)
             {

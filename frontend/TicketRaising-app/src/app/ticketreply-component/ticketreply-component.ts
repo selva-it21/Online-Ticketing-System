@@ -6,6 +6,7 @@ import { TicketReply } from '../../models/ticketreply';
 import { TicketService } from '../ticket-service';
 import { Ticket } from '../../models/ticket';
 import { EmployeeService } from '../employee-service';
+import { Employee } from '../../models/employee';
 
 @Component({
   selector: 'app-ticket-reply-component',
@@ -17,32 +18,47 @@ export class TicketReplyComponent {
 
   replySvc: TicketReplyService = inject(TicketReplyService);
   ticketSvc: TicketService = inject(TicketService);
-  employeeSvc : EmployeeService = inject(EmployeeService)
+  empSvc : EmployeeService = inject(EmployeeService)
   tickets: Ticket[];
   replier: string;
   createIdStore : string
   assignIdStore : string 
   ticket: Ticket;
+  // employee : Employee
   reply: TicketReply;
   replies: TicketReply[] = [];
   errMsg: string = '';
-
+  role : string = ""
   ticketId: string = '';
   empId: string = '';
   creator: any = sessionStorage.getItem("empId");
   constructor() {
     this.tickets = [];
+    
     this.createIdStore = ""
     this.assignIdStore = ""
     this.ticket = new Ticket("", "", "", "", new Date(), "", "", "")
     this.replier = "";
     this.reply = new TicketReply('', '', '', this.ticket.createdByEmpId, this.ticket.assignedToEmpId);
     this.newReply();
-    this.showAllReplies();
-    this.showAllTickets();
+     this.showAllReplies();
 
+    this.showAllTickets();
+    this.showEmployee();
   }
   
+ showEmployee(): void {
+    this.empSvc.getOneEmployee(this.creator).subscribe({
+      next: (response: Employee) => {
+        this.role = response.role;
+        this.errMsg = '';
+      },
+      error: (err) => {
+        this.errMsg = err.error;
+        console.log(err);
+      }
+    });
+  }
   onReplierChange(value: string) {
     if (value === 'creator') {
       console.log("value : " + value);
@@ -147,7 +163,7 @@ export class TicketReplyComponent {
   }
 
   getRepliesByEmployee() {
-    this.replySvc.getRepliesByEmployee(this.empId).subscribe({
+    this.replySvc.getRepliesByEmployee(this.creator).subscribe({
       next: (res) => {
         this.replies = res;
         this.errMsg = '';

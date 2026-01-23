@@ -7,14 +7,16 @@
         <div class="form-group">
           <label for="replyId" class="form-label">Reply ID</label>
           <div class="input-with-button">
-            <input type="text" id="replyId" [(ngModel)]="reply.replyId" name="replyId" class="form-input" placeholder="Enter ID" />
+            <input type="text" id="replyId" [(ngModel)]="reply.replyId" name="replyId" class="form-input"
+              placeholder="Enter ID" />
             <!-- <button type="button" class="inline-btn show-btn" (click)="getReply()">👁️ Show</button> -->
           </div>
         </div>
 
         <div class="form-group">
           <label for="ticketId" class="form-label">Ticket ID</label>
-          <select id="ticketId" [(ngModel)]="reply.ticketId" (ngModelChange)="onTicketIdChange($event)" name="ticketId" class="form-input">
+          <select id="ticketId" [(ngModel)]="reply.ticketId" (ngModelChange)="onTicketIdChange($event)" name="ticketId"
+            class="form-input">
             <option value="">Select Ticket</option>
             <option *ngFor="let t of tickets" [value]="t.ticketId">{{ t.ticketId }}</option>
           </select>
@@ -22,7 +24,8 @@
 
         <div class="form-group">
           <label for="replier" class="form-label">Select Replier</label>
-          <select id="replier" [(ngModel)]="replier" (ngModelChange)="onReplierChange($event)" name="replier" class="form-input">
+          <select id="replier" [(ngModel)]="replier" (ngModelChange)="onReplierChange($event)" name="replier"
+            class="form-input">
             <option value="">Select Replier</option>
             <option value="creator">Creator</option>
             <option value="assigner">Assigner</option>
@@ -33,7 +36,8 @@
       <div class="single-row-form">
         <div class="form-group form-group-wide">
           <label for="replyMessage" class="form-label">Reply Message</label>
-          <textarea id="replyMessage" [(ngModel)]="reply.replyMessage" name="replyMessage" class="form-input form-textarea" placeholder="Enter reply message"></textarea>
+          <textarea id="replyMessage" [(ngModel)]="reply.replyMessage" name="replyMessage"
+            class="form-input form-textarea" placeholder="Enter reply message"></textarea>
         </div>
 
         <!-- <div class="form-group">
@@ -46,8 +50,8 @@
             <label for="replyByAssignedEmpId" class="form-label">Assigned Emp ID</label>
             <input type="text" id="replyByAssignedEmpId" [(ngModel)]="assignIdStore" name="replyByAssignedEmpId" class="form-input" placeholder="Assigned ID" disabled />
           </div> -->
-          
-          <!-- <div *ngIf="!replier" class="replier-placeholder">
+
+        <!-- <div *ngIf="!replier" class="replier-placeholder">
             <div class="placeholder-text">Select replier above</div>
           </div>
         </div> -->
@@ -81,13 +85,30 @@
         <tbody>
           @for (r of replies; track r) {
           <tr>
+            @if(role == "admin"){
             <td><span class="reply-id">{{ r.replyId }}</span></td>
             <td><span class="ticket-id">{{ r.ticketId }}</span></td>
             <td class="message-cell">{{ r.replyMessage }}</td>
             <td>{{ r.replyByCreatorEmpId }}</td>
             <td>{{ r.replyByAssignedEmpId }}</td>
+
+            }
+            @else{
+            @if( r.replyByCreatorEmpId == creator){
+            <td><span class="reply-id">{{ r.replyId }}</span></td>
+            <td><span class="ticket-id">{{ r.ticketId }}</span></td>
+            <td class="message-cell">{{ r.replyMessage }}</td>
+            <td>{{ r.replyByCreatorEmpId }}</td>
+            <td>{{ r.replyByAssignedEmpId }}</td>
+
+            }
+
+            } 
           </tr>
+
           }
+
+
           @empty {
           <tr>
             <td colspan="5" class="no-data">📭 No replies found</td>
