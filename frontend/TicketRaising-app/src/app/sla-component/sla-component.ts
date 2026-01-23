@@ -40,6 +40,10 @@ export class SlaComponent {
   }
 
   addSla(): void {
+    if(this.sla.slaId == ""){
+      this.errMsg = "Enter SLA id";
+      return;
+    }
     this.slaSvc.addSla(this.sla).subscribe({
       next: (response: SLA) => {
         this.slas.push(response);

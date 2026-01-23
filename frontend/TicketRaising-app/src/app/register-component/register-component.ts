@@ -40,7 +40,6 @@ export class RegisterComponent {
   }
   confirmPassword:string='';
   addEmployee(): void {
-
       if(this.employee.empId == ""){
       this.errMsg = "Enter Employee id";
       return;
