@@ -1,10 +1,10 @@
 <div class="ticket-management-container">
   <h2 class="ticket-header">Ticket Management</h2>
-
+ 
   <div *ngIf="errMsg" class="error-message">⚠️ {{ errMsg }}</div>
-
+ 
 <div class="form-card" #ticketFormContainer>
-
+ 
     <form #ticketForm="ngForm" class="ticket-form">
       <div class="form-row">
         <div class="form-group">
@@ -15,7 +15,7 @@
           <label for="title" class="form-label">Title</label>
           <input type="text" id="title" name="Title" [(ngModel)]="ticket.title" required class="form-input" placeholder="Enter title" />
         </div>
-
+ 
         <div class="form-group">
           <label for="ticketTypeId" class="form-label">Type</label>
           <select id="ticketTypeId" name="ticketTypeId" [(ngModel)]="ticket.ticketTypeId" (ngModelChange)="onTicketTypeChange($event)" class="form-input">
@@ -34,9 +34,9 @@
           </select>
         </div>
         }
-        
+       
       </div>
-
+ 
       <div class="form-row">
         <div class="form-group">
           <label for="createdByEmpId" class="form-label">Created By</label>
@@ -56,7 +56,7 @@
           <textarea id="description" name="Description" [(ngModel)]="ticket.description" class="form-input form-textarea" placeholder="Enter description"></textarea>
         </div>
       </div>
-
+ 
       <div class="action-buttons">
         <button type="button" class="action-btn add-btn" (click)="addTicket()">+ Add</button>
         <button type="button" class="action-btn search-btn" (click)="showTicket()">🔍 Search</button>
@@ -73,9 +73,9 @@
     <button class="filter-btn" (click)="getTicketsAssignedTo()">Assigned To</button>
     <button class="filter-btn" (click)="showAllTickets()">Show All</button>
     <button class="filter-btn" (click)="filterTicketsByStatus()">By Status</button>
-
+ 
   </div>
-
+ 
   <h3 class="list-header">Ticket List</h3>
   <div class="table-card">
     <div class="table-wrapper">
@@ -102,7 +102,7 @@
             <td><button class="edit-btn" (click)="editTicket(t)">✏️ Edit</button>
 </td>
           </tr>
-          <tr *ngIf="filteredTickets.length === 0">
+          <tr *ngIf="tickets.length === 0">
             <td colspan="7" class="no-data">📭 No tickets found</td>
           </tr>
         </tbody>
@@ -111,7 +111,6 @@
   </div>
 }
 @else {
-   <!-- <button class="filter-btn" (click)="getTicketsByCreator()">By Creator</button> -->
    <h3 class="list-header">Ticket List</h3>
   <div class="table-card">
     <div class="table-wrapper">

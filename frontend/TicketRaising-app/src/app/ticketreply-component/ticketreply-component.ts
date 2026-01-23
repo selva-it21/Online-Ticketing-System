@@ -5,6 +5,7 @@ import { TicketReplyService } from '../ticketreply-service';
 import { TicketReply } from '../../models/ticketreply';
 import { TicketService } from '../ticket-service';
 import { Ticket } from '../../models/ticket';
+import { EmployeeService } from '../employee-service';
 
 @Component({
   selector: 'app-ticket-reply-component',
@@ -16,37 +17,56 @@ export class TicketReplyComponent {
 
   replySvc: TicketReplyService = inject(TicketReplyService);
   ticketSvc: TicketService = inject(TicketService);
+  employeeSvc: EmployeeService = inject(EmployeeService)
   tickets: Ticket[];
-  replier : string;
-  ticket : Ticket;
+  replier: string;
+  createIdStore : string
+  assignIdStore : string 
+  ticket: Ticket;
   reply: TicketReply;
   replies: TicketReply[] = [];
   errMsg: string = '';
 
   ticketId: string = '';
   empId: string = '';
-  creator : any = sessionStorage.getItem("empId");
+  creator: any = sessionStorage.getItem("empId");
   constructor() {
     this.tickets = [];
-    this.ticket  = new Ticket("","","","",new Date() ,"","" ,"")
+    this.createIdStore = ""
+    this.assignIdStore = ""
+    this.ticket = new Ticket("", "", "", "", new Date(), "", "", "")
     this.replier = "";
-    this.reply= new TicketReply('', '', '', this.ticket.createdByEmpId, this.ticket.assignedToEmpId);
+    this.reply = new TicketReply('', '', '', this.ticket.createdByEmpId, this.ticket.assignedToEmpId);
     this.newReply();
     this.showAllReplies();
     this.showAllTickets();
+
+  }
+  
+  onReplierChange(value: string) {
+    if (value === 'creator') {
+      console.log("value : " + value);
+       this.reply.replyByAssignedEmpId = "";
+      
+    }
+    else {
+      console.log("value : " + value); 
+      this.reply.replyByCreatorEmpId = "";
+
+    }
   }
 
-  onTicketIdChange(ticketId : string){
+
+  onTicketIdChange(ticketId: string) {
 
     this.ticketSvc.getOneTicket(ticketId).subscribe({
       next: (response: Ticket) => {
         this.ticket = response;
-        //  this.newReply()
         this.reply.replyByAssignedEmpId = this.ticket.assignedToEmpId;
         this.reply.replyByCreatorEmpId = this.ticket.createdByEmpId
         console.log(this.ticket);
         console.log(this.ticket.createdByEmpId);
-        
+
         this.errMsg = '';
       },
       error: (err) => {
@@ -58,14 +78,14 @@ export class TicketReplyComponent {
 
   }
   newReply() {
-       this.reply= new TicketReply('',"" , '', "", "");
+    this.reply = new TicketReply('', "", '', "", "");
 
   }
-    showAllTickets(): void {
+  showAllTickets(): void {
     this.ticketSvc.showAllTickets().subscribe({
       next: (response: Ticket[]) => {
         this.tickets = response;
-        
+
         this.errMsg = '';
       },
       error: (err) => {
@@ -137,8 +157,12 @@ export class TicketReplyComponent {
 
 
   addReply() {
+    console.log(this.reply);
     this.replySvc.addReply(this.reply).subscribe({
+
       next: () => {
+        console.log(this.reply);
+
         alert('Reply Added Successfully!');
         this.showAllReplies();
         this.newReply();
