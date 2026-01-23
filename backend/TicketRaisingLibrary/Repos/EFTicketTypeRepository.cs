@@ -84,6 +84,7 @@ namespace TicketRaisingLibrary.Repos
                 SqlException sqlException = ex.InnerException as SqlException;
                 int errorNumber = sqlException.Number;
                 switch(errorNumber) {
+                    case 547: throw new TicketingException("Select both Dept ID and SLA ID", 500);
                     case 2627: throw new TicketingException("Ticket Type ID already exists",501);
                     case 2628: throw new TicketingException("Description too long",502);
                     default: throw new TicketingException(sqlException.Message,599);

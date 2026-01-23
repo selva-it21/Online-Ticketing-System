@@ -139,6 +139,10 @@ export class TicketReplyComponent {
 
 
   addReply() {
+    if(this.reply.replyId == ""){
+      this.errMsg = "Enter reply id";
+      return;
+    }
     this.replySvc.addReply(this.reply).subscribe({
       next: () => {
         alert('Reply Added Successfully!');

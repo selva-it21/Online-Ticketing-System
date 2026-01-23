@@ -42,7 +42,7 @@ INSERT INTO TicketReply (ReplyId, TicketId, ReplyMessage, ReplyByCreatorEmpId, R
 ('R004', 'T003', 'Software installed successfully', NULL, 'E002'),
 ('R005', 'T004', 'VPN credentials have been updated', NULL, 'E004');
 select * from TicketReply 
-DELETE from TicketReply where ReplyId = 'R006' 
+DELETE from TicketReply where ReplyId = '' 
 
 INSERT INTO SLA (SLAId, SLAName, Priority, ResponseTime, ResolutionHours) VALUES
 ('S001', 'Critical SLA', 'Critical', 1, 4),

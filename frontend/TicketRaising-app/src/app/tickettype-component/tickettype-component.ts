@@ -64,6 +64,10 @@ export class TickettypeComponent {
   }
 
   addTicketType(): void {
+    if(this.tickettype.ticketTypeId == ""){
+      this.errMsg = "Enter ticket type id";
+      return;
+    }
     this.tickettypeSvc.addTicketType(this.tickettype).subscribe({
       next: (response: TicketType) => {
         this.tickettypes.push(response); 

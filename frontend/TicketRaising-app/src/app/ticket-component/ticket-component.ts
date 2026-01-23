@@ -153,6 +153,10 @@ editTicket(t: Ticket): void {
 }
  
   addTicket(): void {
+    if(this.ticket.ticketId == ""){
+      this.errMsg = "Enter Ticket id";
+      return;
+    }
     this.ticketSvc.addTicket(this.ticket).subscribe({
       next: (response: Ticket) => {
         this.tickets.push(response);
