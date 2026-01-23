@@ -97,7 +97,7 @@ export class TicketComponent {
   }
  
   showAllTickets(): void {
-          this.isStatusFilter = false;
+    this.isStatusFilter = false;
  
     this.ticketSvc.showAllTickets().subscribe({
       next: (response: Ticket[]) => {
@@ -142,7 +142,7 @@ export class TicketComponent {
 editTicket(t: Ticket): void {
   // Copy ticket data into form
   this.ticket = { ...t };
- 
+  this.onTicketTypeChange(t.ticketTypeId);
   // Scroll to form
   setTimeout(() => {
     this.ticketFormContainer.nativeElement.scrollIntoView({
