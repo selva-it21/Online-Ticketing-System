@@ -188,8 +188,10 @@ editTicket(t: Ticket): void {
   updateTicket(): void {
     this.ticketSvc.updateTicket(this.ticket.ticketId, this.ticket).subscribe({
       next: () => {
+        
         this.showAllTickets();
         alert('Ticket updated successfully!');
+        
         this.errMsg = '';
       },
       error: (err) => {

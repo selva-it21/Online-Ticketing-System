@@ -16,6 +16,13 @@ public class EFTicketRepository : ITicketRepository
     {
         try
         {
+<<<<<<< HEAD
+            // if(ticket.CreatedByEmpId == "")
+            //     ticket.AssignedToEmpId = null;
+            // if(ticket.AssignedToEmpId == "")
+            //     ticket.CreatedByEmpId = null;
+=======
+>>>>>>> 2284bc82da5b487f2cad6f22e1f26697ed047381
             await context.Tickets.AddAsync(ticket);
             await context.SaveChangesAsync();
             return ticket;
@@ -26,7 +33,11 @@ public class EFTicketRepository : ITicketRepository
             int errorNumber = sqlException.Number;
 
             switch (errorNumber){
+<<<<<<< HEAD
+                // case 547: throw new TicketingException("Please select both Ticket type and employee field", 500);
+=======
                 case 547: throw new TicketingException("Please select Ticket type and then employee field", 500);
+>>>>>>> 2284bc82da5b487f2cad6f22e1f26697ed047381
                 case 2627: throw new TicketingException("Ticket ID already exists", 501);
                 case 2628: throw new TicketingException("Description too long",502);
                 default: throw new TicketingException(sqlException.Message, 599);

@@ -16,6 +16,10 @@ public class EFTicketReplyRepository : ITicketReplyRepository
     {
         try
         {
+            if(ticketReply.ReplyByCreatorEmpId == "")
+                ticketReply.ReplyByCreatorEmpId = null;
+            if(ticketReply.ReplyByAssignedEmpId == "")
+                ticketReply.ReplyByAssignedEmpId = null;
             await context.TicketReplies.AddAsync(ticketReply);
             await context.SaveChangesAsync();
         }
@@ -63,21 +67,15 @@ public class EFTicketReplyRepository : ITicketReplyRepository
 
     public async Task DeleteTicketReplyAsync(string replyId)
     {
-        TicketReply reply2del = await context.TicketReplies.Include("Tickets").FirstOrDefaultAsync(r => r.ReplyId == replyId);
-
-        if (reply2del == null)
-        {
-            throw new TicketingException("No such reply ID", 2003);
-        }
-
-        if (reply2del.Ticket == null || reply2del.Ticket.Status == "Closed")
+        TicketReply reply2del = await GetTicketReplyByIdAsync(replyId);
+        try
         {
             context.TicketReplies.Remove(reply2del);
             await context.SaveChangesAsync();
         }
-        else
+        catch
         {
-            throw new TicketingException("Cannot delete because ticket is still active", 2004);
+            throw new TicketingException("No reply id found",666);
         }
     }
 
