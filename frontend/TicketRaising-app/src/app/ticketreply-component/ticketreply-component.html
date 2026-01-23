@@ -40,21 +40,7 @@
             class="form-input form-textarea" placeholder="Enter reply message"></textarea>
         </div>
 
-        <!-- <div class="form-group">
-          <div *ngIf="replier === 'assigner'" class="replier-field">
-            <label for="replyByCreatorEmpId" class="form-label">Creator Emp ID</label>
-            <input type="text" id="replyByCreatorEmpId" [(ngModel)]="createIdStore" name="replyByCreatorEmpId" class="form-input" placeholder="Creator ID" disabled />
-          </div>
-          
-          <div *ngIf="replier === 'creator'" class="replier-field">
-            <label for="replyByAssignedEmpId" class="form-label">Assigned Emp ID</label>
-            <input type="text" id="replyByAssignedEmpId" [(ngModel)]="assignIdStore" name="replyByAssignedEmpId" class="form-input" placeholder="Assigned ID" disabled />
-          </div> -->
-
-        <!-- <div *ngIf="!replier" class="replier-placeholder">
-            <div class="placeholder-text">Select replier above</div>
-          </div>
-        </div> -->
+       
       </div>
 
       <div class="action-buttons">
@@ -62,60 +48,47 @@
         <button type="button" class="action-btn update-btn" (click)="updateReply()">↻ Update</button>
         <button type="button" class="action-btn delete-btn" (click)="deleteReply()">🗑️ Delete</button>
         <button type="button" class="action-btn show-all-btn" (click)="getReply()">👁️ Show</button>
+        <button type="button" class="action-btn show-all-btn" (click)="getRepliesByTicket()"> View Converstion</button>
+
       </div>
 
       <div *ngIf="errMsg" class="error-message">⚠️ {{ errMsg }}</div>
     </form>
   </div>
 
-  <h3 class="list-header">List of Ticket Replies</h3>
+
 
   <div class="table-card">
-    <div class="table-wrapper">
-      <table class="ticketreplies-table">
-        <thead>
-          <tr>
-            <th>Reply ID</th>
-            <th>Ticket ID</th>
-            <th>Message</th>
-            <th>Creator</th>
-            <th>Assigned</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (r of replies; track r) {
-          <tr>
-            @if(role == "admin"){
-            <td><span class="reply-id">{{ r.replyId }}</span></td>
-            <td><span class="ticket-id">{{ r.ticketId }}</span></td>
-            <td class="message-cell">{{ r.replyMessage }}</td>
-            <td>{{ r.replyByCreatorEmpId }}</td>
-            <td>{{ r.replyByAssignedEmpId }}</td>
+  <h3 class="list-header">Conversation</h3>
 
-            }
-            @else{
-            @if( r.replyByCreatorEmpId == creator){
-            <td><span class="reply-id">{{ r.replyId }}</span></td>
-            <td><span class="ticket-id">{{ r.ticketId }}</span></td>
-            <td class="message-cell">{{ r.replyMessage }}</td>
-            <td>{{ r.replyByCreatorEmpId }}</td>
-            <td>{{ r.replyByAssignedEmpId }}</td>
+  <div class="conversation-card">
+    <div class="conversation-body">
 
-            }
+      @for (r of replies; track r) {
+        <div
+          class="chat-message"
+          [class.sent]="r.replyByCreatorEmpId === creator"
+          [class.received]="r.replyByAssignedEmpId === creator">
 
-            } 
-          </tr>
+          <div class="chat-bubble">
+            <div class="chat-text">{{ r.replyMessage }}</div>
+            <div class="chat-meta">
+              <span>{{ r.replyByCreatorEmpId || r.replyByAssignedEmpId }}</span>
+            </div>
+          </div>
 
-          }
+        </div>
+      }
 
+      @empty {
+        <div class="no-data">📭 No conversation found</div>
+      }
 
-          @empty {
-          <tr>
-            <td colspan="5" class="no-data">📭 No replies found</td>
-          </tr>
-          }
-        </tbody>
-      </table>
     </div>
   </div>
+
+  
+
 </div>
+
+    

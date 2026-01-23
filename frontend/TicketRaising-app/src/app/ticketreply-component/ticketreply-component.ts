@@ -41,10 +41,27 @@ export class TicketReplyComponent {
     this.replier = "";
     this.reply = new TicketReply('', '', '', this.ticket.createdByEmpId, this.ticket.assignedToEmpId);
     this.newReply();
-     this.showAllReplies();
-
+    this.showTicket();
+    this.getRepliesByTicket();
+    //  this.showAllReplies();
     this.showAllTickets();
     this.showEmployee();
+  }
+
+  showTicket(): void {
+ 
+    this.ticketSvc.getOneTicket(this.reply.ticketId).subscribe({
+      next: (response: Ticket) => {
+        this.ticket = response;
+        console.log(this.ticket);
+        
+        this.errMsg = '';
+      },
+      error: (err) => {
+        this.errMsg = err.error;
+        console.log(err);
+      }
+    });
   }
   
  showEmployee(): void {
@@ -133,8 +150,10 @@ export class TicketReplyComponent {
   }
 
   getRepliesByTicket() {
-    this.replySvc.getRepliesByTicketId(this.ticketId).subscribe({
+    this.replySvc.getRepliesByTicketId(this.reply.ticketId).subscribe({
       next: (res) => {
+        console.log(res);
+        
         this.replies = res;
         this.errMsg = '';
       },
