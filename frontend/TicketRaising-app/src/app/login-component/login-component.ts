@@ -35,7 +35,7 @@ export class LoginComponent {
         alert("Loged in successfull")
         sessionStorage.setItem("empId", this.user.empId);
         sessionStorage.setItem("role", this.user.role);
-        // this.authSvc.setLogin(this.user.empName);
+        this.authSvc.setLogin(this.user.empName);
         this.errMsg = "";
         this.router.navigate(['/']);
       },

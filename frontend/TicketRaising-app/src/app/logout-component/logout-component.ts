@@ -10,11 +10,10 @@ import { RouterLink, RouterLinkActive } from "@angular/router";
   styleUrl: './logout-component.css',
 })
 export class LogoutComponent {
-  // authSvc:AuthService=inject(AuthService);
+  authSvc:AuthService=inject(AuthService);
   router:Router=inject(Router);
   constructor(){
-    // this.authSvc.logout();
-    sessionStorage.clear()
-    // this.router.navigate(['/logout']);
+    this.authSvc.logout();
+    this.router.navigate(['']);
   }
 }

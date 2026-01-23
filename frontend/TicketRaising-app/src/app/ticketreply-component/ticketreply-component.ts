@@ -17,7 +17,7 @@ export class TicketReplyComponent {
 
   replySvc: TicketReplyService = inject(TicketReplyService);
   ticketSvc: TicketService = inject(TicketService);
-  employeeSvc: EmployeeService = inject(EmployeeService)
+  employeeSvc : EmployeeService = inject(EmployeeService)
   tickets: Ticket[];
   replier: string;
   createIdStore : string
@@ -64,9 +64,9 @@ export class TicketReplyComponent {
         this.ticket = response;
         this.reply.replyByAssignedEmpId = this.ticket.assignedToEmpId;
         this.reply.replyByCreatorEmpId = this.ticket.createdByEmpId
-        console.log(this.ticket);
-        console.log(this.ticket.createdByEmpId);
-
+        // console.log(this.ticket);
+        // console.log(this.ticket.createdByEmpId);
+        
         this.errMsg = '';
       },
       error: (err) => {
@@ -108,6 +108,7 @@ export class TicketReplyComponent {
   getReply() {
     this.replySvc.getReplyById(this.reply.replyId).subscribe({
       next: (res) => {
+        this.onTicketIdChange(this.reply.ticketId)
         this.reply = res;
         this.errMsg = '';
       },
@@ -157,7 +158,10 @@ export class TicketReplyComponent {
 
 
   addReply() {
-    console.log(this.reply);
+    if(this.reply.replyId == ""){
+      this.errMsg = "Enter reply id";
+      return;
+    }
     this.replySvc.addReply(this.reply).subscribe({
 
       next: () => {

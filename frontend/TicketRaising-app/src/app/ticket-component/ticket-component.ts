@@ -97,7 +97,7 @@ export class TicketComponent {
   }
  
   showAllTickets(): void {
-          this.isStatusFilter = false;
+    this.isStatusFilter = false;
  
     this.ticketSvc.showAllTickets().subscribe({
       next: (response: Ticket[]) => {
@@ -142,7 +142,7 @@ export class TicketComponent {
 editTicket(t: Ticket): void {
   // Copy ticket data into form
   this.ticket = { ...t };
-  this.onTicketTypeChange(this.ticket.ticketTypeId)
+  this.onTicketTypeChange(t.ticketTypeId);
   // Scroll to form
   setTimeout(() => {
     this.ticketFormContainer.nativeElement.scrollIntoView({
@@ -153,6 +153,10 @@ editTicket(t: Ticket): void {
 }
  
   addTicket(): void {
+    if(this.ticket.ticketId == ""){
+      this.errMsg = "Enter Ticket id";
+      return;
+    }
     this.ticketSvc.addTicket(this.ticket).subscribe({
       next: (response: Ticket) => {
         this.tickets.push(response);
@@ -180,7 +184,7 @@ editTicket(t: Ticket): void {
       }
     });
   }
-//  ticketype : any =""
+ 
   updateTicket(): void {
     this.ticketSvc.updateTicket(this.ticket.ticketId, this.ticket).subscribe({
       next: () => {
