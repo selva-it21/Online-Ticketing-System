@@ -16,7 +16,10 @@ public class EFTicketRepository : ITicketRepository
     {
         try
         {
+<<<<<<< HEAD
             ticket.AssignedToEmpId = null;
+=======
+>>>>>>> f4cb760c6c92c755ac858c08da60b8dcb1f2eeb7
             await context.Tickets.AddAsync(ticket);
             await context.SaveChangesAsync();
             return ticket;
