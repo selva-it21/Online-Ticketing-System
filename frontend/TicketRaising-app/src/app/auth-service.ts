@@ -10,7 +10,7 @@ export class AuthService {
   isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
   
   http: HttpClient = inject(HttpClient);
-  baseUrl: string = "https://ticketportalwebapi-e5a2fee5auazdpgr.canadacentral-01.azurewebsites.net/api/Auth/";
+  baseUrl: string = "https://ticketportalteam3-hwg6cpg9gvbhaje6.canadacentral-01.azurewebsites.net/api/Auth/";
   
   userName: string = "admin@gmail.com";
   role: string = "admin";
