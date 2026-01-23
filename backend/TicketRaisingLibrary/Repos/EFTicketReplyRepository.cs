@@ -16,7 +16,6 @@ public class EFTicketReplyRepository : ITicketReplyRepository
     {
         try
         {
-            // ticketReply.ReplyByAssignedEmpId = null;
             if(ticketReply.ReplyByCreatorEmpId == "")
                 ticketReply.ReplyByCreatorEmpId = null;
             if(ticketReply.ReplyByAssignedEmpId == "")

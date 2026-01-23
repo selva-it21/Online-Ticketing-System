@@ -14,7 +14,7 @@ import { AuthService } from '../auth-service';
 })
 export class LoginComponent {
   loginSvc: EmployeeService = inject(EmployeeService);
-  authSvc:AuthService=inject(AuthService);
+  authSvc: AuthService = inject(AuthService);
   user: Employee;
   empId: string;
   password: string;
@@ -32,15 +32,20 @@ export class LoginComponent {
     this.loginSvc.login(this.empId, this.password).subscribe({
       next: (response: any) => {
         this.user = response;
-        alert("Loged in successfull")
+        alert("Logged in successfully");
+        
         sessionStorage.setItem("empId", this.user.empId);
         sessionStorage.setItem("role", this.user.role);
+        sessionStorage.setItem("empName", this.user.empName);
         this.authSvc.setLogin(this.user.empName);
+        
         this.errMsg = "";
         this.router.navigate(['/']);
       },
-      error: (err : any) => {this.errMsg = err.error ; console.log(err);}
+      error: (err: any) => {
+        this.errMsg = err.error; 
+        console.log(err);
+      }
     });
   }
- 
 }
