@@ -46,8 +46,8 @@ export class TicketReplyComponent {
         this.ticket = response;
         this.reply.replyByAssignedEmpId = this.ticket.assignedToEmpId;
         this.reply.replyByCreatorEmpId = this.ticket.createdByEmpId
-        console.log(this.ticket);
-        console.log(this.ticket.createdByEmpId);
+        // console.log(this.ticket);
+        // console.log(this.ticket.createdByEmpId);
         
         this.errMsg = '';
       },
@@ -90,6 +90,7 @@ export class TicketReplyComponent {
   getReply() {
     this.replySvc.getReplyById(this.reply.replyId).subscribe({
       next: (res) => {
+        this.onTicketIdChange(this.reply.ticketId)
         this.reply = res;
         this.errMsg = '';
       },

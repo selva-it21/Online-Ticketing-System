@@ -97,7 +97,7 @@ export class TicketComponent {
   }
  
   showAllTickets(): void {
-          this.isStatusFilter = false;
+    this.isStatusFilter = false;
  
     this.ticketSvc.showAllTickets().subscribe({
       next: (response: Ticket[]) => {
