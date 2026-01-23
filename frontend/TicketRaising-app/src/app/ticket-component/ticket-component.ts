@@ -52,6 +52,7 @@ export class TicketComponent {
       this.showAllTickets();
     }else{
       this.getTicketsByCreator();
+      this.getTicketsAssignedTo();
     }
  
   }
@@ -251,7 +252,7 @@ editTicket(t: Ticket): void {
   getTicketsAssignedTo(): void {
       this.isStatusFilter = false;
  
-    this.ticketSvc.getTicketsAssignedTo(this.ticket.assignedToEmpId).subscribe({
+    this.ticketSvc.getTicketsAssignedTo(this.ticket.createdByEmpId).subscribe({
       next: (response: Ticket[]) => {
         this.tickets = response;
         this.errMsg = '';

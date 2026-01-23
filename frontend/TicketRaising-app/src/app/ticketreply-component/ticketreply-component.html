@@ -1,100 +1,96 @@
 <div class="ticketreply-management-container">
   <h2 class="ticketreply-header">Ticket Reply Management</h2>
-
+ 
   <div class="form-card">
     <form class="ticketreply-form">
       <div class="single-row-form">
         <div class="form-group">
           <label for="replyId" class="form-label">Reply ID</label>
           <div class="input-with-button">
-            <input type="text" id="replyId" [(ngModel)]="reply.replyId" name="replyId" class="form-input" placeholder="Enter ID" />
+            <input type="text" id="replyId" [(ngModel)]="reply.replyId" name="replyId" class="form-input"
+              placeholder="Enter ID" />
             <!-- <button type="button" class="inline-btn show-btn" (click)="getReply()">👁️ Show</button> -->
           </div>
         </div>
-
+ 
         <div class="form-group">
           <label for="ticketId" class="form-label">Ticket ID</label>
-          <select id="ticketId" [(ngModel)]="reply.ticketId" (ngModelChange)="onTicketIdChange($event)" name="ticketId" class="form-input">
+          <select id="ticketId" [(ngModel)]="reply.ticketId" (ngModelChange)="onTicketIdChange($event)" name="ticketId"
+            class="form-input">
             <option value="">Select Ticket</option>
             <option *ngFor="let t of tickets" [value]="t.ticketId">{{ t.ticketId }}</option>
           </select>
         </div>
-
+ 
         <div class="form-group">
           <label for="replier" class="form-label">Select Replier</label>
-          <select id="replier" [(ngModel)]="replier" (ngModelChange)="onReplierChange($event)" name="replier" class="form-input">
+          <select id="replier" [(ngModel)]="replier" (ngModelChange)="onReplierChange($event)" name="replier"
+            class="form-input">
             <option value="">Select Replier</option>
             <option value="creator">Creator</option>
             <option value="assigner">Assigner</option>
           </select>
         </div>
       </div>
-
+ 
       <div class="single-row-form">
         <div class="form-group form-group-wide">
           <label for="replyMessage" class="form-label">Reply Message</label>
-          <textarea id="replyMessage" [(ngModel)]="reply.replyMessage" name="replyMessage" class="form-input form-textarea" placeholder="Enter reply message"></textarea>
+          <textarea id="replyMessage" [(ngModel)]="reply.replyMessage" name="replyMessage"
+            class="form-input form-textarea" placeholder="Enter reply message"></textarea>
         </div>
-
-        <!-- <div class="form-group">
-          <div *ngIf="replier === 'assigner'" class="replier-field">
-            <label for="replyByCreatorEmpId" class="form-label">Creator Emp ID</label>
-            <input type="text" id="replyByCreatorEmpId" [(ngModel)]="createIdStore" name="replyByCreatorEmpId" class="form-input" placeholder="Creator ID" disabled />
-          </div>
-          
-          <div *ngIf="replier === 'creator'" class="replier-field">
-            <label for="replyByAssignedEmpId" class="form-label">Assigned Emp ID</label>
-            <input type="text" id="replyByAssignedEmpId" [(ngModel)]="assignIdStore" name="replyByAssignedEmpId" class="form-input" placeholder="Assigned ID" disabled />
-          </div> -->
-          
-          <!-- <div *ngIf="!replier" class="replier-placeholder">
-            <div class="placeholder-text">Select replier above</div>
-          </div>
-        </div> -->
+ 
+       
       </div>
-
+ 
       <div class="action-buttons">
         <button type="button" class="action-btn add-btn" (click)="addReply()">💾 Save</button>
         <button type="button" class="action-btn update-btn" (click)="updateReply()">↻ Update</button>
         <button type="button" class="action-btn delete-btn" (click)="deleteReply()">🗑️ Delete</button>
         <button type="button" class="action-btn show-all-btn" (click)="getReply()">👁️ Show</button>
+        <button type="button" class="action-btn show-all-btn" (click)="getRepliesByTicket()"> View Converstion</button>
+ 
       </div>
-
+ 
       <div *ngIf="errMsg" class="error-message">⚠️ {{ errMsg }}</div>
     </form>
   </div>
-
-  <h3 class="list-header">List of Ticket Replies</h3>
-
+ 
+ 
+ 
   <div class="table-card">
-    <div class="table-wrapper">
-      <table class="ticketreplies-table">
-        <thead>
-          <tr>
-            <th>Reply ID</th>
-            <th>Ticket ID</th>
-            <th>Message</th>
-            <th>Creator</th>
-            <th>Assigned</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (r of replies; track r) {
-          <tr>
-            <td><span class="reply-id">{{ r.replyId }}</span></td>
-            <td><span class="ticket-id">{{ r.ticketId }}</span></td>
-            <td class="message-cell">{{ r.replyMessage }}</td>
-            <td>{{ r.replyByCreatorEmpId }}</td>
-            <td>{{ r.replyByAssignedEmpId }}</td>
-          </tr>
-          }
-          @empty {
-          <tr>
-            <td colspan="5" class="no-data">📭 No replies found</td>
-          </tr>
-          }
-        </tbody>
-      </table>
+  <h3 class="list-header">Conversation</h3>
+ 
+  <div class="conversation-card">
+    <div class="conversation-body">
+ 
+      @for (r of replies; track r) {
+        <div
+          class="chat-message"
+          [class.sent]="r.replyByCreatorEmpId === creator"
+          [class.received]="r.replyByAssignedEmpId === creator">
+ 
+          <div class="chat-bubble">
+            <div class="chat-text">{{ r.replyMessage }}</div>
+            <div class="chat-meta">
+              <span>{{ r.replyByCreatorEmpId || r.replyByAssignedEmpId }}</span>
+            </div>
+          </div>
+ 
+        </div>
+      }
+ 
+      @empty {
+        <div class="no-data">📭 No conversation found</div>
+      }
+ 
     </div>
   </div>
+ 
+ 
+ 
 </div>
+ 
+   
+ 
+ 
