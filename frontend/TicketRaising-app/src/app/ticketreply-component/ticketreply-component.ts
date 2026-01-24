@@ -234,13 +234,6 @@ export class TicketReplyComponent {
   }
 
   addReply() {
-    const loggedInEmpId = sessionStorage.getItem("empId") || "";
-
-    if (this.reply.replyByCreatorEmpId !== loggedInEmpId &&
-      this.reply.replyByAssignedEmpId !== loggedInEmpId) {
-      return;
-    }
-
     if (this.reply.replyId == "") {
       this.errMsg = "Enter reply id";
       return;
