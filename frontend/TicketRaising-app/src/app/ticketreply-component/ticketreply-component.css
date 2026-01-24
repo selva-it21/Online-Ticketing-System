@@ -266,14 +266,14 @@
 }
  
 .chat-message.received .chat-bubble {
-  background: #f2f3f4;
+  background: #d1dce8;
   color: #0e83f7;
   border-bottom-left-radius: 4px;
 }
  
 .chat-meta {
   font-size: 0.7rem;
-  color: #7f8c8d;
+  color: #7e8f92;
   margin-top: 4px;
   text-align: right;
 }

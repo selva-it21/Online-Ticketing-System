@@ -31,10 +31,11 @@ export class TicketReplyComponent {
   ticketId: string = '';
   empId: string = '';
   creator: any = sessionStorage.getItem("empId");
-  checkmsg: boolean
+  checkmsg: boolean;
+  
   constructor() {
     this.tickets = [];
-    this.checkmsg = true
+    this.checkmsg = true;
     this.createIdStore = "";
     this.assignIdStore = "";
     this.ticket = new Ticket("", "", "", "", new Date(), "", "", "");
@@ -55,7 +56,6 @@ export class TicketReplyComponent {
       },
       error: (err) => {
         this.errMsg = err.error;
-        console.log(err);
       }
     });
   }
@@ -65,23 +65,18 @@ export class TicketReplyComponent {
       next: (response: Ticket) => {
         this.ticket = response;
         this.getRepliesByTicket();
-        // Get current logged-in user's empId from sessionStorage
         const loggedInEmpId = sessionStorage.getItem("empId") || "";
+        
         if (loggedInEmpId === this.ticket.createdByEmpId) {
-          // User is the creator
           this.reply.replyByCreatorEmpId = loggedInEmpId;
           this.reply.replyByAssignedEmpId = "";
-          this.checkmsg = true
-
-          console.log('User is creator, setting replyByCreatorEmpId:', loggedInEmpId);
+          this.checkmsg = true;
         } else if (loggedInEmpId === this.ticket.assignedToEmpId) {
-          this.checkmsg = true
-
+          this.checkmsg = true;
           this.reply.replyByAssignedEmpId = loggedInEmpId;
           this.reply.replyByCreatorEmpId = "";
         } else {
-          // this.errMsg = "You can't reply to this ticket ID";
-          this.checkmsg = false
+          this.checkmsg = false;
           this.reply.replyByCreatorEmpId = "";
           this.reply.replyByAssignedEmpId = "";
           return;
@@ -91,7 +86,6 @@ export class TicketReplyComponent {
       },
       error: (err) => {
         this.errMsg = err.error;
-        console.log(err);
       }
     });
   }
@@ -101,19 +95,14 @@ export class TicketReplyComponent {
 
     if (this.ticket && this.ticket.ticketId) {
       if (loggedInEmpId === this.ticket.createdByEmpId) {
-        // User is the creator
         this.reply.replyByCreatorEmpId = loggedInEmpId;
         this.reply.replyByAssignedEmpId = "";
         this.replier = "creator";
-        console.log('Auto-set: User is creator');
       } else if (loggedInEmpId === this.ticket.assignedToEmpId) {
-        // User is the assigner
         this.reply.replyByAssignedEmpId = loggedInEmpId;
         this.reply.replyByCreatorEmpId = "";
         this.replier = "assigner";
-        console.log('Auto-set: User is assigner');
       } else {
-        // User is neither creator nor assigner
         this.reply.replyByCreatorEmpId = "";
         this.reply.replyByAssignedEmpId = "";
         this.replier = "";
@@ -121,19 +110,14 @@ export class TicketReplyComponent {
     }
   }
 
-  // MODIFIED: onReplierChange method to handle manual selection if still needed
   onReplierChange(value: string) {
     if (value === 'creator') {
-      console.log("value : " + value);
       this.reply.replyByCreatorEmpId = this.ticket.createdByEmpId;
       this.reply.replyByAssignedEmpId = "";
-    }
-    else if (value === 'assigner') {
-      console.log("value : " + value);
+    } else if (value === 'assigner') {
       this.reply.replyByAssignedEmpId = this.ticket.assignedToEmpId;
       this.reply.replyByCreatorEmpId = "";
-    }
-    else {
+    } else {
       this.reply.replyByCreatorEmpId = "";
       this.reply.replyByAssignedEmpId = "";
     }
@@ -151,7 +135,6 @@ export class TicketReplyComponent {
       },
       error: (err) => {
         this.errMsg = err.error;
-        console.log(err);
       }
     });
   }
@@ -179,7 +162,6 @@ export class TicketReplyComponent {
   getRepliesByTicket() {
     this.replySvc.getRepliesByTicketId(this.reply.ticketId).subscribe({
       next: (res) => {
-        console.log(res);
         this.replies = res;
         this.errMsg = '';
       },
@@ -221,34 +203,33 @@ export class TicketReplyComponent {
     this.ticketSvc.getOneTicket(this.reply.ticketId).subscribe({
       next: (response: Ticket) => {
         this.ticket = response;
-        console.log(this.ticket);
-        // Auto-set replier when ticket is loaded
         this.autoSetReplier();
         this.errMsg = '';
       },
       error: (err) => {
         this.errMsg = err.error;
-        console.log(err);
       }
     });
   }
 
   addReply() {
+    const loggedInEmpId = sessionStorage.getItem("empId") || "";
+
     if (this.reply.replyId == "") {
       this.errMsg = "Enter reply id";
       return;
     }
-    if(this.reply.replyMessage == ""){
-      this.errMsg = "Reply field can't empty";
+    
+    if(this.reply.replyMessage == "") {
+      this.errMsg = "Reply field can't be empty";
       return;
     }
+    
     this.replySvc.addReply(this.reply).subscribe({
       next: () => {
         alert('Reply Added Successfully!');
-        // this.showAllReplies();
-        this.getRepliesByTicket();
+        this.showAllReplies();
         this.newReply();
-        // Clear the ticket selection
         this.ticket = new Ticket("", "", "", "", new Date(), "", "", "");
         this.replier = "";
       },
