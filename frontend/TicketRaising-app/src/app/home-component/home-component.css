@@ -1,0 +1,95 @@
+/* Home container full screen */
+.home-container {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;   /* navbar on top, hero below */
+  margin: 0;
+  padding: 0;
+}
+
+/* Hero fills remaining space automatically */
+.hero-section {
+  flex: 1;                  /* 🔑 THIS IS THE MAGIC */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10%;
+  background: linear-gradient(135deg, #3498db, #2c3e50);
+  color: white;
+  overflow: hidden;
+}
+
+/* Content */
+.hero-content {
+  max-width: 650px;
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.hero-title .brand {
+  color: #f1c40f;
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 35px;
+  opacity: 0.9;
+}
+
+/* Buttons */
+.hero-actions {
+  display: flex;
+  gap: 20px;
+}
+
+.hero-btn {
+  padding: 14px 34px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.primary-btn {
+  background-color: #f1c40f;
+  color: #2c3e50;
+}
+
+.primary-btn:hover {
+  background-color: #d4ac0d;
+}
+
+.secondary-btn {
+  border: 2px solid white;
+  color: white;
+}
+
+.secondary-btn:hover {
+  background-color: white;
+  color: #2c3e50;
+}
+
+/* Right icon */
+.hero-image {
+  font-size: 180px;
+  opacity: 0.15;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .hero-image {
+    font-size: 120px;
+  }
+}

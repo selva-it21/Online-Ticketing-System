@@ -1,0 +1,15 @@
+export class TicketType{
+    public ticketTypeId : string;
+    public typeName : string;
+    public description : string;
+    public slaId : string;
+    public deptId : string;
+
+    constructor(TicketTypeId : string, TypeName : string, Description : string, SLAId : string, DeptId : string){
+        this.ticketTypeId = TicketTypeId;
+        this.typeName = TypeName;
+        this.description = Description;
+        this.slaId = SLAId;
+        this.deptId = DeptId;
+    }
+}

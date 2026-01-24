@@ -1,0 +1,89 @@
+<div class="employee-management-container">
+  <h2 class="employee-header">Employee Management</h2>
+
+
+
+  <div class="form-card">
+    <form #empForm="ngForm" class="employee-form">
+      <div class="single-row-form">
+        <div class="form-group">
+          <label for="empId" class="form-label required">Employee ID</label>
+          <input type="text" id="empId" name="empId" [(ngModel)]="employee.empId" class="form-input" placeholder="Enter ID"/>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label required">Password</label>
+          <input type="password" id="password" name="password" [(ngModel)]="employee.password" class="form-input" placeholder="Enter password" />
+        </div>
+
+        <div class="form-group">
+          <label for="empName" class="form-label required">Employee Name</label>
+          <input type="text" id="empName" name="empName" [(ngModel)]="employee.empName" class="form-input" placeholder="Enter name" />
+        </div>
+      </div>
+
+      <div class="single-row-form">
+        <div class="form-group">
+          <label for="deptId" class="form-label required">Department</label>
+          <select id="deptId" name="deptId" [(ngModel)]="employee.deptId" class="form-input">
+            <option value="">Select Department</option>
+            <option *ngFor="let dept of departments" [value]="dept.deptId">{{ dept.deptName }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="role" class="form-label required">Role</label>
+          <select id="role" name="role" [(ngModel)]="employee.role" class="form-input">
+            <option value="">Select Role</option>
+            <option value="admin">Admin</option>
+            <option value="employee">Employee</option>
+          </select>
+        </div>
+
+        <div class="form-group form-group-empty">
+          <!-- Empty for spacing -->
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" class="action-btn add-btn" (click)="addEmployee()" [disabled]="empForm.invalid">+ Add</button>
+        <button type="button" class="action-btn search-btn" (click)="showEmployee()">🔍 Search</button>
+        <button type="button" class="action-btn update-btn" (click)="updateEmployee()" [disabled]="empForm.invalid">↻ Update</button>
+        <button type="button" class="action-btn delete-btn" (click)="deleteEmployee()">🗑️ Delete</button>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="errMsg" class="error-message">⚠️ {{ errMsg }}</div>
+  <h3 class="list-header">Employee List</h3>
+
+  <div class="table-card">
+    <div class="table-wrapper">
+      <table class="employees-table">
+        <thead>
+          <tr>
+            <th>Emp ID</th>
+            <!-- <th>Password</th> -->
+            <th>Name</th>
+            <th>Dept ID</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (emp of employees; track emp) {
+          <tr>
+            <td><span class="emp-id">{{ emp.empId }}</span></td>
+            <!-- <td><span class="password-field">{{ emp.password }}</span></td> -->
+            <td><strong>{{ emp.empName }}</strong></td>
+            <td>{{ emp.deptId }}</td>
+            <td><span class="role-badge role-{{emp.role?.toLowerCase()}}">{{ emp.role }}</span></td>
+          </tr>
+          } @empty {
+          <tr>
+            <td colspan="5" class="no-data">📭 No employees found</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

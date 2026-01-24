@@ -1,0 +1,83 @@
+<nav class="main-nav">
+    @if(isLoggedIn()) {
+    @if(role().toLowerCase() === "admin") {
+    <div class="nav-container">
+        <div class="nav-links">
+            <img src="/eyw.png" alt="Profile" class="profile-img">
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+            <a routerLink="/employee" routerLinkActive="active">Employee</a>
+            <a routerLink="/ticket" routerLinkActive="active">Tickets</a>
+            <a routerLink="/tickettype" routerLinkActive="active">TicketTypes</a>
+            <a routerLink="/ticketreply" routerLinkActive="active">TicketReplies</a>
+            <a routerLink="/department" routerLinkActive="active">Departments</a>
+            <a routerLink="/sla" routerLinkActive="active">SLAs</a>
+        </div>
+        <div class="navbar-user">
+            <div class="user-info">
+                <span class="welcome-text">Welcome,</span>
+                <div class="profile-dropdown">
+                    <button class="profile-link profile-dropdown-toggle" (click)="toggleDropdown()">
+                        <i class="bi bi-person-circle"></i>
+                        <span class="username">{{employeeName()}}</span>
+                        <i class="bi bi-chevron-down dropdown-arrow" [class.rotate]="isDropdownOpen"></i>
+                    </button>
+                    <div class="profile-dropdown-menu" [class.show]="isDropdownOpen">
+                        <a routerLink="/profile" class="dropdown-item" (click)="closeDropdown()">
+                            <i class="bi bi-person"></i>
+                            Update Profile
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a routerLink="/logout" class="dropdown-item logout-item" (click)="closeDropdown()">
+                            <i class="bi bi-box-arrow-left"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+    @else {
+    <div class="nav-container">
+        <div class="nav-links">
+            <img src="/eyw.png" alt="Profile" class="profile-img">
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+            <a routerLink="/ticket" routerLinkActive="active">Tickets</a>
+            <a routerLink="/ticketreply" routerLinkActive="active">TicketReplies</a>
+        </div>
+        <div class="navbar-user">
+            <div class="user-info">
+                <span class="welcome-text">Welcome</span>
+                <div class="profile-dropdown">
+                    <button class="profile-link profile-dropdown-toggle" (click)="toggleDropdown()">
+                        <i class="bi bi-person-circle"></i>
+                        <span class="username">{{employeeName()}}</span>
+                        <i class="bi bi-chevron-down dropdown-arrow" [class.rotate]="isDropdownOpen"></i>
+                    </button>
+                    <div class="profile-dropdown-menu" [class.show]="isDropdownOpen">
+                        <a routerLink="/profile" class="dropdown-item" (click)="closeDropdown()">
+                            <i class="bi bi-person"></i>
+                            Update Profile
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a routerLink="/logout" class="dropdown-item logout-item" (click)="closeDropdown()">
+                            <i class="bi bi-box-arrow-left"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+    }
+    @else {
+    <div class="nav-container">
+        <div class="nav-links">
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+            <a routerLink="/register" routerLinkActive="active">Register</a>
+            <a routerLink="/login" routerLinkActive="active">Login</a>
+        </div>
+    </div>
+    }
+</nav>

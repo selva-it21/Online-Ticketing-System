@@ -1,0 +1,64 @@
+<div class="department-management-container">
+  <h2 class="department-header">Department Form</h2>
+  
+  <div class="form-card">
+    <form class="department-form">
+      <div class="single-row-form">
+        <div class="form-group">
+          <label for="deptId" class="form-label">Dept ID</label>
+          <input type="text" id="deptId" [(ngModel)]="department.deptId" name="deptId" class="form-input" placeholder="Enter ID" />
+        </div>
+        
+        <div class="form-group">
+          <label for="deptName" class="form-label">Dept Name</label>
+          <input type="text" id="deptName" [(ngModel)]="department.deptName" name="deptName" class="form-input" placeholder="Enter name" />
+        </div>
+        
+        <div class="form-group form-group-wide">
+          <label for="description" class="form-label">Description</label>
+          <input type="text" id="description" [(ngModel)]="department.description" name="description" class="form-input" placeholder="Enter description" />
+        </div>
+      </div>
+      
+      <div class="action-buttons">
+        <button type="button" class="action-btn add-btn" (click)="addDepartment()">+ Add</button>
+        <button type="button" class="action-btn update-btn" (click)="updateDepartment()">↻ Update</button>
+        <button type="button" class="action-btn show-btn" (click)="showDepartment()">👁️ Show</button>
+        <button type="button" class="action-btn delete-btn" (click)="deleteDepartment()">🗑️ Delete</button>
+      </div>
+    </form>
+    
+    <div *ngIf="errMsg" class="error-message">
+      ⚠️ {{errMsg}}
+    </div>
+  </div>
+  
+  <h2 class="departments-header">Departments List</h2>
+  
+  <div class="table-card">
+    <div class="table-wrapper">
+      <table class="departments-table">
+        <thead>
+          <tr>
+            <th>Department ID</th>
+            <th>Department Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (dept of departments; track dept) {
+            <tr>
+              <td><span class="dept-id">{{ dept.deptId }}</span></td>
+              <td><strong>{{ dept.deptName }}</strong></td>
+              <td>{{ dept.description }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="3" class="no-data">📭 No departments found</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

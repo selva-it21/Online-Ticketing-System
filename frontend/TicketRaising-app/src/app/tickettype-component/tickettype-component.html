@@ -1,0 +1,83 @@
+<div class="tickettype-management-container">
+  <h2 class="tickettype-header">Ticket Type Form</h2>
+
+  <div class="form-card">
+    <form class="tickettype-form">
+      <div class="single-row-form">
+        <div class="form-group">
+          <label for="ticketTypeId" class="form-label">Type ID</label>
+          <input type="text" id="ticketTypeId" [(ngModel)]="tickettype.ticketTypeId" name="ticketTypeId" class="form-input" placeholder="Enter ID" />
+        </div>
+
+        <div class="form-group">
+          <label for="typeName" class="form-label">Type Name</label>
+          <input type="text" id="typeName" [(ngModel)]="tickettype.typeName" name="typeName" class="form-input" placeholder="Enter name" />
+        </div>
+
+        <div class="form-group">
+          <label for="slaId" class="form-label">SLA</label>
+          <select id="slaId" name="slaId" [(ngModel)]="tickettype.slaId" class="form-input">
+            <option value="">Select SLA</option>
+            <option *ngFor="let sla of slas" [value]="sla.slaId">{{ sla.slaName }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="single-row-form">
+        <div class="form-group">
+          <label for="deptId" class="form-label">Department</label>
+          <select id="deptId" name="deptId" [(ngModel)]="tickettype.deptId" class="form-input">
+            <option value="">Select Department</option>
+            <option *ngFor="let dept of departments" [value]="dept.deptId">{{ dept.deptName }}</option>
+          </select>
+        </div>
+
+        <div class="form-group form-group-wide">
+          <label for="description" class="form-label">Description</label>
+          <input type="text" id="description" [(ngModel)]="tickettype.description" name="description" class="form-input" placeholder="Enter description" />
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button type="button" class="action-btn add-btn" (click)="addTicketType()">+ Add</button>
+        <button type="button" class="action-btn update-btn" (click)="updateTicketType()">↻ Update</button>
+        <button type="button" class="action-btn show-btn" (click)="showTicketType()">👁️ Show</button>
+        <button type="button" class="action-btn delete-btn" (click)="deleteTicketType()">🗑️ Delete</button>
+      </div>
+    </form>
+
+    <div *ngIf="errMsg" class="error-message">⚠️ {{ errMsg }}</div>
+  </div>
+
+  <h2 class="tickettypes-header">Ticket Types List</h2>
+  <div class="table-card">
+    <div class="table-wrapper">
+      <table class="tickettypes-table">
+        <thead>
+          <tr>
+            <th>Type ID</th>
+            <th>Type Name</th>
+            <th>Description</th>
+            <th>SLA ID</th>
+            <th>Department ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (tickettype of tickettypes; track tickettype) {
+          <tr>
+            <td><span class="type-id">{{ tickettype.ticketTypeId }}</span></td>
+            <td><strong>{{ tickettype.typeName }}</strong></td>
+            <td>{{ tickettype.description }}</td>
+            <td>{{ tickettype.slaId }}</td>
+            <td>{{ tickettype.deptId }}</td>
+          </tr>
+          } @empty {
+          <tr>
+            <td colspan="5" class="no-data">📭 No Ticket Types found</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

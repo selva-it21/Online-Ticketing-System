@@ -1,0 +1,332 @@
+/* Main Navigation Styles */
+.main-nav {
+    background-color: #2c3e50;
+    color: white;
+    padding: 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: #ecf0f1;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 16px;
+    position: relative;
+}
+
+.nav-links a:hover {
+    background-color: #34495e;
+    color: #3498db;
+    transform: translateY(-2px);
+}
+
+.nav-links a.active {
+    background-color: #3498db;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 30%;
+    object-fit: fill;
+    margin-right: 5px;
+}
+
+/* User Info Section */
+.navbar-user {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin-left: 20px;
+}
+
+.welcome-text {
+    color: #bdc3c7;
+    font-size: 14px;
+}
+
+/* =========================
+   PROFILE DROPDOWN
+========================= */
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    font-size: 16px;
+}
+
+.profile-dropdown-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.profile-dropdown-toggle .username {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.profile-dropdown-toggle i {
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.dropdown-arrow {
+    font-size: 0.8rem;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-arrow.rotate {
+    transform: rotate(180deg);
+}
+
+/* Dropdown Menu */
+.profile-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    min-width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 1001;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.profile-dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #2c3e50;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #3498db;
+    padding-left: 20px;
+}
+
+.dropdown-item i {
+    width: 20px;
+    text-align: center;
+    font-size: 1rem;
+    color: #7f8c8d;
+}
+
+.dropdown-item:hover i {
+    color: #3498db;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #e0e0e0, transparent);
+    margin: 5px 0;
+}
+
+.logout-item {
+    color: #e74c3c;
+}
+
+.logout-item:hover {
+    background-color: #ffeaea;
+    color: #c0392b;
+}
+
+.logout-item i {
+    color: #e74c3c;
+}
+
+.logout-item:hover i {
+    color: #c0392b;
+}
+
+/* Animation for active state */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.main-nav {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Hover effects enhancement */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #3498db;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-links a:hover::after {
+    width: 70%;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+        gap: 15px;
+    }
+   
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+   
+    .nav-links a {
+        text-align: center;
+        padding: 10px;
+        width: 100%;
+    }
+   
+    .navbar-user {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    
+    .user-info {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .welcome-text {
+        text-align: center;
+    }
+    
+    .profile-dropdown-menu {
+        position: fixed;
+        top: auto;
+        right: 1rem;
+        left: 1rem;
+        bottom: 1rem;
+        max-height: 250px;
+        overflow-y: auto;
+    }
+}
+
+/* Tablet Responsive */
+@media (max-width: 992px) {
+    .nav-links {
+        gap: 15px;
+    }
+    
+    .nav-links a {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+    
+    .profile-dropdown-toggle {
+        padding: 4px 8px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .nav-container {
+        padding: 10px;
+    }
+    
+    .nav-links a {
+        font-size: 13px;
+        padding: 8px;
+    }
+    
+    .profile-img {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .username {
+        font-size: 14px;
+    }
+}
