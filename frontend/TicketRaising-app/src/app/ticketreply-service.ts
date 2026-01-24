@@ -8,7 +8,7 @@ import { TicketReply } from '../models/ticketreply';
 })
 export class TicketReplyService {
   http: HttpClient = inject(HttpClient);
-  baseUrl = 'http://localhost:5041/api/TicketReply/';
+  baseUrl = 'https://ticketportalteam3-hwg6cpg9gvbhaje6.canadacentral-01.azurewebsites.net/api/TicketReply/';
   httpOptions;
   token;
 

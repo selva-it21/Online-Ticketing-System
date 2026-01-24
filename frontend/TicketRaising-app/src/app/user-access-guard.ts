@@ -1,5 +1,9 @@
 import { CanActivateFn } from '@angular/router';
 
 export const userAccessGuard: CanActivateFn = (route, state) => {
-  return true;
+  let name=sessionStorage.getItem('empName');
+  if(name) {
+    return true;
+  }
+  return false;
 };

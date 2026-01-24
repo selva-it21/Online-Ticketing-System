@@ -7,6 +7,7 @@ import { DepartmentService } from '../department-service';
 
 import { Employee } from '../../models/employee';
 import { Department } from '../../models/department';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-component',
@@ -22,7 +23,7 @@ export class RegisterComponent {
   employee: Employee = new Employee('', '', '', '', '');
   departments: Department[] = [];
   errMsg: string = '';
-
+  router: Router = inject(Router);
   constructor() {
     this.getAllDepartments();
   }
@@ -54,6 +55,7 @@ export class RegisterComponent {
         alert('Employee registered successfully!');
         this.employee = new Employee('', '', '', '', '');
         this.errMsg = '';
+        this.router.navigate(['/login']);
       },
       error: (err) => {
         this.errMsg = err.error;

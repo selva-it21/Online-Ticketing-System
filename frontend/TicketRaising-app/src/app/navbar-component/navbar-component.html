@@ -1,6 +1,6 @@
 <nav class="main-nav">
-    @if(username) {
-    @if(role.toLocaleLowerCase() == "admin"){
+    @if(isLoggedIn()) {
+    @if(role().toLowerCase() === "admin") {
     <div class="nav-container">
         <div class="nav-links">
             <img src="/eyw.png" alt="Profile" class="profile-img">
@@ -14,14 +14,15 @@
         </div>
         <div class="navbar-user">
             <div class="user-info">
-
                 <span class="welcome-text">Welcome</span>
                 <a routerLink="/profile" class="profile-link" routerLinkActive="active">
                     <i class="bi bi-person-circle"></i>
-                    <span class="username">{{employeeName}}</span></a>
+                    <span class="username">{{employeeName()}}</span>
+                </a>
             </div>
-            <a routerLink="/logout" routerLinkActive="active" class="profile-link"><i
-                    class="bi bi-box-arrow-left"></i></a>
+            <a routerLink="/logout" routerLinkActive="active" class="profile-link">
+                <i class="bi bi-box-arrow-left"></i>
+            </a>
         </div>
     </div>
     }
@@ -32,27 +33,25 @@
             <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
             <a routerLink="/ticket" routerLinkActive="active">Tickets</a>
             <a routerLink="/ticketreply" routerLinkActive="active">TicketReplies</a>
-
         </div>
-          <div class="navbar-user">
+        <div class="navbar-user">
             <div class="user-info">
-
                 <span class="welcome-text">Welcome</span>
                 <a routerLink="/profile" class="profile-link" routerLinkActive="active">
                     <i class="bi bi-person-circle"></i>
-                    <span class="username">{{employeeName}}</span></a>
+                    <span class="username">{{employeeName()}}</span>
+                </a>
             </div>
-            <a routerLink="/logout" routerLinkActive="active" class="profile-link"><i
-                    class="bi bi-box-arrow-left"></i></a>
+            <a routerLink="/logout" routerLinkActive="active" class="profile-link">
+                <i class="bi bi-box-arrow-left"></i>
+            </a>
         </div>
     </div>
     }
-
     }
     @else {
     <div class="nav-container">
         <div class="nav-links">
-            <span class="username">{{employeeName}}</span>
             <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
             <a routerLink="/register" routerLinkActive="active">Register</a>
             <a routerLink="/login" routerLinkActive="active">Login</a>

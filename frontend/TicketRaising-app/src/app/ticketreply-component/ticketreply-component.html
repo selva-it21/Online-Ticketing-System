@@ -1,6 +1,6 @@
 <div class="ticketreply-management-container">
   <h2 class="ticketreply-header">Ticket Reply Management</h2>
-
+ 
   <div class="form-card">
     <form class="ticketreply-form">
       <div class="single-row-form">
@@ -12,7 +12,7 @@
             <!-- <button type="button" class="inline-btn show-btn" (click)="getReply()">👁️ Show</button> -->
           </div>
         </div>
-
+ 
         <div class="form-group">
           <label for="ticketId" class="form-label">Ticket ID</label>
           <select id="ticketId" [(ngModel)]="reply.ticketId" (ngModelChange)="onTicketIdChange($event)" name="ticketId"
@@ -21,7 +21,7 @@
             <option *ngFor="let t of tickets" [value]="t.ticketId">{{ t.ticketId }}</option>
           </select>
         </div>
-
+ 
         <div class="form-group">
           <label for="replier" class="form-label">Select Replier</label>
           <select id="replier" [(ngModel)]="replier" (ngModelChange)="onReplierChange($event)" name="replier"
@@ -32,63 +32,65 @@
           </select>
         </div>
       </div>
-
+ 
       <div class="single-row-form">
         <div class="form-group form-group-wide">
           <label for="replyMessage" class="form-label">Reply Message</label>
           <textarea id="replyMessage" [(ngModel)]="reply.replyMessage" name="replyMessage"
             class="form-input form-textarea" placeholder="Enter reply message"></textarea>
         </div>
-
+ 
        
       </div>
-
+ 
       <div class="action-buttons">
         <button type="button" class="action-btn add-btn" (click)="addReply()">💾 Save</button>
         <button type="button" class="action-btn update-btn" (click)="updateReply()">↻ Update</button>
         <button type="button" class="action-btn delete-btn" (click)="deleteReply()">🗑️ Delete</button>
         <button type="button" class="action-btn show-all-btn" (click)="getReply()">👁️ Show</button>
         <button type="button" class="action-btn show-all-btn" (click)="getRepliesByTicket()"> View Converstion</button>
-
+ 
       </div>
-
+ 
       <div *ngIf="errMsg" class="error-message">⚠️ {{ errMsg }}</div>
     </form>
   </div>
-
-
-
+ 
+ 
+ 
   <div class="table-card">
   <h3 class="list-header">Conversation</h3>
-
+ 
   <div class="conversation-card">
     <div class="conversation-body">
-
+ 
       @for (r of replies; track r) {
         <div
           class="chat-message"
           [class.sent]="r.replyByCreatorEmpId === creator"
           [class.received]="r.replyByAssignedEmpId === creator">
-
+ 
           <div class="chat-bubble">
             <div class="chat-text">{{ r.replyMessage }}</div>
             <div class="chat-meta">
               <span>{{ r.replyByCreatorEmpId || r.replyByAssignedEmpId }}</span>
             </div>
           </div>
-
+ 
         </div>
       }
-
+ 
       @empty {
         <div class="no-data">📭 No conversation found</div>
       }
-
+ 
     </div>
   </div>
-
-  
-
+ 
+ 
+ 
 </div>
-
-    
+ 
+   
+ 
+ 

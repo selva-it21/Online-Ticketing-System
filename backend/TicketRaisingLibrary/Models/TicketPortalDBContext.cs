@@ -56,6 +56,7 @@ public class TicketPortalDBContext : DbContext
     {
         
         // optionsBuilder.UseSqlServer(@"data source=host.docker.internal\SQLEXPRESS; database=TicketPortalDB; user id=sa; password=User%2025; Trust Server Certificate=true");
-        optionsBuilder.UseSqlServer(@"data source=localhost\SQLEXPRESS; database=TicketPortalDB; user id=sa; password=User%2025; Trust Server Certificate=true");
+        // optionsBuilder.UseSqlServer(@"data source=localhost\SQLEXPRESS; database=TicketPortalDB; user id=sa; password=User%2025; Trust Server Certificate=true");
+        optionsBuilder.UseSqlServer("Server=tcp:team3.database.windows.net,1433;Initial Catalog=TicketPortalDB;Persist Security Info=False;User ID=team3;Password=User%2025;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
     }
 }
