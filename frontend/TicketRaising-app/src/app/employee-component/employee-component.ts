@@ -52,6 +52,10 @@ export class EmployeeComponent {
       this.errMsg = "Enter emp id";
       return;
     }
+    if(this.employee.empName == ""){
+      this.errMsg = "Enter Employee Name";
+      return;
+    }
     this.empSvc.addEmployee(this.employee).subscribe({
       next: (response: Employee) => {
         this.employees.push(response);

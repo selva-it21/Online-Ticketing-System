@@ -31,9 +31,10 @@ export class TicketReplyComponent {
   ticketId: string = '';
   empId: string = '';
   creator: any = sessionStorage.getItem("empId");
-
+  checkmsg: boolean
   constructor() {
     this.tickets = [];
+    this.checkmsg = true
     this.createIdStore = "";
     this.assignIdStore = "";
     this.ticket = new Ticket("", "", "", "", new Date(), "", "", "");
@@ -43,6 +44,7 @@ export class TicketReplyComponent {
     this.showTicket();
     this.showAllTickets();
     this.showEmployee();
+    this.errMsg = '';
   }
 
   showEmployee(): void {
@@ -58,7 +60,6 @@ export class TicketReplyComponent {
     });
   }
 
-  // UPDATED: MODIFIED onTicketIdChange METHOD
   onTicketIdChange(ticketId: string) {
     this.ticketSvc.getOneTicket(ticketId).subscribe({
       next: (response: Ticket) => {
@@ -66,27 +67,26 @@ export class TicketReplyComponent {
         this.getRepliesByTicket();
         // Get current logged-in user's empId from sessionStorage
         const loggedInEmpId = sessionStorage.getItem("empId") || "";
-        
-        // Check if logged-in user is the creator or assigner
         if (loggedInEmpId === this.ticket.createdByEmpId) {
           // User is the creator
           this.reply.replyByCreatorEmpId = loggedInEmpId;
           this.reply.replyByAssignedEmpId = "";
+          this.checkmsg = true
+
           console.log('User is creator, setting replyByCreatorEmpId:', loggedInEmpId);
         } else if (loggedInEmpId === this.ticket.assignedToEmpId) {
-          // User is the assigner
+          this.checkmsg = true
+
           this.reply.replyByAssignedEmpId = loggedInEmpId;
           this.reply.replyByCreatorEmpId = "";
-          console.log('User is assigner, setting replyByAssignedEmpId:', loggedInEmpId);
         } else {
-          // User is neither creator nor assigner
-          console.log('User is not authorized to reply to this ticket');
-          this.errMsg = 'You are not authorized to reply to this ticket';
+          // this.errMsg = "You can't reply to this ticket ID";
+          this.checkmsg = false
           this.reply.replyByCreatorEmpId = "";
           this.reply.replyByAssignedEmpId = "";
           return;
         }
-        
+
         this.errMsg = '';
       },
       error: (err) => {
@@ -96,11 +96,9 @@ export class TicketReplyComponent {
     });
   }
 
-  // ADD THIS METHOD TO AUTOMATICALLY SET REPLIER BASED ON LOGGED-IN USER
   autoSetReplier(): void {
-    // Get current logged-in user's empId from sessionStorage
     const loggedInEmpId = sessionStorage.getItem("empId") || "";
-    
+
     if (this.ticket && this.ticket.ticketId) {
       if (loggedInEmpId === this.ticket.createdByEmpId) {
         // User is the creator
@@ -116,7 +114,6 @@ export class TicketReplyComponent {
         console.log('Auto-set: User is assigner');
       } else {
         // User is neither creator nor assigner
-        this.errMsg = 'You are not authorized to reply to this ticket';
         this.reply.replyByCreatorEmpId = "";
         this.reply.replyByAssignedEmpId = "";
         this.replier = "";
@@ -237,25 +234,26 @@ export class TicketReplyComponent {
   }
 
   addReply() {
-    // Validate that reply is from authorized user
     const loggedInEmpId = sessionStorage.getItem("empId") || "";
-    
-    if (this.reply.replyByCreatorEmpId !== loggedInEmpId && 
-        this.reply.replyByAssignedEmpId !== loggedInEmpId) {
-      this.errMsg = "You are not authorized to reply to this ticket";
+
+    if (this.reply.replyByCreatorEmpId !== loggedInEmpId &&
+      this.reply.replyByAssignedEmpId !== loggedInEmpId) {
       return;
     }
-    
+
     if (this.reply.replyId == "") {
       this.errMsg = "Enter reply id";
       return;
     }
-    
+    if(this.reply.replyMessage == ""){
+      this.errMsg = "Reply field can't empty";
+      return;
+    }
     this.replySvc.addReply(this.reply).subscribe({
       next: () => {
-        console.log(this.reply);
         alert('Reply Added Successfully!');
-        this.showAllReplies();
+        // this.showAllReplies();
+        this.getRepliesByTicket();
         this.newReply();
         // Clear the ticket selection
         this.ticket = new Ticket("", "", "", "", new Date(), "", "", "");

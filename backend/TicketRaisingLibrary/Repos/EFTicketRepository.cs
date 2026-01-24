@@ -118,7 +118,13 @@ public class EFTicketRepository : ITicketRepository
 
     public async Task<List<Ticket>> GetTicketsAssignedToAsync(string empId)
     {
-        List<Ticket> tickets = await context.Tickets.Where(t => t.AssignedToEmpId == empId).ToListAsync();
-        return tickets;
+        try
+        {
+            List<Ticket> tickets = await context.Tickets.Where(t => t.AssignedToEmpId == empId).ToListAsync();
+            return tickets;
+        }
+        catch{
+            throw new TicketingException("Select Assigned Employee ID",577);
+        }
     }
 }
