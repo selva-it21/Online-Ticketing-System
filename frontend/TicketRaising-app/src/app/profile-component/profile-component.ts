@@ -40,7 +40,8 @@ export class ProfileComponent {
     this.empSvc.getOneEmployee(this.userid).subscribe({
       next: (response: Employee) => {
         this.employee = response;
-        console.log(response);
+        this.confirmPassword = response.password
+        // console.log(response);
 
         this.errMsg = '';
       },

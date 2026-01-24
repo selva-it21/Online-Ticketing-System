@@ -18,7 +18,7 @@
           <select id="ticketId" [(ngModel)]="reply.ticketId" (ngModelChange)="onTicketIdChange($event)" name="ticketId"
             class="form-input">
             <option value="">Select Ticket</option>
-            <option *ngFor="let t of tickets" [value]="t.ticketId">{{ t.ticketId }}</option>
+            <option *ngFor="let t of tickets" [value]="t.ticketId">{{ t.ticketId }}-{{ t.title}}</option>
           </select>
         </div>
       </div>
