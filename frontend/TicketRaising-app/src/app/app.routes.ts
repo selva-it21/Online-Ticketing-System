@@ -15,15 +15,16 @@ import { ProfileComponent } from './profile-component/profile-component';
 
 export const routes: Routes = [
     {path: '',component:HomeComponent},
-    {path: 'employee',component:EmployeeComponent},
-    {path: 'department',component:DepartmentComponent},
+    {path: 'employee',component:EmployeeComponent, canActivate: [userAccessGuard]},
+    {path: 'department',component:DepartmentComponent, canActivate: [userAccessGuard]},
     {path: 'ticket' , component:TicketComponent, canActivate: [userAccessGuard]},
-    {path: 'sla',component:SlaComponent},
+    {path: 'sla',component:SlaComponent, canActivate: [userAccessGuard]},
     {path: 'navbar',component:NavbarComponent},
-    {path: 'tickettype',component:TickettypeComponent},
-    {path: 'ticketreply',component:TicketReplyComponent},
+    {path: 'tickettype',component:TickettypeComponent, canActivate: [userAccessGuard]},
+    {path: 'ticketreply',component:TicketReplyComponent, canActivate: [userAccessGuard]},
     {path: 'profile',component:ProfileComponent, canActivate: [userAccessGuard]},
-    {path: 'logout',component:LogoutComponent},
+    {path: 'logout',component:LogoutComponent, canActivate: [userAccessGuard]},
+    {path: 'register',component:RegisterComponent},
     {path: 'login',component:LoginComponent},
     {path: 'register', component:RegisterComponent}
 ];

@@ -1,43 +1,55 @@
-import { Component, inject } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
+import { Component, inject, OnInit } from '@angular/core';
+import { RouterLink, RouterLinkActive } from "@angular/router";
 import { EmployeeService } from '../employee-service';
 import { Employee } from '../../models/employee';
+import { AuthService } from '../auth-service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar-component',
-  imports: [RouterLinkActive, RouterLink],
+  imports: [CommonModule, RouterLinkActive, RouterLink],
   templateUrl: './navbar-component.html',
   styleUrl: './navbar-component.css',
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   empSvc: EmployeeService = inject(EmployeeService);
-  username : string;
+  authSvc = inject(AuthService);
   errMsg: string;
-  role : string;
-  employeeName : string
-  constructor(){
-    this.errMsg=""
-    this.username = sessionStorage.getItem("empId") || "";
-    this.employeeName = ""
-    this.role = ""
-    this.showEmployee()
+  
+  username = this.authSvc.employeeName;
+  role = this.authSvc.employeeRole;
+  employeeName = this.authSvc.employeeName;
+  isLoggedIn = this.authSvc.isLoggedIn;
+  
+  private employeeData: Employee | null = null;
+  
+  constructor() {
+    this.errMsg = "";
   }
 
+  ngOnInit() {
+    this.loadEmployeeData();
+    
+    // You might want to reload employee data when auth state changes
+    // this.authSvc.isLoggedIn$.subscribe(() => {
+    //   this.loadEmployeeData();
+    // });
+  }
 
-  showEmployee(): void {
-    this.empSvc.getOneEmployee(this.username).subscribe({
-      next: (response: Employee) => {
-        this.employeeName = response.empName;
-        this.role = response.role
-        console.log(this.employeeName + "hello");
-        
-        this.errMsg = '';
-      },
-      error: (err) => {
-        this.errMsg = err.error;
-        console.log(err);
-      }
-    });
+  loadEmployeeData(): void {
+    if (this.isLoggedIn() && this.username()) {
+      this.empSvc.getOneEmployee(this.username()!).subscribe({
+        next: (response: Employee) => {
+          this.employeeData = response;
+          console.log("Employee data loaded:", response);
+          this.errMsg = '';
+        },
+        error: (err) => {
+          this.errMsg = err.error;
+          console.log("Error loading employee data:", err);
+        }
+      });
+    }
   }
 
 }
