@@ -27,17 +27,14 @@ export class LoginComponent {
     this.password = "";
     this.errMsg = "";
   }
-
   login() {
     this.loginSvc.login(this.empId, this.password).subscribe({
       next: (response: any) => {
         this.user = response;
         alert("Logged in successfully");
         
-        sessionStorage.setItem("empId", this.user.empId);
-        sessionStorage.setItem("role", this.user.role);
-        sessionStorage.setItem("empName", this.user.empName);
-        this.authSvc.setLogin(this.user.empName);
+        // Use the updated setLogin method
+        this.authSvc.setLogin(this.user.empName, this.user.empId, this.user.role);
         
         this.errMsg = "";
         this.router.navigate(['/']);

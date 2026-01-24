@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal, computed } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -16,10 +16,31 @@ export class AuthService {
   role: string = "admin";
   secretkey: string = "we are Team3 .Net developers from EY India";
   
-  empNameSignal = signal<string | null>(sessionStorage.getItem('empName'));
+  // Use signals for reactive state
+  private empNameSignal = signal<string | null>(this.getStoredEmpName());
+  private empIdSignal = signal<string | null>(this.getStoredEmpId());
+  private roleSignal = signal<string | null>(this.getStoredRole());
+  
+  // Computed signals for derived state
+  employeeName = computed(() => this.empNameSignal() || '');
+  employeeId = computed(() => this.empIdSignal() || '');
+  employeeRole = computed(() => this.roleSignal() || '');
+  isLoggedIn = computed(() => !!this.empIdSignal());
+
+  private getStoredEmpName(): string | null {
+    return sessionStorage.getItem('empName');
+  }
+
+  private getStoredEmpId(): string | null {
+    return sessionStorage.getItem('empId');
+  }
+
+  private getStoredRole(): string | null {
+    return sessionStorage.getItem('role');
+  }
 
   private checkInitialLoginState(): boolean {
-    return !!sessionStorage.getItem('empId') || !!sessionStorage.getItem('empName');
+    return !!this.getStoredEmpId() || !!this.getStoredEmpName();
   }
 
   getToken(): Observable<string> {
@@ -29,16 +50,25 @@ export class AuthService {
     );
   }
 
-  // UPDATED: Accept empName parameter and update state
-  setLogin(empName: string): void {
+  // UPDATED: Accept all user data
+  setLogin(empName: string, empId: string, role: string): void {
     sessionStorage.setItem('empName', empName);
-    this.isLoggedInSubject.next(true);
+    sessionStorage.setItem('empId', empId);
+    sessionStorage.setItem('role', role);
+    
+    // Update all signals
     this.empNameSignal.set(empName);
+    this.empIdSignal.set(empId);
+    this.roleSignal.set(role);
+    
+    this.isLoggedInSubject.next(true);
   }
 
   logout(): void {
     sessionStorage.clear();
-    this.isLoggedInSubject.next(false);
     this.empNameSignal.set(null);
+    this.empIdSignal.set(null);
+    this.roleSignal.set(null);
+    this.isLoggedInSubject.next(false);
   }
 }

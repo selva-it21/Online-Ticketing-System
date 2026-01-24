@@ -40,7 +40,7 @@
       <div class="form-row">
         <div class="form-group">
           <label for="createdByEmpId" class="form-label">Created By</label>
-          <input type="text" id="createdByEmpId" name="CreatedByEmpId" [(ngModel)]="ticket.createdByEmpId" class="form-input" placeholder="Emp ID" />
+          <input type="text" id="createdByEmpId" name="CreatedByEmpId" [(ngModel)]="ticket.createdByEmpId" class="form-input" placeholder="Emp ID" disabled/>
         </div>
         @if(role.toLocaleLowerCase() == "admin"){
         <div class="form-group">
