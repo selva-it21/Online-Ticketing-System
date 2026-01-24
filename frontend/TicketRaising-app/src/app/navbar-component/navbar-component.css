@@ -151,3 +151,117 @@
 .nav-links a {
     position: relative;
 }
+
+/* Profile Dropdown Styles */
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-dropdown-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    color: inherit;
+    font-size: inherit;
+}
+
+.profile-dropdown-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-arrow {
+    font-size: 0.8rem;
+    transition: transform 0.3s;
+}
+
+.dropdown-arrow.rotate {
+    transform: rotate(180deg);
+}
+
+.profile-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    min-width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    margin-top: 0.5rem;
+    display: block;
+}
+
+.profile-dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #f5f5f5;
+    color: #3498db;
+}
+
+.dropdown-item i {
+    width: 16px;
+    text-align: center;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 0.25rem 0;
+}
+
+.logout-item {
+    color: #e74c3c;
+}
+
+.logout-item:hover {
+    background-color: #ffeaea;
+    color: #c0392b;
+}
+
+/* Mobile responsiveness for dropdown */
+@media (max-width: 768px) {
+    .profile-dropdown-menu {
+        position: fixed;
+        top: auto;
+        right: 1rem;
+        left: 1rem;
+        bottom: 1rem;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+    
+    .profile-dropdown-toggle {
+        padding: 0.25rem;
+    }
+}

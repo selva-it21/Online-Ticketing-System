@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { EmployeeService } from '../employee-service';
 import { Employee } from '../../models/employee';
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './navbar-component.html',
   styleUrl: './navbar-component.css',
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   empSvc: EmployeeService = inject(EmployeeService);
   authSvc = inject(AuthService);
   errMsg: string;
@@ -21,19 +21,13 @@ export class NavbarComponent implements OnInit {
   employeeName = this.authSvc.employeeName;
   isLoggedIn = this.authSvc.isLoggedIn;
   
+  isDropdownOpen = false;
+  
   private employeeData: Employee | null = null;
   
   constructor() {
     this.errMsg = "";
-  }
-
-  ngOnInit() {
     this.loadEmployeeData();
-    
-    // You might want to reload employee data when auth state changes
-    // this.authSvc.isLoggedIn$.subscribe(() => {
-    //   this.loadEmployeeData();
-    // });
   }
 
   loadEmployeeData(): void {
@@ -41,15 +35,28 @@ export class NavbarComponent implements OnInit {
       this.empSvc.getOneEmployee(this.username()!).subscribe({
         next: (response: Employee) => {
           this.employeeData = response;
-          console.log("Employee data loaded:", response);
           this.errMsg = '';
         },
         error: (err) => {
           this.errMsg = err.error;
-          console.log("Error loading employee data:", err);
         }
       });
     }
   }
 
+  toggleDropdown(): void {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  closeDropdown(): void {
+    this.isDropdownOpen = false;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.profile-dropdown')) {
+      this.isDropdownOpen = false;
+    }
+  }
 }

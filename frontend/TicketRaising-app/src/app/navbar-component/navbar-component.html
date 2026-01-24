@@ -15,14 +15,25 @@
         <div class="navbar-user">
             <div class="user-info">
                 <span class="welcome-text">Welcome</span>
-                <a routerLink="/profile" class="profile-link" routerLinkActive="active">
-                    <i class="bi bi-person-circle"></i>
-                    <span class="username">{{employeeName()}}</span>
-                </a>
+                <div class="profile-dropdown">
+                    <button class="profile-link profile-dropdown-toggle" (click)="toggleDropdown()">
+                        <i class="bi bi-person-circle"></i>
+                        <span class="username">{{employeeName()}}</span>
+                        <i class="bi bi-chevron-down dropdown-arrow" [class.rotate]="isDropdownOpen"></i>
+                    </button>
+                    <div class="profile-dropdown-menu" [class.show]="isDropdownOpen">
+                        <a routerLink="/profile" class="dropdown-item" (click)="closeDropdown()">
+                            <i class="bi bi-person"></i>
+                            Update Profile
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a routerLink="/logout" class="dropdown-item logout-item" (click)="closeDropdown()">
+                            <i class="bi bi-box-arrow-left"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
             </div>
-            <a routerLink="/logout" routerLinkActive="active" class="profile-link">
-                <i class="bi bi-box-arrow-left"></i>
-            </a>
         </div>
     </div>
     }
@@ -36,14 +47,25 @@
         <div class="navbar-user">
             <div class="user-info">
                 <span class="welcome-text">Welcome</span>
-                <a routerLink="/profile" class="profile-link" routerLinkActive="active">
-                    <i class="bi bi-person-circle"></i>
-                    <span class="username">{{employeeName()}}</span>
-                </a>
+                <div class="profile-dropdown">
+                    <button class="profile-link profile-dropdown-toggle" (click)="toggleDropdown()">
+                        <i class="bi bi-person-circle"></i>
+                        <span class="username">{{employeeName()}}</span>
+                        <i class="bi bi-chevron-down dropdown-arrow" [class.rotate]="isDropdownOpen"></i>
+                    </button>
+                    <div class="profile-dropdown-menu" [class.show]="isDropdownOpen">
+                        <a routerLink="/profile" class="dropdown-item" (click)="closeDropdown()">
+                            <i class="bi bi-person"></i>
+                            Update Profile
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a routerLink="/logout" class="dropdown-item logout-item" (click)="closeDropdown()">
+                            <i class="bi bi-box-arrow-left"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
             </div>
-            <a routerLink="/logout" routerLinkActive="active" class="profile-link">
-                <i class="bi bi-box-arrow-left"></i>
-            </a>
         </div>
     </div>
     }

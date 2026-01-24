@@ -20,7 +20,7 @@ export class RegisterComponent {
   empSvc = inject(EmployeeService);
   depSvc = inject(DepartmentService);
 
-  employee: Employee = new Employee('', '', '', '', '');
+  employee: Employee = new Employee('', '', '', 'employee', '');
   departments: Department[] = [];
   errMsg: string = '';
   router: Router = inject(Router);
@@ -53,7 +53,7 @@ export class RegisterComponent {
     this.empSvc.addEmployee(this.employee).subscribe({
       next: () => {
         alert('Employee registered successfully!');
-        this.employee = new Employee('', '', '', '', '');
+        this.employee = new Employee('', '', '', 'employee', '');
         this.errMsg = '';
         this.router.navigate(['/login']);
       },

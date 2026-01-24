@@ -21,7 +21,7 @@ public class EFDepartmentRepository : IDepartmentRepository
             int errorNumber = sqlException.Number;
             switch(errorNumber) {
                 case 2627: throw new TicketingException("Department ID already exists",501);
-                //case 2628: throw new ProductException("Name and/or description too long");
+                case 2628: throw new TicketingException("Name and/or description too long",502);
                 default: throw new TicketingException(sqlException.Message,599);
             }    
         }
