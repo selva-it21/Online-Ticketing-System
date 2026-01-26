@@ -180,35 +180,119 @@ select.form-input {
   background-color: #e74c3c;
   color: white;
 }
+.show-btn {
+  background-color: #c0d601;
+  color: white;
+}
 
 .delete-btn:hover {
   background-color: #c0392b;
 }
 
-/* Filter buttons */
-.filter-buttons {
-  display: flex;
-  gap: 1rem;
+/* =========== FILTER SECTION STYLES =========== */
+.filter-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
   margin-bottom: 1.5rem;
-  flex-wrap: wrap;
 }
 
-.filter-btn {
-  padding: 0.5rem 1rem;
-  border: 2px solid #3498db;
-  background-color: white;
-  color: #3498db;
+.filter-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5eb;
+}
+
+.filter-title {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.filter-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filter-select {
+  width: 100%;
+  padding: 0.625rem;
+  border: 2px solid #ddd;
   border-radius: 6px;
   font-size: 0.9rem;
-  font-weight: 500;
+  background-color: white;
   cursor: pointer;
-  transition: all 0.3s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2334495e' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 10px;
+  padding-right: 2rem;
 }
 
-.filter-btn:hover {
+.filter-select:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.filter-btn-card {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.filter-apply-btn {
+  width: 100%;
+  padding: 0.625rem;
   background-color: #3498db;
   color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
 }
+
+.filter-apply-btn:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.show-all-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  grid-column: 1 / -1;
+  margin-top: 0.5rem;
+}
+
+.show-all-btn:hover {
+  background-color: #1a252f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* =========== END FILTER SECTION =========== */
 
 /* Table styles */
 .table-wrapper {
@@ -315,6 +399,10 @@ select.form-input {
   .form-group-wide {
     flex: 1 0 100%;
   }
+  
+  .filter-section {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
 }
 
 @media (max-width: 768px) {
@@ -344,12 +432,27 @@ select.form-input {
     width: 100%;
   }
   
-  .filter-buttons {
-    flex-direction: column;
+  .filter-section {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
   
-  .filter-btn {
-    width: 100%;
+  .filter-card {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ticket-management-container {
+    padding: 0.75rem;
+  }
+  
+  .form-card, .table-card, .filter-card {
+    padding: 1rem;
+  }
+  
+  .ticket-header {
+    font-size: 1.5rem;
   }
 }
 
@@ -365,6 +468,6 @@ select.form-input {
   }
 }
 
-.form-card, .table-card {
+.form-card, .table-card, .filter-card {
   animation: fadeIn 0.5s ease-out;
 }
