@@ -14,7 +14,7 @@ export class TickettypeService {
     
     constructor() {
       this.token = sessionStorage.getItem("token");
-      console.log(this.token);
+      // console.log(this.token);
       this.httpOptions = { 
         headers: new HttpHeaders({
           'Authorization': 'Bearer ' + this.token

@@ -59,11 +59,5 @@ export class EmployeeService {
         );
     }
 
-    login(empId: string, password: string): Observable<Employee> {
-        console.log(empId);
-        console.log(password);
-        // console.log("hi");
 
-        return this.http.get<Employee>(this.baseUrl + empId + "/" + password, this.httpOptions);
-    }
 }

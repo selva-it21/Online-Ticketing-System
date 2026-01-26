@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { EmployeeService } from '../employee-service';
 import { Employee } from '../../models/employee';
 import { AuthService } from '../auth-service';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-login-component',
@@ -13,7 +14,7 @@ import { AuthService } from '../auth-service';
   styleUrl: './login-component.css',
 })
 export class LoginComponent {
-  loginSvc: EmployeeService = inject(EmployeeService);
+  loginSvc: LoginService = inject(LoginService);
   authSvc: AuthService = inject(AuthService);
   user: Employee;
   empId: string;
@@ -32,8 +33,6 @@ export class LoginComponent {
       next: (response: any) => {
         this.user = response;
         alert("Logged in successfully");
-        
-        // Use the updated setLogin method
         this.authSvc.setLogin(this.user.empName, this.user.empId, this.user.role);
         
         this.errMsg = "";

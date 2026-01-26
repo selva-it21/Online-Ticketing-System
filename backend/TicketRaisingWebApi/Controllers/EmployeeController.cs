@@ -130,20 +130,20 @@ namespace TicketRaisingWebApi.Controllers
       
            
 
-        [HttpGet("{EmpId}/{Password}")]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
-        public async Task<IActionResult> Login(string EmpId, string Password)
-        {
-            try
-            {
-                return Ok(await empRepo.LoginAsync(EmpId, Password));
-            }
-            catch (TicketingException ex)
-            {
-                return NotFound(ex.Message);
-            }
-        }
+        // [HttpGet("{EmpId}/{Password}")]
+        // [ProducesResponseType(200)]
+        // [ProducesResponseType(404)]
+        // public async Task<IActionResult> Login(string EmpId, string Password)
+        // {
+        //     try
+        //     {
+        //         return Ok(await empRepo.LoginAsync(EmpId, Password));
+        //     }
+        //     catch (TicketingException ex)
+        //     {
+        //         return NotFound(ex.Message);
+        //     }
+        // }
 
     }
 }

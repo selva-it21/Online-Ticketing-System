@@ -23,7 +23,7 @@ export class App {
       next: (response: any) => {
         this.token = response;
         sessionStorage.setItem("token", this.token);
-        console.log(this.token);
+        // console.log(this.token);
       },
       error: (err) => { alert(err.message); console.log(err); }
     });
