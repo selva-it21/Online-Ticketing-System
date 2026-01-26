@@ -10,7 +10,7 @@ export class EmployeeService {
 
     http: HttpClient = inject(HttpClient);
     token;
-    baseUrl: string = "https://ticketportalteam3-hwg6cpg9gvbhaje6.canadacentral-01.azurewebsites.net/api/Employee/";
+    baseUrl: string = "http://localhost:5041/api/Employee/";
     httpOptions;
     constructor() {
         this.token = sessionStorage.getItem("token");

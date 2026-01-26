@@ -3,23 +3,39 @@
  
   <div class="form-card">
     <form class="ticketreply-form">
+      <!-- Role info badge -->
+      <div class="role-badge" [class.admin]="role === 'admin'" [class.employee]="role !== 'admin'">
+        Logged in as: {{ role === 'admin' ? 'Administrator' : 'Employee' }} ({{ creator }})
+      </div>
+
       <div class="single-row-form">
         <div class="form-group">
           <label for="replyId" class="form-label">Reply ID</label>
           <div class="input-with-button">
             <input type="text" id="replyId" [(ngModel)]="reply.replyId" name="replyId" class="form-input"
               placeholder="Enter ID" />
-            <!-- <button type="button" class="inline-btn show-btn" (click)="getReply()">👁️ Show</button> -->
           </div>
         </div>
  
         <div class="form-group">
           <label for="ticketId" class="form-label">Ticket ID</label>
           <select id="ticketId" [(ngModel)]="reply.ticketId" (ngModelChange)="onTicketIdChange($event)" name="ticketId"
-            class="form-input">
+            class="form-input" [disabled]="filteredTickets.length === 0">
             <option value="">Select Ticket</option>
-            <option *ngFor="let t of tickets" [value]="t.ticketId">{{ t.ticketId }}-{{ t.title}}</option>
+            <!-- Show only filtered tickets based on role -->
+            <option *ngFor="let t of filteredTickets" [value]="t.ticketId">
+              {{ t.ticketId }}-{{ t.title }}
+              <span *ngIf="role !== 'admin'">
+                ({{ t.createdByEmpId === creator ? 'Created by me' : 'Assigned to me' }})
+              </span>
+            </option>
           </select>
+          
+          <!-- Show message if no tickets available -->
+          <div *ngIf="filteredTickets.length === 0" class="no-tickets-message">
+            <span *ngIf="role === 'admin'">No tickets available in the system</span>
+            <span *ngIf="role !== 'admin'">No tickets created by or assigned to you</span>
+          </div>
         </div>
       </div>
  
@@ -27,22 +43,30 @@
         <div class="form-group form-group-wide">
           <label for="replyMessage" class="form-label">Reply Message</label>
           <textarea id="replyMessage" [(ngModel)]="reply.replyMessage" name="replyMessage"
-            class="form-input form-textarea" placeholder="Enter reply message"></textarea>
+            class="form-input form-textarea" placeholder="Enter reply message"
+            [disabled]="!canReply"></textarea>
         </div>
       </div>
 
-      <!-- Auto-determined replier info display -->
-      <div *ngIf="reply.replyByCreatorEmpId || reply.replyByAssignedEmpId" class="replier-info">
+      <!-- Authorization Messages -->
+      <div *ngIf="canReply && (reply.replyByCreatorEmpId || reply.replyByAssignedEmpId)" class="replier-info authorized">
         <strong>Replying as:</strong> 
-        {{ reply.replyByCreatorEmpId ? 'Creator (' + reply.replyByCreatorEmpId + ')' : '' }}
-        {{ reply.replyByAssignedEmpId ? 'Assigner (' + reply.replyByAssignedEmpId + ')' : '' }}
+        <span *ngIf="reply.replyByCreatorEmpId">Creator ({{ reply.replyByCreatorEmpId }})</span>
+        <span *ngIf="reply.replyByAssignedEmpId">Assigner ({{ reply.replyByAssignedEmpId }})</span>
+      </div>
+
+      <div *ngIf="reply.ticketId && !canReply" class="replier-info unauthorized">
+        <strong>⚠️ Access Denied:</strong> 
+        You cannot reply to Ticket ID: {{ reply.ticketId }}. 
+        Only the creator ({{ ticket?.createdByEmpId }}) or assigner ({{ ticket?.assignedToEmpId }}) can reply.
       </div>
  
       <div class="action-buttons">
-        <button type="button" class="action-btn add-btn" (click)="addReply()">💾 Save</button>
-        <button type="button" class="action-btn update-btn" (click)="updateReply()">↻ Update</button>
-        <button type="button" class="action-btn delete-btn" (click)="deleteReply()">🗑️ Delete</button>
-        <button type="button" class="action-btn show-all-btn" (click)="getReply()">👁️ Show</button>
+        <button type="button" class="action-btn add-btn" (click)="addReply()" [disabled]="!canReply">💾 Save</button>
+        <button type="button" class="action-btn update-btn" (click)="updateReply()" [disabled]="!canReply">↻ Update</button>
+        <button type="button" class="action-btn delete-btn" (click)="deleteReply()" [disabled]="!canReply">🗑️ Delete</button>
+        <button type="button" class="action-btn admin-btn" (click)="getReply()">🔍 Search Reply</button>
+        <!--<button *ngIf="role === 'admin'" type="button" class="action-btn admin-btn" (click)="showAllReplies()">👁️ Show All Replies</button>-->
       </div>
  
       <div *ngIf="errMsg" class="error-message">⚠️ {{ errMsg }}</div>
@@ -50,30 +74,50 @@
   </div>
  
   <div class="table-card">
-    <h3 class="list-header">Conversation</h3>
- @if(checkmsg || role == "admin"){
-    <div class="conversation-card">
-      <div class="conversation-body">
-        @for (r of replies; track r) {
-          <div
-            class="chat-message"
-            [class.sent]="r.replyByCreatorEmpId === creator"
-            [class.received]="r.replyByAssignedEmpId === creator">
- 
-            <div class="chat-bubble">
-              <div class="chat-text">{{ r.replyMessage }}</div>
-              <div class="chat-meta">
-                <span>{{ r.replyByCreatorEmpId || r.replyByAssignedEmpId }}</span>
+    <h3 class="list-header">
+      Conversation for: {{ ticket.ticketId }} 
+      <span *ngIf="ticket.ticketId">- {{ ticket.title }}</span>
+    </h3>
+    
+    <!-- Admin info -->
+    <div *ngIf="role === 'admin'" class="admin-info">
+      <strong>Ticket Details:</strong> 
+      Created by: {{ ticket.createdByEmpId }} | 
+      Assigned to: {{ ticket.assignedToEmpId }} | 
+      Status: {{ ticket.status }}
+    </div>
+
+    @if(checkmsg || role == "admin"){
+      <div class="conversation-card">
+        <div class="conversation-body">
+          @for (r of replies; track r) {
+            <div
+              class="chat-message"
+              [class.sent]="r.replyByCreatorEmpId === creator"
+              [class.received]="r.replyByAssignedEmpId === creator">
+  
+              <div class="chat-bubble">
+                <div class="chat-text">{{ r.replyMessage }}</div>
+                <div class="chat-meta">
+                  <span class="replier-info">
+                    {{ r.replyByCreatorEmpId ? 'Creator (' + r.replyByCreatorEmpId + ')' : 'Assigner (' + r.replyByAssignedEmpId + ')' }}
+                  </span>
+                  <span class="reply-id">ID: {{ r.replyId }}</span>
+                </div>
               </div>
             </div>
-          </div>
-        }
- 
-        @empty {
-          <div class="no-data">📭 No conversation found</div>
-        }
+          }
+  
+          @empty {
+            <div class="no-data">📭 No conversation found for this ticket</div>
+          }
+        </div>
       </div>
-    </div>
-  }
+    } @else {
+      <div class="unauthorized-view">
+        <p>You do not have permission to view this conversation.</p>
+        <p>Only the creator or assigner of this ticket can view replies.</p>
+      </div>
+    }
   </div>
 </div>
